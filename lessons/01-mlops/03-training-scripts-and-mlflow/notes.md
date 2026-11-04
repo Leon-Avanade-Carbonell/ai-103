@@ -14,7 +14,30 @@ Planned source goals: convert notebooks to scripts, test in a terminal, run para
 ### M03-U01 — Introduction
 Source: https://learn.microsoft.com/en-us/training/modules/run-training-scripts-track-models-mlflow/1-introduction
 
-Pending study.
+Source fetched: 2026-11-04; page updated 2026-08-27. Conceptual study only; no code, command job, scheduler, or MLflow logging was executed.
+
+#### From interactive experimentation to repeatable training
+
+Official source: production-oriented training code should be scalable, repeatable, and ready for automation. Notebooks are ideal for experimentation and development; scripts are a better fit for production workloads. In Azure Machine Learning, run a script as a **command job**, configuring inputs such as data and the compute environment.
+
+| Role | Responsibility |
+| --- | --- |
+| Notebook | Explore data and develop training code interactively. |
+| Training script | Execute data-processing and model-training logic. |
+| Command job | Define and run that script with configured inputs, environment, and compute. |
+| MLflow | Track parameters, metrics, and artifacts for run comparison and next-step decisions. |
+
+Tutor clarification: a submitted command job does not automatically recur weekly. A scheduler or automation workflow supplies the recurring trigger and submits the job; the job then executes the script. Distinguish **when to submit** from **how the workload executes**. No scheduling API or executable configuration was introduced here.
+
+MLflow records the evidence captured by configured logging, not automatically everything happening in a job. Tracking does not itself train the model, schedule execution, or guarantee production readiness. Moving code into a script makes reuse and automation easier, but model evaluation and deployment remain separate concerns. These distinctions support AI-300 D2 training orchestration and experiment comparison.
+
+#### Worked workflow illustration
+
+Tutor-created, not executed: develop a classifier in a notebook, move its training logic into `train.py`, and have weekly automation submit an Azure Machine Learning command job using updated input data. The script trains the model; MLflow preserves settings, measured results, and output files for comparison across runs. Manual submission today alone does not arrange a run next week.
+
+The module's planned next topics are notebook-to-script conversion, terminal testing, command jobs and parameters, MLflow integration, and inspecting run outputs. No SDK/CLI versions or package prerequisites were tested in this conceptual introduction; relevant executable examples remain pending in later units. No JavaScript equivalent was assumed.
+
+[Optional quiz history](quizzes.md)
 
 ### M03-U02 — Convert a notebook to a script
 Source: https://learn.microsoft.com/en-us/training/modules/run-training-scripts-track-models-mlflow/2-convert-notebook-script

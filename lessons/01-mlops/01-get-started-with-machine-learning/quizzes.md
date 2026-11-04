@@ -9,6 +9,39 @@ These are tutor-created formative quizzes, not official Microsoft assessments. O
 
 ## Quiz history
 
+<a name="quiz-2026-11-04-session-04"></a>
+
+### Optional tutor quiz — 2026-11-04-session-04
+
+- Date: 2026-11-04
+- Units: [M01-U04 — Train the model](notes.md#m01-u04--train-the-model)
+- Verified source S: https://learn.microsoft.com/en-us/training/modules/design-machine-learning-model-training-solution/3-choose-service-train — fetched 2026-11-04.
+- Participation: completed. Requested/planned: Full quiz, 10 / 10 session-wide.
+- Session-wide presented / valid answered: 10 / 10; correct / incorrect / skipped / invalid / unasked or unanswered: 9 / 1 / 0 / 0 / 0; score: 9/10.
+- Module-local presented / valid answered: 1 / 1; correct / incorrect / skipped / invalid / unasked or unanswered: 1 / 0 / 0 / 0 / 0; score: 1/1.
+- Difficulty: session-wide 3 easy, 4 medium, 3 hard; this module Q01 easy. Multiple-answer items elsewhere use exact-set scoring.
+- Other items: [M02 quiz record](../02-experiment-with-azure-machine-learning/quizzes.md#quiz-2026-11-04-session-04), Q02–Q10. This is one shared quiz, not two quizzes.
+- Evidence provenance: current-conversation initial question-tool selections. Tutor-created formative checks, not an official assessment; no execution or retries.
+
+<a name="quiz-2026-11-04-session-04-q01"></a>
+
+#### Q01 — Integrated workflow selection; easy; single-answer; M01-U04; S
+
+Prompt: Question 1/10 — Easy. Select one answer. A team needs an integrated workflow for data preparation, model training, predictions, and Power BI reports. Which service best matches that requirement?
+- A. Foundry Tools — Prebuilt model APIs.
+- B. Microsoft Fabric — Integrated analytics platform.
+- C. Azure Machine Learning — ML lifecycle platform.
+- D. Azure Databricks — Spark-based analytics platform.
+
+Initial learner selections: B. Microsoft Fabric.
+Correct set: {B}. Outcome: correct.
+Explanation: Fabric matches the integrated analytics-to-Power BI requirement. Azure ML focuses on the ML lifecycle, Databricks on Spark-based analytics, and Foundry Tools on prebuilt model APIs; none matches this stated workflow as directly. Source: S.
+Follow-up: none.
+
+Strengths: Fabric selection, alongside the ordinary workflow explanation preserved in memory.
+Remaining gaps: none demonstrated for this review topic; practical execution remains unverified.
+Review proposal: resolve the existing M01-U04 review due 2026-10-30 using the ordinary explanation plus Q01; memory-agent validates resolution. No automatic new review proposed for this resolved gap.
+
 <a name="quiz-2026-10-29-session-04"></a>
 
 ### Optional tutor quiz — 2026-10-29-session-04

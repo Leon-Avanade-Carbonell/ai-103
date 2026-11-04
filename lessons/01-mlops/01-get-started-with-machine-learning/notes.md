@@ -127,7 +127,7 @@ An ingestion pipeline is a sequence of data movement and transformation tasks. I
 ### M01-U04 — Train the model
 Source: https://learn.microsoft.com/en-us/training/modules/design-machine-learning-model-training-solution/3-choose-service-train
 
-Source verified: 2026-10-29; page updated 2026-08-27. Studied conceptually on 2026-10-29; no code or training job executed.
+Source verified: 2026-11-04; page updated 2026-08-27. Conceptual study and service-selection illustrations only; no code or training job executed.
 
 #### Select a service for the broader workflow
 
@@ -296,6 +296,7 @@ Tutor-created conceptual tasks, discussed without executing code or Azure resour
 1. **Rapid object-detection feature, no custom-training requirement:** investigate Foundry Tools for an applicable prebuilt model, then evaluate suitability.
 2. **Custom-data training, algorithm comparison, model retention, deployment, and Python preference:** Azure Machine Learning fits the lifecycle and offers a Python SDK. Databricks is also a candidate, especially with an existing Spark workflow; the best choice requires organizational context.
 3. **Explore several algorithms without manually configuring every run:** use AutoML for training-choice exploration; a pipeline can coordinate preparation, training, and evaluation steps around that work.
+4. **Existing Fabric analytics, sales-data preparation, demand-model training, and predictions in Power BI reports:** Fabric fits the integrated workflow. Existing adoption strengthens the choice, but the required analytics-to-reporting workflow is the deciding factor; ownership alone does not establish suitability.
 
 ### M01-U05 — Studio and compute selection practice
 

@@ -400,3 +400,354 @@ Follow-up: none.
 Strengths: task selection, policy-based algorithm restrictions, ranking criterion, concurrency versus total trials, MLTable input, submission, monitoring, early termination, and upper-limit semantics.
 Misconceptions and remaining gaps: [Q04](#quiz-2026-10-29-session-07-q04) confused the whole-experiment timeout with the individual-trial timeout despite a correct ordinary lesson configuration answer. Tutor feedback was supplied; independent retention on a fresh equivalent configuration remains unverified. No practical execution was attempted. Initial lesson algorithm-selection confusion was followed by a supported blocking answer and a correct Q02 application.
 Review proposal: M02-U03 overall versus individual timeout on 2026-10-30; use a fresh configuration task distinguishing total duration, per-trial duration, trial count, and concurrency. Keep review separate from completion.
+
+<a name="quiz-2026-11-04-session-01"></a>
+
+### Optional tutor quiz — 2026-11-04-session-01
+
+- Date: 2026-11-04
+- Units: [M02-U04 — Evaluate and compare models](notes.md#m02-u04--evaluate-and-compare-models)
+- Verified source (S4 for all items): https://learn.microsoft.com/en-us/training/modules/experiment-azure-machine-learning/4-evaluate-compare-models — fetched 2026-11-04. Studied tutor ranking/latency and causation clarifications supplement the source.
+- Participation: completed
+- Requested/planned: Short quiz; 5 / 5.
+- Presented / valid answered: 5 / 5
+- Correct / incorrect / skipped / invalid / unasked or unanswered: 5 / 0 / 0 / 0 / 0
+- Score: 5/5
+- Difficulty mix and scoring: 2 easy, 3 medium; single-answer match except Q04, which requires an exact set.
+- Count scope: this module only; identical to session-wide counts.
+- Evidence provenance: current-conversation learner selections returned by the question tool. Tutor-created formative checks, not official Microsoft assessment evidence. No practical execution.
+
+<a name="quiz-2026-11-04-session-01-q01"></a>
+
+#### Q01 — Done guardrail; easy; single-answer; M02-U04; S4
+
+Prompt: A data guardrail shows Done. What does this mean? Select one answer.
+- A. No issue was detected — No action is required for this check.
+- B. An issue remains unfixed — AutoML detected it but could not fix it.
+- C. Data changes were applied — Review the changes AutoML made.
+
+Initial learner selections: C. Data changes were applied
+Correct set: {C}
+Outcome: correct
+Explanation: Done means data changes were applied and should be reviewed. A describes Passed; B describes Alerted. Source: S4.
+Follow-up: none.
+
+<a name="quiz-2026-11-04-session-01-q02"></a>
+
+#### Q02 — Ranking and latency; medium; single-answer; M02-U04; S4
+
+Prompt: AutoML ranks models by accuracy. Model X has 96% accuracy and 120 ms prediction latency; model Y has 94% accuracy and 35 ms latency. The application requires latency under 60 ms. Which statement is correct? Select one answer.
+- A. X ranks first; only Y meets latency — Distinguish ranking from the application constraint.
+- B. Y ranks first; only Y meets latency — Use latency for both decisions.
+- C. X ranks first; both meet latency — Treat both candidates as meeting the constraint.
+- D. Y ranks first; neither meets latency — Rank Y first but reject both candidates.
+
+Initial learner selections: A. X ranks first; only Y meets latency
+Correct set: {A}
+Outcome: correct
+Explanation: X leads on the configured accuracy metric; only Y is below 60 ms. B and D change the ranking incorrectly; C accepts X's excessive latency. Source: S4 plus studied tutor-created comparison, not executed.
+Follow-up: none.
+
+<a name="quiz-2026-11-04-session-01-q03"></a>
+
+#### Q03 — Algorithm name; easy; single-answer; M02-U04; S4
+
+Prompt: A model's Algorithm name is MaxAbsScaler, LightGBM. What does this identify? Select one answer.
+- A. Two classification algorithms — Both names identify predictive algorithms.
+- B. A metric and an algorithm — The first name identifies the ranking metric.
+- C. A scaler and a data asset — The second name identifies the input data.
+- D. A scaler and an algorithm — The first scales features; the second trains the classifier.
+
+Initial learner selections: D. A scaler and an algorithm
+Correct set: {D}
+Outcome: correct
+Explanation: MaxAbsScaler scales features by their maximum absolute value; LightGBM is the classification algorithm. A, B, and C misidentify one or both names. Source: S4.
+Follow-up: none.
+
+<a name="quiz-2026-11-04-session-01-q04"></a>
+
+#### Q04 — Broader comparison and explanations; medium; multiple-answer; M02-U04; S4
+
+Prompt: You want a broader comparison of trained candidates, including a feature-importance explanation for a model that did not rank first. Which TWO actions does the studied unit support? Select two answers.
+- A. Change the input asset's name — Rename the experiment's data reference.
+- B. Edit the Models tab columns — Display additional performance metrics.
+- C. Select that model, then Explain model — Request an explanation for that candidate.
+- D. Inspect only the best-model summary — Limit inspection to the Overview summary.
+
+Initial learner selections: B. Edit the Models tab columns; C. Select that model, then Explain model
+Correct set: {B, C}
+Outcome: correct (exact set)
+Explanation: B adds comparison metrics and C requests the other candidate's explanation. Renaming data supplies neither capability; the best-model summary alone is insufficient for the requested inspection. Source: S4.
+Follow-up: none.
+
+<a name="quiz-2026-11-04-session-01-q05"></a>
+
+#### Q05 — Explanation limits; medium; single-answer; M02-U04; S4
+
+Prompt: An explanation assigns a feature high relative importance. Which conclusion is justified by the studied unit? Select one answer.
+- A. The feature causes the outcome — Treat the explanation as causal proof.
+- B. Its predictive importance is estimated — Treat the explanation as an approximation of importance for the target.
+- C. The model meets production requirements — Treat the explanation as deployment approval.
+- D. Other features can safely be removed — Treat the explanation as sufficient evidence to discard them.
+
+Initial learner selections: B. Its predictive importance is estimated
+Correct set: {B}
+Outcome: correct
+Explanation: Explanations estimate relative importance; they do not establish causation, approve deployment, or justify removing other features without further evaluation. Source: S4 and studied tutor clarification.
+Follow-up: none.
+
+Strengths: interpreted Done, separated primary-metric ranking from latency eligibility in a fresh scenario, identified preprocessing/algorithm labels, selected comparison and explanation actions, and recognized explanation limits.
+Misconceptions and remaining gaps: no incorrect quiz answers. Ordinary lesson checks initially omitted review of Done changes, ranked by latency instead of accuracy, and misread tightening a latency requirement as making models suitable. Tutor feedback and scaffolded recovery preceded a correct fresh Q02 application; full ordinary evidence is in the memory session. Practical experiment inspection and execution remain unverified.
+Review proposal: M02-U04 guardrail actions and ranking versus application constraints on 2026-11-07; a fresh combined scenario should confirm retention, including review of Done changes. Keep review separate from completion.
+
+<a name="quiz-2026-11-04-session-02"></a>
+
+### Optional tutor quiz — 2026-11-04-session-02
+
+- Date: 2026-11-04
+- Units: [M02-U05 — Configure MLflow for model tracking in notebooks](notes.md#m02-u05--configure-mlflow-for-model-tracking-in-notebooks)
+- Verified source: https://learn.microsoft.com/en-us/training/modules/experiment-azure-machine-learning/5-model-tracking — fetched 2026-11-04.
+- Participation: declined. The learner selected **Skip quiz** in the optional end-of-lesson offer.
+- Requested/planned: Not applicable; no quiz generated.
+- Presented / valid answered: 0 / 0.
+- Count scope: this module only; identical to session-wide participation counts.
+- Evidence provenance: current-conversation question-tool response. No optional quiz items, answer keys, or score exist. Ordinary lesson checks are preserved in the memory session, not scored as optional quiz items.
+
+The decline does not undo ordinary lesson-check evidence or establish a blanket quiz preference. Practical setup and logging remain unverified, not failed quiz checks.
+
+<a name="quiz-2026-11-04-session-03"></a>
+
+### Optional tutor quiz — 2026-11-04-session-03
+
+- Date: 2026-11-04
+- Units: [M02-U06 — Train and track models in notebooks](notes.md#m02-u06--train-and-track-models-in-notebooks)
+- Verified source (S6 for all items): https://learn.microsoft.com/en-us/training/modules/experiment-azure-machine-learning/6-train-models-notebooks — fetched 2026-11-04. Studied tutor measurement/logging clarification supplements the source.
+- Participation: completed
+- Requested/planned: Short quiz (up to 5); 4 planned to avoid padding this focused lesson.
+- Presented / valid answered: 4 / 4
+- Correct / incorrect / skipped / invalid / unasked or unanswered: 3 / 1 / 0 / 0 / 0
+- Score: 3/4
+- Difficulty mix and scoring: 1 easy, 3 medium; single-answer match except Q02, which requires an exact set.
+- Count scope: this module only; identical to session-wide counts.
+- Evidence provenance: current-conversation question-tool selections; tutor-created questions and feedback. No practical execution or official Microsoft assessment.
+
+<a name="quiz-2026-11-04-session-03-q01"></a>
+
+#### Q01 — Experiment organization; easy; single-answer; M02-U06; S6
+
+Prompt: What does mlflow.set_experiment() do in this notebook workflow? Select one answer.
+- A. Trains a model — Runs the model-training code.
+- B. Selects a group for runs — Organizes related tracked attempts.
+- C. Measures prediction latency — Calculates a runtime measurement.
+- D. Enables autologging — Turns on framework logging.
+
+Initial learner selections: B. Selects a group for runs
+Correct set: {B}
+Outcome: correct
+Explanation: B groups related runs. Selecting an experiment does not train (A), measure latency (C), or enable autologging (D). Source: S6.
+Follow-up: none.
+
+<a name="quiz-2026-11-04-session-03-q02"></a>
+
+#### Q02 — Autologging workflow; medium; multiple-answer; M02-U06; S6
+
+Prompt: You want autologging to capture a supported framework's training activity. Which two actions belong in your notebook workflow? Select two answers.
+- A. Start a tracked run — Use mlflow.start_run().
+- B. Replace training with log_param — Record settings instead of executing training.
+- C. Enable autologging before training — Call mlflow.autolog(), then run training code.
+- D. Expect autologging to train — Omit the model-training code.
+
+Initial learner selections: A. Start a tracked run; C. Enable autologging before training
+Correct set: {A, C}
+Outcome: correct (exact set)
+Explanation: Start a run and enable autologging before training. Parameter logging does not replace training (B); autologging does not execute training for you (D). Source: S6.
+Follow-up: none.
+
+<a name="quiz-2026-11-04-session-03-q03"></a>
+
+#### Q03 — Existing report artifact; medium; single-answer; M02-U06; S6
+
+Prompt: A validation report already exists as validation_report.txt. Which call attaches that file to the active run? Select one answer.
+- A. mlflow.log_metric(...) — Use the file path as a metric value.
+- B. mlflow.set_experiment(...) — Use the file path as an experiment name.
+- C. mlflow.log_param(...) — Record only the file path as a setting.
+- D. mlflow.log_artifact(...) — Log the existing file as an artifact.
+
+Initial learner selections: D. mlflow.log_artifact(...)
+Correct set: {D}
+Outcome: correct
+Explanation: D logs the existing file. A requires a numeric metric value; B selects an experiment; C records path text rather than attaching the file. Source: S6 and studied tutor example.
+Follow-up: none.
+
+<a name="quiz-2026-11-04-session-03-q04"></a>
+
+#### Q04 — Recording versus measuring; medium; single-answer; M02-U06; S6
+
+Prompt: Your code calls mlflow.log_metric("prediction_latency_ms", 42.0). What does this call establish? Select one answer.
+- A. MLflow measured latency — The call timed model predictions.
+- B. MLflow trained a faster model — The call optimized model latency.
+- C. The supplied value was recorded — The call logs 42.0; measurement happens elsewhere.
+- D. A report file was created — The call writes a validation report artifact.
+
+Initial learner selections: A. MLflow measured latency
+Correct set: {C}
+Outcome: incorrect
+Explanation: C is correct: log_metric records the supplied value. It does not time predictions (A), optimize a model (B), or create a report file (D). Source: S6 and studied tutor clarification.
+Follow-up: tutor explained logging as writing a measurement into a record, not taking the measurement; timing code must produce the value first. No learner retry or independent post-feedback recovery was observed.
+
+Strengths: experiment organization, autologging workflow, and existing-file artifact logging.
+Misconceptions and remaining gaps: [Q04](#quiz-2026-11-04-session-03-q04) conflated measuring latency with recording it. Ordinary checks showed scaffolded recovery on combining autologging with custom latency logging; full prompts/responses are in memory. Practical training and logging remain unverified.
+Review proposal: M02-U06 measurement versus logging and autologging/custom combinations on 2026-11-05; use a fresh scenario identifying where a measurement is calculated and where it is recorded. Review state is separate from completion.
+
+<a name="quiz-2026-11-04-session-04"></a>
+
+### Optional tutor quiz — 2026-11-04-session-04
+
+- Date: 2026-11-04
+- Units: [M02-U07 — Evaluate models with the Responsible AI dashboard](notes.md#m02-u07--evaluate-models-with-the-responsible-ai-dashboard)
+- Verified source S7 for every local item: https://learn.microsoft.com/en-us/training/modules/experiment-azure-machine-learning/7-responsible-ai-dashboard — fetched 2026-11-04. Tutor causal-proof and investigation clarifications supplement the source.
+- Participation: completed. Requested/planned: Full quiz, 10 / 10 session-wide.
+- Session-wide presented / valid answered: 10 / 10; correct / incorrect / skipped / invalid / unasked or unanswered: 9 / 1 / 0 / 0 / 0; score: 9/10.
+- Module-local presented / valid answered: 9 / 9; correct / incorrect / skipped / invalid / unasked or unanswered: 8 / 1 / 0 / 0 / 0; score: 8/9.
+- Difficulty: session-wide 3 easy, 4 medium, 3 hard; module-local 2 easy, 4 medium, 3 hard. Q05, Q07, Q09 use exact-set scoring; other items single-answer.
+- Other item: [M01 Q01](../01-get-started-with-machine-learning/quizzes.md#quiz-2026-11-04-session-04-q01). This is one shared quiz, not two quizzes.
+- Evidence provenance: actual current-conversation initial question-tool selections. Tutor-created formative checks, not an official assessment; no execution or retries.
+
+<a name="quiz-2026-11-04-session-04-q02"></a>
+
+#### Q02 — Higher-error subgroups; easy; single-answer; M02-U07; S7
+
+Prompt: Question 2/10 — Easy. Select one answer. Which Responsible AI tool identifies data subgroups where a model makes more prediction errors?
+- A. Counterfactuals — Explore changes to inputs.
+- B. Causal analysis — Estimate intervention effects.
+- C. Explanations — Examine feature influence.
+- D. Error analysis — Examine error distribution.
+
+Initial learner selections: D. Error analysis.
+Correct set: {D}. Outcome: correct.
+Explanation: Error analysis locates higher-error subgroups. Explanations address influence, counterfactuals prediction changes, and causal analysis estimated effects on outcomes. Source: S7.
+Follow-up: none.
+
+<a name="quiz-2026-11-04-session-04-q03"></a>
+
+#### Q03 — One-patient explanation; easy; single-answer; M02-U07; S7
+
+Prompt: Question 3/10 — Easy. Select one answer. A clinician wants to understand which inputs influenced one particular patient's prediction. Which view is most appropriate?
+- A. Individual feature importance — Feature influence for one prediction.
+- B. Aggregate feature importance — Overall influence across test data.
+- C. Error heat map — Error rates across features.
+- D. Error tree map — Higher-error subgroup combinations.
+
+Initial learner selections: B. Aggregate feature importance.
+Correct set: {A}. Outcome: incorrect.
+Explanation: Individual importance explains one prediction. Aggregate importance summarizes test-data influence and can differ from what matters for one patient. Heat and tree maps show errors rather than influence on a specific prediction. Source: S7.
+Follow-up: tutor supplied the distinction; no independent retry. Initial answer remains scored.
+
+<a name="quiz-2026-11-04-session-04-q04"></a>
+
+#### Q04 — Two-feature error comparison; medium; single-answer; M02-U07; S7
+
+Prompt: Question 4/10 — Medium. Select one answer. You want to compare prediction error rates across patient age bands and clinics. Which visualization most directly supports this two-feature comparison?
+- A. Aggregate feature importance — Overall input influence.
+- B. Counterfactual view — Input changes for a desired prediction.
+- C. Error heat map — Errors across one or two features.
+- D. Individual feature importance — Input influence for one prediction.
+
+Initial learner selections: C. Error heat map.
+Correct set: {C}. Outcome: correct.
+Explanation: The heat map supports one- or two-feature error comparisons; the other views address influence or hypothetical prediction changes. Source: S7.
+Follow-up: none.
+
+<a name="quiz-2026-11-04-session-04-q05"></a>
+
+#### Q05 — Counterfactual limits; medium; multiple-answer; M02-U07; S7
+
+Prompt: Question 5/10 — Medium. Select two answers. A counterfactual suggests a small change to an input would flip a model's prediction to the desired category. Which conclusions are justified?
+- A. The actual outcome will improve — The change guarantees real-world benefit.
+- B. The model would predict differently — Under the suggested changed input.
+- C. The feature caused the outcome — The result establishes causation.
+- D. This is a model what-if result — It does not alone prove an intervention's effect.
+
+Initial learner selections: D. This is a model what-if result; B. The model would predict differently (set {B, D}).
+Correct set: {B, D}. Outcome: correct (exact-set).
+Explanation: B and D describe model behavior under changed input. A guarantees an actual benefit without evidence; C incorrectly establishes causation. Source: S7 and studied tutor clarification.
+Follow-up: none.
+
+<a name="quiz-2026-11-04-session-04-q06"></a>
+
+#### Q06 — Intervention effects; medium; single-answer; M02-U07; S7
+
+Prompt: Question 6/10 — Medium. Select one answer. A team wants to estimate how an intervention on a feature might affect the actual outcome, using historical data and statistical methods. Which tool addresses that question?
+- A. Causal analysis — Estimate effects on outcomes.
+- B. Counterfactuals — Explore changes that flip predictions.
+- C. Error analysis — Locate higher-error subgroups.
+- D. Explanations — Estimate feature influence on predictions.
+
+Initial learner selections: A. Causal analysis.
+Correct set: {A}. Outcome: correct.
+Explanation: Causal analysis estimates effects on outcomes, subject to statistical assumptions. Counterfactuals concern prediction flips; error analysis concerns errors and explanations concern model influence. Source: S7.
+Follow-up: none.
+
+<a name="quiz-2026-11-04-session-04-q07"></a>
+
+#### Q07 — Responsible AI practices; medium; multiple-answer; M02-U07; S7
+
+Prompt: Question 7/10 — Medium. Select two answers. Which actions directly align with the Responsible AI principles described in this unit?
+- A. Treat accuracy as sufficient — Skip other evaluations when accuracy is high.
+- B. Remove human oversight — Let the dashboard replace governance.
+- C. Minimize personal-data collection — Protect privacy through responsible handling.
+- D. Assign traceable human oversight — Make AI-influenced decisions accountable.
+
+Initial learner selections: C. Minimize personal-data collection; D. Assign traceable human oversight.
+Correct set: {C, D}. Outcome: correct (exact-set).
+Explanation: C supports privacy/security and D accountability. Accuracy does not replace other evaluations (A), and the dashboard does not replace governance (B). Source: S7.
+Follow-up: none.
+
+<a name="quiz-2026-11-04-session-04-q08"></a>
+
+#### Q08 — Missing pipeline gathering step; hard; single-answer; M02-U07; S7
+
+Prompt: Question 8/10 — Hard. Select one answer. A pipeline starts with the RAI Insights dashboard constructor, adds Error Analysis and Explanation components, and then stops. What must be added to produce the combined dashboard using the required structure?
+- A. A second constructor — Restart dashboard construction.
+- B. Gather RAI Insights dashboard — Collect the component insights.
+- C. Every remaining RAI tool — Require all available analyses.
+- D. A Power BI report — Replace the dashboard gathering step.
+
+Initial learner selections: B. Gather RAI Insights dashboard.
+Correct set: {B}. Outcome: correct.
+Explanation: End with Gather to collect insights. Another constructor or Power BI report cannot replace it, and every tool is not required. Source: S7.
+Follow-up: none.
+
+<a name="quiz-2026-11-04-session-04-q09"></a>
+
+#### Q09 — Component selection; hard; multiple-answer; M02-U07; S7
+
+Prompt: Question 9/10 — Hard. Select two answers. A hospital needs to find combinations of patient characteristics associated with higher error rates and explore minimal input changes that would flip a selected prediction. Which two RAI tool components should it include between constructor and Gather?
+- A. Add Explanation — Feature influence on predictions.
+- B. Add Causal — Estimated intervention effects on outcomes.
+- C. Add Error Analysis — Higher-error subgroup combinations.
+- D. Add Counterfactuals — Input changes for a desired prediction.
+
+Initial learner selections: C. Add Error Analysis; D. Add Counterfactuals.
+Correct set: {C, D}. Outcome: correct (exact-set).
+Explanation: Error Analysis addresses subgroup errors and Counterfactuals minimal prediction-flipping changes. Explanation and Causal address influence and intervention-effect questions instead. Source: S7.
+Follow-up: none.
+
+<a name="quiz-2026-11-04-session-04-q10"></a>
+
+#### Q10 — Investigation versus causal proof; hard; single-answer; M02-U07; S7
+
+Prompt: Question 10/10 — Hard. Select one answer. A model has strong overall performance, but Error Analysis identifies a subgroup with many mistakes. Explanations show an influential feature. What is the most defensible next conclusion?
+- A. The feature caused the harm — Importance alone establishes the cause.
+- B. The model is ready for deployment — Overall performance overrides subgroup errors.
+- C. Removing the feature will fix it — Feature removal is guaranteed to resolve errors.
+- D. Investigate the subgroup weakness — Use these findings as leads, not causal proof.
+
+Initial learner selections: D. Investigate the subgroup weakness.
+Correct set: {D}. Outcome: correct.
+Explanation: Findings guide investigation rather than establish causation, guarantee a feature-removal fix, or approve deployment. Source: S7 and studied tutor clarification.
+Follow-up: none.
+
+Strengths: error-analysis views, counterfactual versus causal questions, privacy/accountability practices, pipeline structure, component selection, and investigation limits.
+Remaining gap: [Q03](#quiz-2026-11-04-session-04-q03) repeated the ordinary lesson's aggregate-versus-individual confusion after correction. Feedback supplied; independent recovery remains unverified. Practical creation/execution remains unverified, not a failed lab.
+Review proposal: M02-U07 on 2026-11-05, using a fresh explanation scenario contrasting one prediction with dataset-wide importance. Review is separate from conceptual completion.

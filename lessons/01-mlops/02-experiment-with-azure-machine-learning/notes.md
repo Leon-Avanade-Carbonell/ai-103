@@ -142,22 +142,168 @@ Workflow: configure task/data/target/metric → set limits and training options 
 ### M02-U04 — Evaluate and compare models
 Source: https://learn.microsoft.com/en-us/training/modules/experiment-azure-machine-learning/4-evaluate-compare-models
 
-Pending study.
+Source fetched: 2026-11-04. Conceptual study and illustrative comparisons only; no Azure experiment, code, or studio inspection was executed.
+
+#### Inspect results and data guardrails
+
+Official source: the experiment's **Overview** shows its input data asset and best-model summary; the **Models** tab lists trained candidates. With featurization enabled, classification guardrails cover class balancing detection, missing feature values imputation, and high-cardinality feature detection.
+
+| Guardrail status | Meaning and action |
+| --- | --- |
+| Passed | No problem detected; no action required for that check. |
+| Done | AutoML applied data changes; review those changes. |
+| Alerted | An issue was detected but could not be fixed; review and address the data issue. |
+
+Tutor clarification: Done is not a reason to ignore preprocessing, and Passed does not guarantee that the entire dataset is sound. For example, missing values marked Done warrant inspecting the replacements, while high cardinality marked Alerted warrants investigating the unresolved feature issue before deployment.
+
+#### Ranking versus deployment suitability
+
+Official source: candidates are sorted by the configured **primary metric**, with the best-performing candidate at the top. Edit the Models tab columns to show additional metrics for a broader comparison.
+
+Tutor-created worked example, illustrative and not executed: an accuracy-ranked experiment produces A (94% accuracy, 180 ms prediction latency) and B (93%, 40 ms). A ranks first. Only B meets an application latency requirement of under 100 ms or under 50 ms; neither meets under 30 ms. Making a latency limit stricter does not change the accuracy ranking or speed up the models. Minimum acceptable accuracy was not specified, so latency eligibility alone does not establish full deployment suitability. These distinctions support AI-300 D2 job comparison and model evaluation.
+
+#### Preprocessing labels and model explanations
+
+Official source: **Algorithm name** can include preprocessing and the classifier. In `MaxAbsScaler, LightGBM`, MaxAbsScaler scales each feature by its maximum absolute value, and LightGBM is the classification algorithm.
+
+Explanations can be requested for the best model during experiment configuration. To inspect another candidate, select it and choose **Explain model**. Explanations approximate interpretability by estimating features' relative importance for the target. Tutor clarification: importance is not proof of causation, production readiness, or sufficient evidence to remove other features.
+
+The source positions AutoML as a starting point; notebooks allow further custom experimentation, such as custom features or approaches outside AutoML's search. Practical code, CLI, and configuration examples remain future module work; no JavaScript equivalent is assumed.
 
 ### M02-U05 — Configure MLflow for model tracking in notebooks
 Source: https://learn.microsoft.com/en-us/training/modules/experiment-azure-machine-learning/5-model-tracking
 
-Pending study.
+Source fetched: 2026-11-04. Conceptual study and illustrative Python configuration only; no installation, authentication, training, or logging was executed.
+
+#### What MLflow Tracking records
+
+Official source: MLflow is an open-source library for tracking and managing experiments. MLflow Tracking records **parameters**, **metrics**, and **artifacts**, allowing comparison of notebook runs and AutoML results in the workspace.
+
+| Type | Meaning | Tutor-created example |
+| --- | --- | --- |
+| Parameter | A setting used for training | Learning rate `0.01`, or 100 trees |
+| Metric | A measured result | Validation accuracy `0.91` |
+| Artifact | A saved file associated with the run | Confusion-matrix image or trained model file |
+
+Tutor clarification: a notebook provides interactive control over experimentation; MLflow records what was tried and the resulting evidence. Tracking does not itself perform AutoML's automated algorithm search. Recording the configuration alongside results and files helps distinguish runs when settings change.
+
+#### Managed compute instance versus local notebook
+
+Official source: a notebook running on an Azure Machine Learning managed **compute instance** has MLflow already configured. Verify the `mlflow` and `azureml-mlflow` packages if needed. `mlflow` provides the open-source functionality; `azureml-mlflow` provides Azure Machine Learning integration.
+
+On a local device, install both packages, obtain the intended workspace's **MLflow tracking URI**, and explicitly configure MLflow to use it. The source directs you from the workspace name in studio to **View all properties in Azure portal**, then to the tracking URI property.
+
+Tutor-adapted Python configuration, with an explicit import added to the source example:
+
+```python
+import mlflow
+
+mlflow.set_tracking_uri("YOUR-WORKSPACE-TRACKING-URI")
+```
+
+Prerequisites: installed `mlflow` and `azureml-mlflow`, the actual workspace tracking URI replacing the placeholder, and authorized workspace access for subsequent remote tracking. Exact installed versions were not verified; the unit specifies the packages but no version pins. Expected outcome: MLflow is configured to use the specified tracking destination. Not executed; authentication and remote logging were not tested.
+
+Tutor clarification: copying the URI and applying it with `set_tracking_uri()` are separate steps. Configuring the destination does not train a model or log records by itself. These distinctions support AI-300 D2 experiment-tracking objectives. Training and logging are introduced in M02-U06; no JavaScript counterpart was assumed.
+
+#### Worked conceptual practice
+
+Tutor-created, illustrative and not executed: classify learning rate `0.01`, measured validation accuracy `0.91`, and a saved confusion-matrix image. Worked solution: parameter, metric, and artifact respectively. For a laptop notebook with both packages installed, the remaining destination setup is to obtain the workspace tracking URI and apply it using `mlflow.set_tracking_uri()`.
 
 ### M02-U06 — Train and track models in notebooks
 Source: https://learn.microsoft.com/en-us/training/modules/experiment-azure-machine-learning/6-train-models-notebooks
 
-Pending study.
+Source fetched: 2026-11-04. Conceptual study and illustrative Python only; no training, timing, logging, authentication, or studio inspection was executed.
+
+#### Experiments group runs
+
+Official source: an MLflow experiment groups related runs. Select an experiment with `mlflow.set_experiment()` and start a tracked attempt with `mlflow.start_run()`. Selecting an experiment or starting a run does not train a model; training code must execute separately.
+
+Tutor illustration: compare models with 50, 100, and 200 trees in one `maintenance-classifier` experiment with three runs. Each run retains its own parameter settings and results. The tracking destination determines where records go; the experiment organizes related attempts within that destination. This supports AI-300 D2 training and experiment comparison.
+
+```python
+import mlflow
+
+mlflow.set_experiment(experiment_name="maintenance-classifier")
+with mlflow.start_run():
+    # Training and logging code goes here.
+    ...
+```
+
+Prerequisites: installed MLflow and configured tracking destination; Azure workspace integration/access as described in M02-U05 for remote tracking. The source specifies no version pins; installed versions were not verified. Expected outcome: select the named experiment and open/close a tracked run, not train a model. Illustrative, not executed.
+
+#### Autologging and custom logging can be combined
+
+Official source: `mlflow.autolog()` enables automatic recording for supported framework integrations. Enable it before training; the integration determines the parameters, metrics, artifacts, and models captured. Autologging records training activity, not performs training. Custom logging lets you explicitly record additional information and may be used alone or alongside autologging.
+
+Tutor-adapted examples, not executed; same tracking prerequisites:
+
+```python
+with mlflow.start_run():
+    mlflow.autolog()
+    # Train the model, then measure prediction latency.
+    mlflow.log_metric("prediction_latency_ms", measured_latency_ms)
+```
+
+`measured_latency_ms` must be calculated by separate code; this is a workflow sketch, not a standalone training program. If autologging already records the tree count, no additional manual tree-count record is needed for that purpose. Add custom metric logging for latency if it is not captured by the integration.
+
+```python
+with mlflow.start_run():
+    mlflow.log_param("n_trees", 100)
+    mlflow.log_metric("prediction_latency_ms", 42.0)
+    mlflow.log_artifact("validation_report.txt")
+```
+
+Expected outcome: record a parameter, a numeric metric, and an existing file. The report must already exist. These calls do not train a model, measure latency, or create the report. Framework compatibility and actual execution remain unverified; no JavaScript counterpart is assumed.
+
+#### Worked practice and logging pitfalls
+
+Tutor-created conceptual tasks, not executed:
+- Compare three tree-count settings: use one experiment and three runs, preserving each run's settings and results.
+- Add latency when standard training information is autologged: retain autologging and add `mlflow.log_metric()` for the independently measured latency.
+- Attach an existing validation report: use `mlflow.log_artifact()`; recording its path with `log_param()` stores text, not the file itself.
+
+Distinguish **measurement** from **logging**: `mlflow.log_metric("prediction_latency_ms", 42.0)` records the supplied number. It does not prove that MLflow timed predictions or that the number was measured correctly. Parameters are settings, metrics are numeric results, and artifacts are files—not interchangeable categories of “training information.”
 
 ### M02-U07 — Evaluate models with the Responsible AI dashboard
 Source: https://learn.microsoft.com/en-us/training/modules/experiment-azure-machine-learning/7-responsible-ai-dashboard
 
-Pending study.
+Source fetched: 2026-11-04; page updated 2026-08-27. Conceptual study and tutor-created hospital scenarios only; no dashboard pipeline, SDK, CLI, or configuration was executed. Practical creation prerequisites and API versions remain to be verified before an executable example.
+
+#### Evaluate beyond overall accuracy
+
+Official source: model evaluation should consider fairness, transparency, and reliability as well as accuracy. Microsoft's six Responsible AI principles are fairness; reliability and safety; privacy and security; inclusiveness; transparency; and accountability. Minimal personal-data collection supports privacy, while traceable human oversight supports accountability. The dashboard assists evaluation; it does not replace governance or establish compliance with every principle.
+
+#### Choose the analysis for the question
+
+| RAI tool | Purpose and views |
+| --- | --- |
+| Error Analysis | Identify higher-error subgroups. An error tree map reveals combinations of subgroup characteristics; an error heat map compares errors across one or two features. |
+| Explanation | Estimate feature influence. Aggregate importance summarizes influence across test data; individual importance explains one prediction. |
+| Counterfactuals | Explore minimal input changes that would flip a selected prediction to a desired outcome. |
+| Causal | Use historical data and statistical methods to estimate effects on actual outcomes, including possible interventions. |
+
+Tutor clarification: a data feature (such as age or clinic) is not a training parameter. Drilling into an error tree means examining data subgroups, not tuning hyperparameters. A heat map is a view within Error Analysis, not a separate pipeline component.
+
+Feature importance is not causal proof. Counterfactual prediction changes likewise do not guarantee improved real-world outcomes. Causal estimates depend on statistical methods and assumptions; they are not automatic proof. Explanations and error patterns provide investigation leads rather than guaranteed diagnoses or fixes.
+
+#### Construct and open the dashboard
+
+Official pipeline structure:
+
+**RAI Insights dashboard constructor → one or more RAI tool components → Gather RAI Insights dashboard.**
+
+Available tools are `Add Explanation to RAI Insights dashboard`, `Add Error Analysis to RAI Insights dashboard`, `Add Counterfactuals to RAI Insights dashboard`, and `Add Causal to RAI Insights dashboard`. Select relevant tools; including every tool is not required. Build with Python SDK, CLI, or studio's no-code experience. After successful pipeline completion, open the dashboard from the pipeline overview or the registered model's **Responsible AI** tab.
+
+This is a source-described conceptual structure, not an executable configuration. No unsupported JavaScript equivalent is assumed. It supports AI-300 D2 responsible AI evaluation.
+
+#### Worked hospital analysis example
+
+Tutor-created, illustrative and not executed:
+
+- Strong overall performance can conceal errors among older patients at specific clinics. Start with Error Analysis; use an age-by-clinic heat map or a tree map for subgroup combinations.
+- To explain one patient's high-risk prediction, use **individual**, not aggregate, feature importance.
+- To explore small input changes that would flip that prediction, use Counterfactuals. Do not treat a prediction flip as evidence of improved health.
+- For subgroup errors and individual explanations, include Error Analysis and Explanation between the constructor and Gather. Their findings guide investigation; they do not establish what causes medical outcomes.
 
 ### M02-U08 — Exercise - Find the best classification model with Azure Machine Learning
 Source: https://learn.microsoft.com/en-us/training/modules/experiment-azure-machine-learning/8-exercise

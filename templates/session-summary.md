@@ -53,17 +53,17 @@ Evidence provenance: <origin of responses and verification; historical backfills
 
 ## Persistence result
 
-<Memory-agent records applied changes, saved notes links, accepted statuses, and any unresolved conflicts. Give read-back results for the summary, TOLEARN.md, and memory/sessions/README.md; verify both indexes' IDs/counts and local file/anchor targets. Distinguish unresolved persistence blockers from provenance limitations and learner gaps. Preserve the same ID on retry.>
+<Memory-agent records applied changes, saved notes links, accepted statuses, and any unresolved conflicts. Give read-back results for the summary, TOLEARN.md, and memory/sessions/README.md; verify the authoritative session index's IDs/count against actual summaries, TOLEARN's count/latest-ID/history pointer against that index, and local file/anchor targets. Report automatic compaction's measured size/result or blocker separately from the session save. Distinguish unresolved persistence blockers from provenance limitations and learner gaps. Preserve the same ID on retry.>
 
 ## Maintenance/repair handoff fields (existing records only)
 
-<For an explicitly requested documentation repair, supply these fields instead of creating a new session summary. Keep the original lesson/review/correction mode and date; add or update a dated maintenance entry within affected existing records.>
+<For an explicitly requested documentation repair or dashboard compaction, supply these fields instead of creating a new session summary. Keep the original lesson/review/correction mode and date; add or update a dated maintenance entry within affected existing records. Dashboard-only compaction/history preservation may use memory/maintenance.md without allocating a learning-session ID.>
 
 - Operation: `maintenance/repair`
 - Repair date: <actual ISO date>
 - Target existing session IDs/files: <IDs and paths; no new learning session>
 - Evidence origins/provenance: <existing memory/notes/quizzes links and limitations>
-- Requested changes: <backfill/link/index/blocker corrections; preserve original evidence and failure history>
+- Requested changes: <backfill/link/index/blocker corrections or compaction; preserve original evidence and failure history; inventory dashboard-only history before removal>
 - Notebook save/read-back results: <per-file sections/items/counts verified, explicit anchors, failures>
-- Memory results: <per-file verification of summaries and both indexes; resolved blockers and remaining provenance limits>
+- Memory results: <per-file read-back/link verification; authoritative index versus actual summaries; dashboard count/latest-ID/history pointer; preserved history; before/after compaction bytes and target/overage where applicable; resolved blockers and remaining provenance limits>
 - Learning-state effect: <none by default; confirm no new sessions or progress/review changes; any separately requested progress correction needs evidence>
