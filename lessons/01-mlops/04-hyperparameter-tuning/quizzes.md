@@ -413,3 +413,16 @@ Strengths: Individual-trial stopping (Q01), absolute Bandit threshold applicatio
 Misconceptions and remaining gaps: Q02 and follow-up explanations repeatedly equated reporting intervals with epochs. A final report-only check was correct after explicit tutoring; independent transfer with different logging frequencies remains unverified. The source's inconsistent “four trials” wording was explicitly clarified. No Azure execution occurred; practical sweep construction and the M04-U06 lab remain pending.
 
 Review proposal: M04-U04, 2026-11-07, independently distinguish epochs, primary-metric reporting intervals, delay, and evaluation frequency in a fresh logging-frequency scenario. Final recovery was scaffolded and does not replace Q02's initial response.
+
+<a name="quiz-2026-11-12-session-01"></a>
+
+### Optional tutor quiz — 2026-11-12-session-01
+
+- Date: 2026-11-12
+- Units: [M04-U05 — Use a sweep job for hyperparameter tuning](notes.md#m04-u05--use-a-sweep-job-for-hyperparameter-tuning)
+- Verified source: https://learn.microsoft.com/en-us/training/modules/perform-hyperparameter-tuning-azure-machine-learning-pipelines/5-use-sweep-job-hyperparameter-tuning (fetched 2026-11-12).
+- Participation: declined. The learner selected **Skip quiz** from the end-of-lesson offer.
+- Requested/planned questions: Not applicable; no quiz accepted or planned.
+- Presented / valid answered: 0 / 0.
+- Count scope: M04 only; also the entire session's optional quiz.
+- Evidence provenance: current-session choice returned by the question tool. No optional quiz items, answer keys, or score apply. Ordinary lesson-check evidence is handed off separately to memory; this decline does not undo that evidence or establish a blanket preference.

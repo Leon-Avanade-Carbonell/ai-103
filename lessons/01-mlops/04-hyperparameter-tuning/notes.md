@@ -129,7 +129,28 @@ Respect the primary metric's optimization direction: low loss may be good, where
 ### M04-U05 — Use a sweep job for hyperparameter tuning
 Source: https://learn.microsoft.com/en-us/training/modules/perform-hyperparameter-tuning-azure-machine-learning-pipelines/5-use-sweep-job-hyperparameter-tuning
 
-Pending study.
+Source fetched: 2026-11-12. Requirements and workflow below reflect Microsoft Learn; examples are tutor illustrations and were not executed.
+
+#### Training-script contract
+
+The script must accept an argument for every hyperparameter being varied and log the target performance metric with MLflow. The sweep selects an input value, the command passes it to the script, the script trains and evaluates, and the logged metric enables trial comparison. Printing a metric to the console is not a substitute for `mlflow.log_metric`.
+
+The logged name must match `primary_metric`. For example, `mlflow.log_metric("validation_loss", validation_loss)` pairs with `primary_metric="validation_loss"` and `goal="Minimize"`. Lower loss is better; for an objective such as accuracy where higher is better, use `"Maximize"`.
+
+#### Configure, then submit
+
+1. Create a base command job specifying the script, fixed inputs, environment, and compute.
+2. Override tunable inputs with search-space expressions.
+3. Call `.sweep()` to configure sampling, the primary metric, and its goal; set trial/concurrency/time limits.
+4. Submit using an authenticated client's `ml_client.create_or_update(sweep_job)`.
+
+Constructing a sweep object does not start training. Total trial count and concurrency are different limits: three grid candidates with `max_total_trials=3` and `max_concurrent_trials=2` permit three trials overall, with at most two active simultaneously, subject to compute capacity and timeout.
+
+#### Monitor and compare
+
+Azure Machine Learning studio exposes child trials, their logged metrics, and charts comparing hyperparameter values with performance. The primary metric and goal determine ranking; additional logged metrics provide context but do not automatically become ranking objectives.
+
+**Tutor illustration:** Learning rates 0.001, 0.01, and 0.1 produce validation losses 0.42, 0.31, and 0.38, taking 60, 90, and 45 seconds respectively. Minimizing validation loss selects 0.01, even though it is slowest. To rank by speed instead, log `training_time`, set that as the primary metric, and use `Minimize`. Optimizing speed alone does not impose a model-quality constraint. Identifying a best trial is separate from registering or deploying its model.
 
 ### M04-U06 — Exercise - Run a sweep job
 Source: https://learn.microsoft.com/en-us/training/modules/perform-hyperparameter-tuning-azure-machine-learning-pipelines/6-exercise-run-sweep-job
@@ -151,7 +172,7 @@ Website-only. Use the Microsoft Learn source link above independently. The tutor
 - M04-U02: use Choice for an exact list, Uniform for linear-range coverage, and LogUniform for balanced coverage across orders of magnitude. Match generated values to script constraints; Normal does not enforce positivity.
 - M04-U03: grid suits small finite spaces; random supports mixed distributions; Sobol supports more even seeded exploration; Bayesian uses performance feedback but restricts distribution expressions. Seeds control sampling, not allowed values or trial budgets.
 - M04-U04: early termination stops weak individual trials; Bandit compares with the best, median stopping compares running averages, and truncation removes a ranked percentage. Delay and frequency count primary-metric reports, not epochs or finished trials.
-- Sweep integration and execution remain pending in M04-U05 and M04-U06.
+- M04-U05: connect script arguments to tunable inputs, match the MLflow metric name to the primary metric, select the optimization direction, and distinguish sweep configuration from submission. Practical execution remains pending in M04-U06.
 
 ## Python examples
 ### M04-U02 — Search-space expressions
@@ -175,7 +196,7 @@ log_space = {
 }
 ```
 
-Expected outcome: dictionaries of search-space expressions, not sampled values or trained models. Integration into a parameterized command job and job submission remain pending for M04-U05.
+Expected outcome: dictionaries of search-space expressions, not sampled values or trained models. M04-U05 below illustrates integration into a parameterized command job; actual submission and execution remain unverified.
 
 ### M04-U03 — Seeded Sobol configuration objects
 
@@ -191,7 +212,7 @@ search_space = {
 sampling = RandomSamplingAlgorithm(rule="sobol", seed=4)
 ```
 
-Expected outcome: a dictionary of search-space expressions and a Sobol sampling configuration. Each eventual trial must choose batch size 3, 10, or 15 and a learning rate within the specified interval; the code does not print or generate an actual trial sequence. Complete sweep integration remains pending for M04-U05. Values are illustrative, not recommended defaults.
+Expected outcome: a dictionary of search-space expressions and a Sobol sampling configuration. Each eventual trial must choose batch size 3, 10, or 15 and a learning rate within the specified interval; the code does not print or generate an actual trial sequence. M04-U05 illustrates the integration workflow using a different, grid-based search space. Values are illustrative, not recommended defaults.
 
 ### M04-U04 — Truncation policy configuration
 
@@ -207,7 +228,51 @@ sweep_job.early_termination = TruncationSelectionPolicy(
 )
 ```
 
-Expected outcome: attach a policy that cancels the lowest-performing 20% at eligible checks, allowing each trial four initial primary-metric reporting intervals and evaluating every interval afterward. Use the exact parameter name `truncation_percentage`, not `truncation_percent`. Complete sweep construction and submission remain pending in M04-U05; this is configuration, not execution evidence.
+Expected outcome: attach a policy that cancels the lowest-performing 20% at eligible checks, allowing each trial four initial primary-metric reporting intervals and evaluating every interval afterward. Use the exact parameter name `truncation_percentage`, not `truncation_percent`. M04-U05 illustrates sweep construction and submission syntax; neither snippet is execution evidence.
+
+### M04-U05 — Command-to-sweep workflow
+
+Tutor adaptation of the verified unit's SDK v2 workflow, using learning rate and validation loss. Prerequisites: Python with `azure-ai-ml`; `./src/train.py` accepting `--learning-rate`; a training environment with the model's dependencies, `mlflow`, and Azure ML tracking integration; an existing compute target; and an authenticated `ml_client` for submission. No installed SDK version or workspace environment availability was checked. `AzureML-sklearn-1.5@latest` follows the official unit's environment identifier, but `@latest` is a moving reference, not a pinned environment version. All code is illustrative and **not run**.
+
+```python
+from azure.ai.ml import command
+from azure.ai.ml.sweep import Choice
+
+base_job = command(
+    code="./src",
+    command="python train.py --learning-rate ${{inputs.learning_rate}}",
+    inputs={"learning_rate": 0.01},
+    environment="AzureML-sklearn-1.5@latest",
+    compute="aml-cluster",
+)
+trial_job = base_job(
+    learning_rate=Choice(values=[0.001, 0.01, 0.1]),
+)
+sweep_job = trial_job.sweep(
+    sampling_algorithm="grid",
+    primary_metric="validation_loss",
+    goal="Minimize",
+)
+sweep_job.set_limits(
+    max_total_trials=3,
+    max_concurrent_trials=2,
+    timeout=7200,
+)
+```
+
+Expected outcome: a configured sweep object with three grid candidates, at most two concurrent trials, and a 7,200-second timeout. In the training script, after computing validation loss, use:
+
+```python
+mlflow.log_metric("validation_loss", validation_loss)
+```
+
+Here `mlflow` must be imported and `validation_loss` computed; this line is not a complete training script. Submission is a separate operation requiring an authenticated workspace client:
+
+```python
+returned_sweep_job = ml_client.create_or_update(sweep_job)
+```
+
+Expected outcome on successful submission: a returned Azure ML job object, not proof that all trials finished or a model was deployed. Client setup, environment verification, and execution remain practical work.
 
 ## JavaScript examples
 Pending study. Use relevant supported examples only.
@@ -228,6 +293,14 @@ Tutor-created conceptual exercises; no environment setup required and no code ex
 - **Task:** A Bayesian proposal uses Choice for batch size and Normal for learning rate. **Worked solution:** Replace Normal with a supported expression such as Uniform over a model-appropriate interval; seeds and larger budgets do not fix distribution incompatibility.
 
 Sweep execution and the official M04-U06 exercise remain pending; these conceptual exercises are not substitutes for the practical lab.
+
+### M04-U05 — Sweep integration applications
+
+Tutor-created conceptual tasks; no code executed and no substitute for the M04-U06 lab.
+
+- **Task:** A parameterized training script only prints validation loss. Make it usable for sweep comparison. **Worked solution:** Log loss with MLflow, match the logged name in `primary_metric`, and set `goal="Minimize"`.
+- **Task:** A grid has one hyperparameter with three Choice values, a three-trial total limit, and concurrency two. Explain its behavior before and after submission. **Worked solution:** Configuration alone starts nothing. After submission, up to three combinations can be tested, with no more than two trials active at once, assuming adequate compute and time.
+- **Task:** Change ranking from validation loss to training time. **Worked solution:** Log training time, change the primary metric to the exact logged name, and minimize it. Logging another metric alone does not change ranking.
 
 [Optional quiz history](quizzes.md)
 
