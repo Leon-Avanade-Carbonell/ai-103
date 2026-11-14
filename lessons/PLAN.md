@@ -2,27 +2,30 @@
 
 Curriculum verified: **2026-10-28**. Source: [AI-300T00 course](https://learn.microsoft.com/en-us/training/courses/ai-300t00), linked from the [certification](https://learn.microsoft.com/en-us/credentials/certifications/operationalizing-machine-learning-and-generative-ai-solutions/).
 
-There are **13 modules and 110 official source units: 84 tutor-study units and 26 website-only closing units**. Each notes file below enumerates every unit with its stable ID and full source URL. Study tutor-study units in displayed order, not URL-number order. Personal progress lives in [TOLEARN.md](../memory/TOLEARN.md).
+There are **13 modules and 110 official source units: 72 tutor-study units and 38 website-only units** (12 exercises and 26 closing units). Each notes file below enumerates every unit with its stable ID and full source URL. Study tutor-study units in displayed order, not URL-number order. Personal progress lives in [TOLEARN.md](../memory/TOLEARN.md).
 
-## Website-only closing units
+<a id="website-only-closing-units"></a>
+## Website-only units
 
-The closing **Module assessment** (also titled **Knowledge check**) and **Summary** units are for independent use on Microsoft Learn. The tutor skips their teaching, checks, and review scheduling. They are excluded from tutor module-completion denominators and automatic TLDR readiness; no website confirmation is required. Their IDs, headings, and source links remain in notes, and exclusion does not mark them completed. Optional tutor quizzes on studied units and generated `tldr.md` references remain available.
+Units titled **Exercise** or beginning **Exercise - …**, along with closing **Module assessment** (also titled **Knowledge check**) and **Summary** units, are for independent use on Microsoft Learn. The tutor skips their selection, teaching, checks, and review scheduling. They are excluded from tutor module-completion denominators and automatic TLDR readiness; no website confirmation is required. Their IDs, headings, and source links remain in notes, and exclusion does not mark them completed. Match unit titles, not incidental exercise references or URL prefixes: tutor-created practice and worked examples within tutor-study units remain available. Optional tutor quizzes on studied units and generated `tldr.md` references remain available.
 
-| Module | Tutor-study units | Website-only assessment / knowledge check | Website-only summary |
-| --- | --- | --- | --- |
-| M01 | M01-U01–M01-U06 | M01-U07 | M01-U08 |
-| M02 | M02-U01–M02-U08 | M02-U09 | M02-U10 |
-| M03 | M03-U01–M03-U07 | M03-U08 | M03-U09 |
-| M04 | M04-U01–M04-U06 | M04-U07 | M04-U08 |
-| M05 | M05-U01–M05-U05 | M05-U06 | M05-U07 |
-| M06 | M06-U01–M06-U07 | M06-U08 | M06-U09 |
-| M07 | M07-U01–M07-U07 | M07-U08 | M07-U09 |
-| G01 | G01-U01–G01-U06 | G01-U07 | G01-U08 |
-| G02 | G02-U01–G02-U06 | G02-U07 | G02-U08 |
-| G03 | G03-U01–G03-U05 | G03-U06 | G03-U07 |
-| G04 | G04-U01–G04-U07 | G04-U08 | G04-U09 |
-| G05 | G05-U01–G05-U07 | G05-U08 | G05-U09 |
-| G06 | G06-U01–G06-U07 | G06-U08 | G06-U09 |
+Tutor scope updated: **2026-11-15**, by learner request to exclude Exercise units. This is a scope change using the existing verified unit index, not a new source verification.
+
+| Module | Tutor-study units | Website-only exercise | Website-only assessment / knowledge check | Website-only summary |
+| --- | --- | --- | --- | --- |
+| M01 | M01-U01–M01-U06 | — | M01-U07 | M01-U08 |
+| M02 | M02-U01–M02-U07 | M02-U08 | M02-U09 | M02-U10 |
+| M03 | M03-U01–M03-U06 | M03-U07 | M03-U08 | M03-U09 |
+| M04 | M04-U01–M04-U05 | M04-U06 | M04-U07 | M04-U08 |
+| M05 | M05-U01–M05-U04 | M05-U05 | M05-U06 | M05-U07 |
+| M06 | M06-U01–M06-U06 | M06-U07 | M06-U08 | M06-U09 |
+| M07 | M07-U01–M07-U06 | M07-U07 | M07-U08 | M07-U09 |
+| G01 | G01-U01–G01-U05 | G01-U06 | G01-U07 | G01-U08 |
+| G02 | G02-U01–G02-U05 | G02-U06 | G02-U07 | G02-U08 |
+| G03 | G03-U01–G03-U04 | G03-U05 | G03-U06 | G03-U07 |
+| G04 | G04-U01–G04-U06 | G04-U07 | G04-U08 | G04-U09 |
+| G05 | G05-U01–G05-U06 | G05-U07 | G05-U08 | G05-U09 |
+| G06 | G06-U01–G06-U06 | G06-U07 | G06-U08 | G06-U09 |
 
 The module tables below count all official source units, including the website-only links.
 

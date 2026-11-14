@@ -44,7 +44,7 @@ Pending study.
 ### G06-U07 — Exercise - Enable tracing for a generative AI application
 Source: https://learn.microsoft.com/en-us/training/modules/tracing-generative-ai-app/7-exercise
 
-Pending exercise. Add the studied task and worked solution with execution context; label any equivalent substitute. Preserve learner outcomes in memory.
+Website-only. Use the Microsoft Learn source link above independently. The tutor skips this unit in lesson selection, teaching, checks, and review scheduling; it is excluded from tutor completion and TLDR readiness. No website confirmation is required.
 
 ### G06-U08 — Knowledge check
 Source: https://learn.microsoft.com/en-us/training/modules/tracing-generative-ai-app/8-knowledge-check

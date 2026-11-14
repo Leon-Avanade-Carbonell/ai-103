@@ -15,7 +15,7 @@ The tutor asks `memory-agent` for your next lesson, teaches a Microsoft Learn un
 
 No lessons are marked learned initially. The first session begins with a short prerequisite check and `M01-U01`.
 
-Closing **Module assessment / Knowledge check** and **Summary** units are website-only. Use their Microsoft Learn links in the notes independently; the tutor skips them and requires no website confirmation. Across 13 modules, the plan contains **84 tutor-study units** and **26 website-only closing units** (110 official source units).
+**Exercise** units (including titles beginning **Exercise - …**) and closing **Module assessment / Knowledge check** and **Summary** units are website-only. Use their Microsoft Learn links in the notes independently; the tutor skips them and requires no website confirmation. Across 13 modules, the plan contains **72 tutor-study units** and **38 website-only units**: 12 exercises and 26 closing units (110 official source units). Worked examples and tutor-created practice within tutor-study units remain available.
 
 ## Optional lesson quizzes
 
@@ -29,7 +29,7 @@ Detailed results are saved in **quizzes.md beside the related notes.md** and pre
 
 The `tldr` subagent generates **tldr.md beside notes.md**, highlighting important concepts, decisions, pitfalls, source pointers, and useful existing code/CLI/configuration snippets with their prerequisites and execution status.
 
-Tutor automatically requests a summary after memory-agent confirms all tutor-study units in the module are completed, and the current notes have no unresolved planned study, lab, or example work within that scope. Website-only closing units do not block generation. Relevant examples must be studied or explicitly addressed as not applicable; historical resolved gaps do not block generation. Later corrections/reviews refresh eligible summaries.
+Tutor automatically requests a summary after memory-agent confirms all tutor-study units in the module are completed, and the current notes have no unresolved planned study, lab, or example work within that scope. Website-only Exercise and closing units do not block generation. Relevant examples must be studied or explicitly addressed as not applicable; historical resolved gaps do not block generation. Later corrections/reviews refresh eligible summaries.
 
 For a manual summary, run:
 
@@ -81,7 +81,7 @@ Chapters follow learning paths; subchapters follow modules. Each module's `notes
 - Module IDs: `M01`–`M07` for MLOps; `G01`–`G06` for GenAIOps.
 - Unit IDs: `M01-U01`, `G02-U07`, etc., following displayed page order rather than Microsoft's sometimes irregular URL numbering.
 - Status: `not-started`, `in-progress`, or `completed`; review needs are tracked separately.
-- Tutor-study completion requires recorded explanation/application-check or exercise evidence. Reading alone does not imply completion. Module completion covers all tutor-study units; website-only closing units are excluded rather than marked completed.
+- Tutor-study completion requires recorded explanation/application-check or exercise evidence. Reading alone does not imply completion. Module completion covers all tutor-study units; website-only Exercise and closing units are excluded rather than marked completed.
 - `lessons/PLAN.md` defines the curriculum; `memory/TOLEARN.md` records personal progress.
 - Supplemental topics in the coverage file require verified sources before adding lesson folders and IDs.
 

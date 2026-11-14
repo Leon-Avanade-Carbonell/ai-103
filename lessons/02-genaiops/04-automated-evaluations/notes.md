@@ -44,7 +44,7 @@ Pending study.
 ### G04-U07 — Exercise - Set up automated evaluations
 Source: https://learn.microsoft.com/en-us/training/modules/automated-evaluation-genaiops/7-exercise
 
-Pending exercise. Add the studied task and worked solution with execution context; label any equivalent substitute. Preserve learner outcomes in memory.
+Website-only. Use the Microsoft Learn source link above independently. The tutor skips this unit in lesson selection, teaching, checks, and review scheduling; it is excluded from tutor completion and TLDR readiness. No website confirmation is required.
 
 ### G04-U08 — Knowledge check
 Source: https://learn.microsoft.com/en-us/training/modules/automated-evaluation-genaiops/8-knowledge-check

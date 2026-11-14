@@ -17,11 +17,11 @@ Source: <full unit URL>
 
 Pending study. After studying this page, organize explanations, decision rules, examples, and useful insights by concept. Distinguish official material, tutor illustrations, and learner conclusions. Merge later additions into the relevant topic. Repeat for every unit in source order; do not seed unstudied content.
 
-For closing Module assessment, Knowledge check, and Summary units identified in `lessons/PLAN.md`, retain the normal stable heading and full source URL, but replace the pending placeholder with:
+For units titled Exercise or beginning Exercise - …, and closing Module assessment, Knowledge check, and Summary units identified in `lessons/PLAN.md`, retain the normal stable heading and full source URL, but replace the pending placeholder with:
 
-> Website-only. Use the Microsoft Learn source link above independently. The tutor skips this closing unit; it is excluded from tutor completion, review scheduling, and TLDR readiness. No website confirmation is required.
+> Website-only. Use the Microsoft Learn source link above independently. The tutor skips this unit in lesson selection, teaching, checks, and review scheduling; it is excluded from tutor completion and TLDR readiness. No website confirmation is required.
 
-Preserve any existing historical evidence through its file owner. Do not seed tutor explanations or substitute assessments in these units.
+Preserve any existing historical evidence through its file owner. Do not seed tutor explanations, substitute exercises, or assessments in these units. Match unit titles rather than incidental exercise references; worked examples and tutor-created practice within tutor-study units remain available.
 
 ## Key concepts and decision points
 

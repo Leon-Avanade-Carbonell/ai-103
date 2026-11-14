@@ -317,7 +317,7 @@ Syntax verification: [MLflow Search Runs — Ordering](https://mlflow.org/docs/l
 ### M03-U07 — Exercise - Optimize model training in Azure Machine Learning
 Source: https://learn.microsoft.com/en-us/training/modules/run-training-scripts-track-models-mlflow/7-exercise
 
-Pending exercise. Add the studied task and worked solution with execution context; label any equivalent substitute. Preserve learner outcomes in memory.
+Website-only. Use the Microsoft Learn source link above independently. The tutor skips this unit in lesson selection, teaching, checks, and review scheduling; it is excluded from tutor completion and TLDR readiness. No website confirmation is required.
 
 ### M03-U08 — Module assessment
 Source: https://learn.microsoft.com/en-us/training/modules/run-training-scripts-track-models-mlflow/8-knowledge-check
@@ -345,7 +345,7 @@ Pending study. Record CLI/extension prerequisites and expected outcomes.
 See [M03-U05](#m03-u05--track-metrics-with-mlflow) for the official Conda YAML excerpt, not executed. Job configuration and automation examples remain pending where relevant.
 
 ## Worked examples and practice
-See [M03-U02](#m03-u02--convert-a-notebook-to-a-script) for the in-memory cleanup task and worked solution. Dedicated training exercise M03-U07 remains pending; no lab execution or equivalent full training exercise has been demonstrated.
+See [M03-U02](#m03-u02--convert-a-notebook-to-a-script) for the in-memory cleanup task and worked solution. The dedicated [M03-U07 training exercise](#m03-u07--exercise---optimize-model-training-in-azure-machine-learning) is website-only; use its source link independently. These worked examples do not demonstrate full training execution.
 
 ## Common pitfalls and clarifications
 - Exporting notebook cells alone does not establish script readiness: remove purposeless exploration, retain dependencies, refactor, and test.

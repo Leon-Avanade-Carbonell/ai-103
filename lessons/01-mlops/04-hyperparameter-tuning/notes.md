@@ -155,7 +155,7 @@ Azure Machine Learning studio exposes child trials, their logged metrics, and ch
 ### M04-U06 — Exercise - Run a sweep job
 Source: https://learn.microsoft.com/en-us/training/modules/perform-hyperparameter-tuning-azure-machine-learning-pipelines/6-exercise-run-sweep-job
 
-Pending exercise. Add the studied task and worked solution with execution context; label any equivalent substitute. Preserve learner outcomes in memory.
+Website-only. Use the Microsoft Learn source link above independently. The tutor skips this unit in lesson selection, teaching, checks, and review scheduling; it is excluded from tutor completion and TLDR readiness. No website confirmation is required.
 
 ### M04-U07 — Module assessment
 Source: https://learn.microsoft.com/en-us/training/modules/perform-hyperparameter-tuning-azure-machine-learning-pipelines/7-knowledge-check
@@ -172,7 +172,7 @@ Website-only. Use the Microsoft Learn source link above independently. The tutor
 - M04-U02: use Choice for an exact list, Uniform for linear-range coverage, and LogUniform for balanced coverage across orders of magnitude. Match generated values to script constraints; Normal does not enforce positivity.
 - M04-U03: grid suits small finite spaces; random supports mixed distributions; Sobol supports more even seeded exploration; Bayesian uses performance feedback but restricts distribution expressions. Seeds control sampling, not allowed values or trial budgets.
 - M04-U04: early termination stops weak individual trials; Bandit compares with the best, median stopping compares running averages, and truncation removes a ranked percentage. Delay and frequency count primary-metric reports, not epochs or finished trials.
-- M04-U05: connect script arguments to tunable inputs, match the MLflow metric name to the primary metric, select the optimization direction, and distinguish sweep configuration from submission. Practical execution remains pending in M04-U06.
+- M04-U05: connect script arguments to tunable inputs, match the MLflow metric name to the primary metric, select the optimization direction, and distinguish sweep configuration from submission. Examples are illustrative, not executed; M04-U06 provides website-only practice.
 
 ## Python examples
 ### M04-U02 — Search-space expressions
@@ -292,11 +292,11 @@ Tutor-created conceptual exercises; no environment setup required and no code ex
 - **Task:** Six batch-size choices and eight learning-rate choices, but only twelve expensive trials. Both use Choice, and previous results should guide later settings. **Worked solution:** Bayesian matches this priority and supports both expressions. A full grid needs 48 trials; Sobol offers more even exploration but does not adapt to performance.
 - **Task:** A Bayesian proposal uses Choice for batch size and Normal for learning rate. **Worked solution:** Replace Normal with a supported expression such as Uniform over a model-appropriate interval; seeds and larger budgets do not fix distribution incompatibility.
 
-Sweep execution and the official M04-U06 exercise remain pending; these conceptual exercises are not substitutes for the practical lab.
+These conceptual exercises do not demonstrate sweep execution. The official M04-U06 exercise is website-only practice, excluded from tutor completion and TLDR readiness.
 
 ### M04-U05 — Sweep integration applications
 
-Tutor-created conceptual tasks; no code executed and no substitute for the M04-U06 lab.
+Tutor-created conceptual tasks; no code executed. The M04-U06 lab is separate website-only practice.
 
 - **Task:** A parameterized training script only prints validation loss. Make it usable for sweep comparison. **Worked solution:** Log loss with MLflow, match the logged name in `primary_metric`, and set `goal="Minimize"`.
 - **Task:** A grid has one hyperparameter with three Choice values, a three-trial total limit, and concurrency two. Explain its behavior before and after submission. **Worked solution:** Configuration alone starts nothing. After submission, up to three combinations can be tested, with no more than two trials active at once, assuming adequate compute and time.

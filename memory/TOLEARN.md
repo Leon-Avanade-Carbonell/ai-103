@@ -11,19 +11,19 @@ Initialized 2026-10-28. [Curriculum](../lessons/PLAN.md).
 
 “Can we stop with the precision/recall quizzes?” No forced metric checks or precision/recall quizzes; explain/apply only with agreement. Not a blanket quiz ban. Prefer new material to repeated U02 exercises. [Evidence](sessions/2026-10-28-session-04.md#learned-so-far-and-learner-reflections).
 
-Skip dedicated labs; prioritize concepts despite due reviews. Completion and denominators unchanged. [Evidence](sessions/2026-11-04-session-05.md#learned-so-far-and-learner-reflections).
+Skip dedicated labs; prioritize concepts despite due reviews. The original preference did not change denominators; the separately authorized [2026-11-15 scope change](maintenance.md#exercise-scope-reconciliation--2026-11-15) excludes website-only exercises. [Evidence](sessions/2026-11-04-session-05.md#learned-so-far-and-learner-reflections).
 
 ## Module progress
 
 | Module ID | Status | Last studied | Notes / tutor-study completion |
 | --- | --- | --- | --- |
 | M01 | in-progress | 2026-11-04 | [Notes](../lessons/01-mlops/01-get-started-with-machine-learning/notes.md); 5/6 completed; U02 in-progress. |
-| M02 | in-progress | 2026-11-04 | [Notes](../lessons/01-mlops/02-experiment-with-azure-machine-learning/notes.md); 7/8 completed; U08 not-started. |
-| M03 | in-progress | 2026-11-05 | [Notes](../lessons/01-mlops/03-training-scripts-and-mlflow/notes.md); 6/7 completed; U07 not-started and deferred. |
-| M04 | in-progress | 2026-11-12 | [Notes](../lessons/01-mlops/04-hyperparameter-tuning/notes.md); 4/6 completed. |
-| M05 | in-progress | 2026-11-12 | [Notes](../lessons/01-mlops/05-machine-learning-pipelines/notes.md); 4/5 completed. |
-| M06 | in-progress | 2026-11-13 | [Notes](../lessons/01-mlops/06-automate-training-with-github-actions/notes.md); 4/7 completed. |
-| M07 | in-progress | 2026-11-13 | [Notes](../lessons/01-mlops/07-deploy-and-monitor-models/notes.md); 1/7 completed. |
+| M02 | completed | 2026-11-04 | [Notes](../lessons/01-mlops/02-experiment-with-azure-machine-learning/notes.md); 7/7 completed. |
+| M03 | completed | 2026-11-05 | [Notes](../lessons/01-mlops/03-training-scripts-and-mlflow/notes.md); 6/6 completed. |
+| M04 | in-progress | 2026-11-12 | [Notes](../lessons/01-mlops/04-hyperparameter-tuning/notes.md); 4/5 completed. |
+| M05 | completed | 2026-11-12 | [Notes](../lessons/01-mlops/05-machine-learning-pipelines/notes.md); 4/4 completed. |
+| M06 | in-progress | 2026-11-13 | [Notes](../lessons/01-mlops/06-automate-training-with-github-actions/notes.md); 4/6 completed. |
+| M07 | in-progress | 2026-11-13 | [Notes](../lessons/01-mlops/07-deploy-and-monitor-models/notes.md); 1/6 completed. |
 | G01 | not-started | — | [Notes](../lessons/02-genaiops/01-plan-and-prepare/notes.md) |
 | G02 | not-started | — | [Notes](../lessons/02-genaiops/02-prompt-management-and-versioning/notes.md) |
 | G03 | not-started | — | [Notes](../lessons/02-genaiops/03-evaluate-and-optimize-agents/notes.md) |
@@ -33,7 +33,7 @@ Skip dedicated labs; prioritize concepts despite due reviews. Completion and den
 
 ## Unit progress
 
-Unlisted units are `not-started`. [Website-only closings](../lessons/PLAN.md#website-only-closing-units) are excluded, not completed; no confirmation required. Completion is separate from reviews, practical mastery and official outcomes.
+Unlisted units are `not-started`. [Website-only Exercise and closing units](../lessons/PLAN.md#website-only-units) are excluded, not completed; no confirmation or substitute required. Completion is separate from reviews, practical mastery and official outcomes. M02, M03 and M05 have pending relevant examples/study, so automatic TLDR is deferred.
 
 | Unit | Status | Last studied | Evidence and rationale | Notes |
 | --- | --- | --- | --- | --- |
@@ -85,12 +85,12 @@ See [reviews](#review-queue) and [history](maintenance.md#automatic-dashboard-co
 - **M01:** U02 metric transfer unresolved; U03 readiness, GPU/memory choice, provisioning and U06 deployment unverified.
 - **M02:** U05 roles/URI and setup; U06 timing/compatibility; U07 dashboard and U04 studio inspection unverified. U07 causal limit partly scaffolded.
 - **M03:** U01/U03 recurrence scaffolded; U02 examples pending; U04 defaults/types incompletely checked; U06 search-all/archived experiments untaught. Setup, execution, timing, logging and querying unverified.
-- **M04:** U01–U03 comparison/distribution/sampling reinforcement; random uniqueness tutor-supplied. U04 interval/epoch, delay/frequency unresolved. U05 metric/goal, execution, client/SDK and environment unverified; JavaScript/CLI/config pending. U06 deferred, no equivalent.
-- **M05:** U01 component/model transfer unchecked; U02 registration and port/flag retention unverified after scaffolding. U04 reinforces U03 compute/printing, not full definition/submission/execution transfer. Disable-before-delete tutor-supplied; SDK, environment, permissions and execution unverified. Module-wide examples pending; U05 lab deferred, no equivalent. [Evidence](sessions/2026-11-12-session-05.md#knowledge-gaps-and-deferred-work).
-- **M06:** Reproduction inputs and practical linkage unverified; U03 merge/pull and rulesets, U04 tests/workflow, U05 authorization/tracking, U06 triggers/bridge and execution outcomes need independent application. Configuration, examples and execution remain unverified; U07 deferred without equivalent. [Details](maintenance.md#automatic-dashboard-compaction--2026-11-13-session-05); [U05 evidence](sessions/2026-11-13-session-03.md#knowledge-gaps-and-deferred-work); [U06 evidence](sessions/2026-11-13-session-04.md#knowledge-gaps-and-deferred-work).
-- **M07:** U02 repeatability versus predictive quality unresolved; deployment unexecuted. U03–U07 unstudied; implementation unverified. U01 labels and reliability metrics tutor-supplied, unchecked. [U02 evidence](sessions/2026-11-13-session-06.md#knowledge-gaps-and-deferred-work); [U01 evidence](sessions/2026-11-13-session-05.md#knowledge-gaps-and-deferred-work).
-- **Practical readiness:** M01-U04 lab unattempted/deferred; no U05 assigned lab deferred. M02-U08, M03-U07 and future labs deferred, not failed. Examples, compute and execution unverified; label substitutes. [Preference](sessions/2026-11-04-session-05.md#knowledge-gaps-and-deferred-work).
-- **Provenance:** 2026-10-29 session-04 participation and session-05 quiz backfills repaired storage; session-05 items remain tutor-reported, not independently corroborated. [History](maintenance.md#historical-dashboard-repair-facts--2026-10-29).
+- **M04:** U01–U03 comparison/distribution/sampling reinforcement; random uniqueness tutor-supplied. U04 interval/epoch, delay/frequency unresolved. U05 metric/goal, execution, client/SDK and environment unverified; JavaScript/CLI/config pending.
+- **M05:** U01 component/model transfer unchecked; U02 registration and port/flag retention unverified after scaffolding. U04 reinforces U03 compute/printing, not full definition/submission/execution transfer. Disable-before-delete tutor-supplied; SDK, environment, permissions and execution unverified. Module-wide examples pending. [Evidence](sessions/2026-11-12-session-05.md#knowledge-gaps-and-deferred-work).
+- **M06:** Reproduction inputs and practical linkage unverified; U03 merge/pull and rulesets, U04 tests/workflow, U05 authorization/tracking, U06 triggers/bridge and execution outcomes need independent application. Configuration, examples and execution remain unverified. [Details](maintenance.md#automatic-dashboard-compaction--2026-11-13-session-05); [U05 evidence](sessions/2026-11-13-session-03.md#knowledge-gaps-and-deferred-work); [U06 evidence](sessions/2026-11-13-session-04.md#knowledge-gaps-and-deferred-work).
+- **M07:** U02 repeatability versus predictive quality unresolved; deployment unexecuted. U03–U06 unstudied; implementation unverified. U01 labels and reliability metrics tutor-supplied, unchecked. [U02 evidence](sessions/2026-11-13-session-06.md#knowledge-gaps-and-deferred-work); [U01 evidence](sessions/2026-11-13-session-05.md#knowledge-gaps-and-deferred-work).
+- **Practical readiness:** M01-U04 lab unattempted/deferred; no U05 assigned lab deferred. Examples, compute and execution unverified. Previously deferred website-only exercises are no longer required; their history remains in the [scope reconciliation](maintenance.md#exercise-scope-reconciliation--2026-11-15). [Preference](sessions/2026-11-04-session-05.md#knowledge-gaps-and-deferred-work).
+- **Provenance:** The 2026-10-29 repair backfilled 2026-10-28 session-04 participation and session-05 quiz storage; session-05 items remain tutor-reported, not independently corroborated. [History](maintenance.md#historical-dashboard-repair-facts--2026-10-29).
 
 ## Review queue
 

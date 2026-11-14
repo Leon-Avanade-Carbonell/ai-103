@@ -5,7 +5,7 @@
 - Generated: <actual YYYY-MM-DD>
 - Scope: <Partial | Complete reference>
 
-Derived from studied notes; this reference is not new learning or completion evidence. Scope covers tutor-study units; website-only Module assessment, Knowledge check, and Summary closing units do not block readiness or count as remaining work. Their source links may be retained as website-only pointers without summarizing unstudied content.
+Derived from studied notes; this reference is not new learning or completion evidence. Scope covers tutor-study units; website-only Exercise units and Module assessment, Knowledge check, and Summary closing units do not block readiness or count as remaining work. Their source links may be retained as website-only pointers without summarizing unstudied content.
 
 ## Key concepts and decisions
 
@@ -36,6 +36,6 @@ Derived from studied notes; this reference is not new learning or completion evi
 
 ## Remaining work
 
-<Required for partial summaries: unfinished tutor-study unit IDs, labs/examples, and unresolved gaps. Omit for a ready complete reference. Do not treat website-only closing units or historical resolved gaps as current blockers.>
+<Required for partial summaries: unfinished tutor-study unit IDs, labs/examples, and unresolved gaps. Omit for a ready complete reference. Do not treat website-only Exercise or closing units or historical resolved gaps as current blockers.>
 
 <Preserve an existing clearly marked User additions section when refreshing; do not seed one unnecessarily.>

@@ -2,7 +2,7 @@
 
 Source: [Official AI-300 study guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-300). Verified: **2026-10-28**.
 
-This is a curriculum mapping, not a record of learner mastery. Mapped units are starting points based on verified module outlines; unit content must be fetched during teaching. An objective absent from an outline is marked for supplemental verification rather than assumed covered. Resolve all such items before claiming complete exam preparation.
+This is a curriculum mapping, not a record of learner mastery. Mapped units are starting points based on verified module outlines; unit content must be fetched during teaching. Ranges include official Exercise units retained as website-only practice pointers under [the tutor scope](PLAN.md#website-only-units); these units are excluded from tutor completion and readiness. An objective absent from an outline is marked for supplemental verification rather than assumed covered. Resolve all such items before claiming complete exam preparation.
 
 ## D1 — Design and implement an MLOps infrastructure (15–20%)
 
@@ -59,7 +59,7 @@ These items are curriculum recommendations derived from the guide/outline compar
 
 ## Final readiness evidence
 
-- All core tutor-study units completed with saved evidence. Website-only Module assessment, Knowledge check, and Summary closing units are excluded from tutor completion; use their Microsoft Learn links independently without required confirmation.
+- All core tutor-study units completed with saved evidence. Website-only Exercise units and Module assessment, Knowledge check, and Summary closing units are excluded from tutor completion; use their Microsoft Learn links independently without required confirmation.
 - Supplemental verification items resolved with source links, lessons, and exercise evidence.
 - Cross-domain scenarios practiced and demonstrated gaps reviewed.
 - Official practice assessment attempted when available; record actual results and follow-up gaps in memory. Tutor checks are not official assessment passes.
