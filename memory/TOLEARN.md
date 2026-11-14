@@ -4,7 +4,7 @@ Initialized 2026-10-28. [Curriculum](../lessons/PLAN.md).
 
 ## Current focus
 
-- M06-U02 completed conceptually; M06-U03 next per preference. M04-U04 in progress; offer timing review with agreement. [Evidence](sessions/2026-11-12-session-07.md#evidence-and-proposed-progress); [reviews](#review-queue).
+- M07-U02 is in progress; offer brief repeatability/quality clarification with agreement, or advance to U03 for preferred new concepts. M06-U06 and U05 remain in progress; offer trigger/outcome or security application with agreement. M04-U04 timing review also needs agreement. [M07 evidence](sessions/2026-11-13-session-06.md#evidence-and-proposed-progress); [U06 evidence][nov13-04-checks]; [U05 evidence][nov13-03-checks]; [reviews](#review-queue).
 - Self-reported Python/Git comfort, some Azure/CLI, limited ML training and partial evaluation familiarity; practical skills unverified. Provide refreshers. [Evidence](sessions/2026-10-28-session-01.md#prerequisite-and-application-evidence).
 
 ## Learner preferences
@@ -22,8 +22,8 @@ Skip dedicated labs; prioritize concepts despite due reviews. Completion and den
 | M03 | in-progress | 2026-11-05 | [Notes](../lessons/01-mlops/03-training-scripts-and-mlflow/notes.md); 6/7 completed; U07 not-started and deferred. |
 | M04 | in-progress | 2026-11-12 | [Notes](../lessons/01-mlops/04-hyperparameter-tuning/notes.md); 4/6 completed. |
 | M05 | in-progress | 2026-11-12 | [Notes](../lessons/01-mlops/05-machine-learning-pipelines/notes.md); 4/5 completed. |
-| M06 | in-progress | 2026-11-12 | [Notes](../lessons/01-mlops/06-automate-training-with-github-actions/notes.md); 2/7 completed. |
-| M07 | not-started | — | [Notes](../lessons/01-mlops/07-deploy-and-monitor-models/notes.md) |
+| M06 | in-progress | 2026-11-13 | [Notes](../lessons/01-mlops/06-automate-training-with-github-actions/notes.md); 4/7 completed. |
+| M07 | in-progress | 2026-11-13 | [Notes](../lessons/01-mlops/07-deploy-and-monitor-models/notes.md); 1/7 completed. |
 | G01 | not-started | — | [Notes](../lessons/02-genaiops/01-plan-and-prepare/notes.md) |
 | G02 | not-started | — | [Notes](../lessons/02-genaiops/02-prompt-management-and-versioning/notes.md) |
 | G03 | not-started | — | [Notes](../lessons/02-genaiops/03-evaluate-and-optimize-agents/notes.md) |
@@ -67,6 +67,12 @@ Unlisted units are `not-started`. [Website-only closings](../lessons/PLAN.md#web
 | M05-U04 | completed | 2026-11-12 | [Checks][nov12-05-checks]: independent compute, print, logs and recurrence/deployment applications; no execution. | [Run a pipeline job](../lessons/01-mlops/05-machine-learning-pipelines/notes.md#m05-u04--run-a-pipeline-job) |
 | M06-U01 | completed | 2026-11-12 | [Intro application](sessions/2026-11-12-session-06.md#evidence-and-proposed-progress): quality versus job success and metric comparison independent; threshold and baseline tutor-supplied. | [Introduction](../lessons/01-mlops/06-automate-training-with-github-actions/notes.md#m06-u01--introduction) |
 | M06-U02 | completed | 2026-11-12 | [Checks and quiz](sessions/2026-11-12-session-07.md#evidence-and-proposed-progress): asset placement and later applications; traceability and full reproduction inputs clarified; practical linkage unverified. | [Source control](../lessons/01-mlops/06-automate-training-with-github-actions/notes.md#m06-u02--use-source-control-for-machine-learning-assets) |
+| M06-U03 | completed | 2026-11-13 | [Checks][nov13-01-checks]: merge gate and drift risks; merge-versus-pull refinement tutor-supplied, practical work unverified. | [Trunk-based development](../lessons/01-mlops/06-automate-training-with-github-actions/notes.md#m06-u03--apply-trunk-based-development) |
+| M06-U04 | completed | 2026-11-13 | [Checks][nov13-02-checks]: test type and merge gate; assertion tutor-supplied, structure and execution unverified. | [Validate changes](../lessons/01-mlops/06-automate-training-with-github-actions/notes.md#m06-u04--validate-changes-with-github-actions) |
+| M06-U05 | in-progress | 2026-11-13 | [Checks][nov13-03-checks]: least-privilege scope independent; authorization misconception, scaffolded recognition, storage clarified; tracking unchecked. | [Secure connection](../lessons/01-mlops/06-automate-training-with-github-actions/notes.md#m06-u05--connect-github-actions-to-azure-machine-learning-securely) |
+| M06-U06 | in-progress | 2026-11-13 | [Checks and quiz][nov13-04-checks]: pipeline/command and manual trigger recognized; bridge, post-merge and execution distinction unresolved. | [Trigger jobs][m06-u06-notes] |
+| M07-U01 | completed | 2026-11-13 | [Intro recap](sessions/2026-11-13-session-05.md#evidence-and-proposed-progress): evaluation and operational reliability independent; rationale/examples tutor-supplied. | [Introduction](../lessons/01-mlops/07-deploy-and-monitor-models/notes.md#m07-u01--introduction) |
+| M07-U02 | in-progress | 2026-11-13 | [Checks and quiz](sessions/2026-11-13-session-06.md#evidence-and-proposed-progress): endpoint/version applications and MLflow recognition; repeatability versus quality unresolved after feedback. | [Prepare a model](../lessons/01-mlops/07-deploy-and-monitor-models/notes.md#m07-u02--prepare-a-model-for-deployment) |
 
 ## Learned so far and reflections
 
@@ -81,13 +87,14 @@ See [reviews](#review-queue) and [history](maintenance.md#automatic-dashboard-co
 - **M03:** U01/U03 recurrence scaffolded; U02 examples pending; U04 defaults/types incompletely checked; U06 search-all/archived experiments untaught. Setup, execution, timing, logging and querying unverified.
 - **M04:** U01–U03 comparison/distribution/sampling reinforcement; random uniqueness tutor-supplied. U04 interval/epoch, delay/frequency unresolved. U05 metric/goal, execution, client/SDK and environment unverified; JavaScript/CLI/config pending. U06 deferred, no equivalent.
 - **M05:** U01 component/model transfer unchecked; U02 registration and port/flag retention unverified after scaffolding. U04 reinforces U03 compute/printing, not full definition/submission/execution transfer. Disable-before-delete tutor-supplied; SDK, environment, permissions and execution unverified. Module-wide examples pending; U05 lab deferred, no equivalent. [Evidence](sessions/2026-11-12-session-05.md#knowledge-gaps-and-deferred-work).
-- **M06:** Independent full reproduction-input enumeration and practical commit linkage/versioning unverified. Workflow, authentication, jobs and execution unverified; U03–U06 and examples pending. U07 deferred, no equivalent. [Evidence](sessions/2026-11-12-session-07.md#knowledge-gaps-and-deferred-work).
+- **M06:** Reproduction inputs and practical linkage unverified; U03 merge/pull and rulesets, U04 tests/workflow, U05 authorization/tracking, U06 triggers/bridge and execution outcomes need independent application. Configuration, examples and execution remain unverified; U07 deferred without equivalent. [Details](maintenance.md#automatic-dashboard-compaction--2026-11-13-session-05); [U05 evidence](sessions/2026-11-13-session-03.md#knowledge-gaps-and-deferred-work); [U06 evidence](sessions/2026-11-13-session-04.md#knowledge-gaps-and-deferred-work).
+- **M07:** U02 repeatability versus predictive quality unresolved; deployment unexecuted. U03–U07 unstudied; implementation unverified. U01 labels and reliability metrics tutor-supplied, unchecked. [U02 evidence](sessions/2026-11-13-session-06.md#knowledge-gaps-and-deferred-work); [U01 evidence](sessions/2026-11-13-session-05.md#knowledge-gaps-and-deferred-work).
 - **Practical readiness:** M01-U04 lab unattempted/deferred; no U05 assigned lab deferred. M02-U08, M03-U07 and future labs deferred, not failed. Examples, compute and execution unverified; label substitutes. [Preference](sessions/2026-11-04-session-05.md#knowledge-gaps-and-deferred-work).
 - **Provenance:** 2026-10-29 session-04 participation and session-05 quiz backfills repaired storage; session-05 items remain tutor-reported, not independently corroborated. [History](maintenance.md#historical-dashboard-repair-facts--2026-10-29).
 
 ## Review queue
 
-Twenty-two unresolved: nineteen due by 2026-11-13, two due 2026-11-15 and one due 2026-11-19. Reviews do not change completion or establish mastery. [Resolved history](review-history.md), [M01-U04 resolution](sessions/2026-11-04-session-04.md#review-proposals).
+Twenty-seven unresolved: as of 2026-11-15, twenty-four due (nineteen by 2026-11-13, three on 2026-11-14, two on 2026-11-15); one due 2026-11-16, one 2026-11-19 and one 2026-11-20. Reviews do not change completion or establish mastery. [Resolved history](review-history.md), [M01-U04 resolution](sessions/2026-11-04-session-04.md#review-proposals).
 
 | Unit / topic | Reason and evidence | Due | State | Resolution action / constraint |
 | --- | --- | --- | --- | --- |
@@ -110,13 +117,18 @@ Twenty-two unresolved: nineteen due by 2026-11-13, two due 2026-11-15 and one du
 | M04-U02 / positive-only distributions and bounds | [Normal confusion, scaffolded retry and correct quiz][nov06-01-checks]; reinforcement, not a completion downgrade. | 2026-11-09 | scheduled | With agreement, independently choose a positive-only distribution and explain bounds; date tutor-proposed, not agreed. |
 | M04-U03 / sampling transfer: grid count, seed versus search-space edits, Bayesian compatibility | [Coverage/seed ambiguities and later applications][nov06-02-checks]; clarification preceded success. | 2026-11-09 | scheduled | With agreement, independently apply all three in a fresh scenario; respect conceptual preference. |
 | M05-U03 / definition versus execution and compute | [Initial laptop-compute error and scaffolded recovery](sessions/2026-11-12-session-04.md#evidence-and-proposed-progress). | 2026-11-13 | scheduled | With agreement, independently distinguish construction, submission and execution compute in a fresh scenario; date tutor-proposed. |
+| M06-U05 / authentication versus authorization and configuration | [Initial OIDC misconception, tutor-corrected storage and scaffolded recognition][nov13-03-checks]. | 2026-11-14 | scheduled | With agreement, independently explain why successful OIDC sign-in may still yield forbidden job submission and identify storage for workspace name and client secret; date tutor-proposed. |
+| M06-U06 / code and data triggers, Azure-event bridge, submission/execution/quality | [Q03–Q05 errors](sessions/2026-11-13-session-04.md#optional-lesson-quiz); explanations only, no learner retry. | 2026-11-14 | scheduled | With agreement, independently map proposed versus merged code versus new-data events and bridge, and distinguish submission, completed execution and below-threshold quality; date tutor-proposed. |
+| M07-U02 / release repeatability versus predictive quality | [Q04](sessions/2026-11-13-session-06.md#q04--repeatability-versus-predictive-quality) guaranteed accuracy; tutor clarification only, no independent recovery. | 2026-11-14 | scheduled | With agreement, independently explain why a repeatable registration/deployment/testing process can still release a poor model; date tutor-proposed. |
 | M05-U02 / registration optionality and port-to-flag mapping | [Two initial misconceptions, scaffolded recovery][nov12-03-checks]. | 2026-11-15 | scheduled | With agreement, independently explain local use versus workspace sharing and mapping in a fresh scenario; date tutor-proposed. |
 | M06-U02 / traceability and reproducibility | [Initial automatic-link misconception and tutor-supplied reproduction inputs](sessions/2026-11-12-session-07.md#evidence-and-proposed-progress); subsequent recognition after clarification. | 2026-11-15 | scheduled | With agreement, independently identify code/data/environment/settings identifiers for a past recipe in a fresh scenario; date tutor-proposed. |
+| M06-U03 / merge enforcement and frequent integration | [Correct gate application; merge-versus-pull clarification tutor-supplied][nov13-01-checks]; retention/clarification. | 2026-11-16 | scheduled | With agreement, apply required checks versus workflow validation and contrast pulling main with merging reviewed changes into main in a fresh scenario; date tutor-proposed. |
 | M04-U05 / independent sweep configuration transfer | [Direction omitted initially and correct on prompted follow-up][nov12-01-checks], after tutor example; reinforcement, not a wrong answer. | 2026-11-19 | scheduled | With agreement, independently give logged metric, matching primary metric/goal, limits and submission stage; prefer new concepts. |
+| M06-U04 / workflow structure and behavioral test design | [Structure explained; assertion tutor-supplied][nov13-02-checks]; retention/untested transfer, not failure. | 2026-11-20 | scheduled | With agreement, map event/workflow/job/runner/steps, distinguish linting from behavioral assertions and independently construct an input/expected-output test. Enforcement is covered by the existing U03 review; date tutor-proposed. |
 
 ## Next recommended lesson
 
-**M06-U03 — Apply trunk-based development** (`not-started`). Source: https://learn.microsoft.com/en-us/training/modules/trigger-azure-machine-learn-jobs-github-actions/3-explore-solution-architecture. [Notes](../lessons/01-mlops/06-automate-training-with-github-actions/notes.md#m06-u03--apply-trunk-based-development). Prefer new concepts; reviews remain scheduled and M05-U05 lab deferred. Refresh AML jobs and GitHub branches/PRs as needed; practical work unverified. Fetch before teaching.
+**M07-U02 — Prepare a model for deployment** (`in-progress`): https://learn.microsoft.com/en-us/training/modules/deploy-model-github-actions/2-understand-business-problem; [notes](../lessons/01-mlops/07-deploy-and-monitor-models/notes.md#m07-u02--prepare-a-model-for-deployment). Offer clarification with agreement; alternatively, new concepts: **M07-U03 — Explore the deployment and monitoring architecture**, https://learn.microsoft.com/en-us/training/modules/deploy-model-github-actions/3-explore-solution-architecture; [notes](../lessons/01-mlops/07-deploy-and-monitor-models/notes.md#m07-u03--explore-the-deployment-and-monitoring-architecture).
 
 ## Exam-coverage follow-up
 
@@ -124,7 +136,7 @@ Twenty-two unresolved: nineteen due by 2026-11-13, two due 2026-11-15 and one du
 
 ## Session index
 
-33 actual learning sessions; latest `2026-11-12-session-07`. [Session history](sessions/README.md) is the sole full index. [Resolved reviews](review-history.md), [M01-U04 resolution](sessions/2026-11-04-session-04.md#review-proposals), [maintenance](maintenance.md).
+39 actual learning sessions; latest `2026-11-13-session-06`. [Session history](sessions/README.md) is the sole full index. [Resolved reviews](review-history.md), [M01-U04 resolution](sessions/2026-11-04-session-04.md#review-proposals), [maintenance](maintenance.md).
 
 [oct28-04-checks]: sessions/2026-10-28-session-04.md#evidence-and-proposed-progress
 [oct28-05-quiz]: sessions/2026-10-28-session-05.md#optional-lesson-quiz
@@ -140,3 +152,8 @@ Twenty-two unresolved: nineteen due by 2026-11-13, two due 2026-11-15 and one du
 [nov12-01-checks]: sessions/2026-11-12-session-01.md#evidence-and-proposed-progress
 [nov12-03-checks]: sessions/2026-11-12-session-03.md#evidence-and-proposed-progress
 [nov12-05-checks]: sessions/2026-11-12-session-05.md#evidence-and-proposed-progress
+[nov13-01-checks]: sessions/2026-11-13-session-01.md#evidence-and-proposed-progress
+[nov13-02-checks]: sessions/2026-11-13-session-02.md#evidence-and-proposed-progress
+[nov13-03-checks]: sessions/2026-11-13-session-03.md#evidence-and-proposed-progress
+[nov13-04-checks]: sessions/2026-11-13-session-04.md#evidence-and-proposed-progress
+[m06-u06-notes]: ../lessons/01-mlops/06-automate-training-with-github-actions/notes.md#m06-u06--trigger-azure-machine-learning-jobs-and-pipelines
