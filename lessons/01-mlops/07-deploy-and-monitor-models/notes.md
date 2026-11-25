@@ -60,17 +60,86 @@ Recurring retraining motivates automation of **registration → deployment → t
 ### M07-U03 — Explore the deployment and monitoring architecture
 Source: https://learn.microsoft.com/en-us/training/modules/deploy-model-github-actions/3-explore-solution-architecture
 
-Pending study.
+Source verified: 2026-11-16. The official unit presents a simplified MLOps architecture and explains automation with human review; implementation details are covered in later units.
+
+#### Registration is the handoff, not the finish line
+
+The official architecture is **setup → model development (inner loop) → continuous integration → model deployment (outer loop) → continuous deployment → monitoring**:
+
+- Setup creates the required Azure resources.
+- Model development explores data and trains/evaluates candidates.
+- Continuous integration packages and registers the model.
+- Model deployment deploys it to an endpoint.
+- Continuous deployment tests the deployment and safely promotes it to production.
+- Monitoring tracks endpoint operational health and model predictions over time.
+
+Registration is the hinge between the first three and last three stages. A registered version is a deployable asset, not a running prediction service. Good evaluation results and registration do not eliminate deployment, deployment testing, or safe production promotion. This connects to D2 model lifecycle and production deployment.
+
+#### Automate repetitive work while retaining judgment
+
+Official scenario: Proseware regularly retrains and redeploys its no-show model. GitHub Actions automates registration, deployment, and testing, with a workflow triggered when a new model version is ready. This reduces repetitive manual work so the team can focus on reviewing quality. Automation does not replace human judgment: production promotion and investigation of monitoring alerts can retain a person in the loop.
+
+Deployment and promotion are distinct. A version can already be deployed for testing without receiving full production traffic. Tutor clarification: in a release with a reviewer gate, the sequence is **deploy → test → approval → promote to full production traffic → monitor**. Scheduling considerations and satisfaction with the output are useful reasons for human review; these are illustrative decision criteria, not guarantees of model quality or a specified approval configuration from this unit.
+
+#### Conceptual practice: release a registered version
+
+Tutor-created example (illustrative; no code, workflow, or Azure deployment executed): `no-show:7` has been registered and evaluated but is not serving requests. Deploy that version to an endpoint, test the deployment, obtain the required approval before full production promotion, then monitor both operational health and predictions. An approval gate does not contradict automation: automated steps and controlled release decisions can coexist. Actual GitHub environment configuration remains for the following unit.
 
 ### M07-U04 — Control deployments with GitHub environments
 Source: https://learn.microsoft.com/en-us/training/modules/deploy-model-github-actions/4-control-deployments-github-environments
 
-Pending study.
+Source verified: 2026-11-16. The official unit covers deployment stages, protection rules, scoped configuration, and identity separation. The examples below are conceptual; no GitHub configuration, workflow, or Azure deployment was executed.
+
+#### Deployment targets versus runtime environments
+
+A GitHub environment is a named deployment target in a repository, such as `staging` or `production`. A workflow job references it; GitHub evaluates its protection rules before the job runs or accesses environment secrets. Naming an environment does not provision Azure resources. Teams explicitly map targets to resources, for example separate Azure ML workspaces for stronger isolation or separate endpoints in one workspace for lower management overhead.
+
+An Azure ML environment instead defines the operating system, packages, and dependencies used to run ML code. It is independent of a GitHub environment's deployment controls.
+
+#### Gate the action that changes production
+
+Separate deployment/testing from promotion: deploy and test the candidate without production traffic, then use a later job referencing the protected `production` environment to change traffic after approval. Protection rules can require reviewers, restrict allowed branches or tags, or add a wait timer. The official Proseware scenario permits production runs from `main` and requires a reviewer to examine staging test results.
+
+Automated tests determine whether defined requirements are met; reviewers decide whether the release should proceed now, considering evidence and operational context. An allowed branch is not evidence that tests passed. Tutor-created worked example: if a candidate comes from `main` but staging deployment tests fail, investigate and resolve the failure, then obtain passing test evidence before promotion. Approval needs clear acceptance criteria; it is not a substitute for testing. These controls support D2 safe production deployment.
+
+#### Configuration, authentication, and authorization
+
+Environment variables hold non-sensitive target settings such as workspace and endpoint names. Environment secrets are available only to jobs referencing that environment and only after its protection rules pass.
+
+OIDC avoids storing an Azure client secret but does not itself establish staging–production isolation. The source recommends different federated identities for staging and production, with each granted only the Azure permissions its job requires. Tutor clarification: authentication establishes identity; Azure RBAC authorizes resource operations. An already overprivileged staging identity needs narrower RBAC scope, not simply more permissions.
+
+Tutor-created conceptual practice: a staging identity can modify both staging and production endpoints. Separate the identities and restrict staging permissions to its required staging resources; use the appropriately authorized production identity in the approval-protected promotion job. This reinforces the gate with least-privilege access. Practical identity, RBAC, and workflow configuration remain unverified; no implementation example was executed.
 
 ### M07-U05 — Deploy, promote, and roll back a model with GitHub Actions
 Source: https://learn.microsoft.com/en-us/training/modules/deploy-model-github-actions/4-model-deployment
 
-Pending study.
+Source verified: 2026-11-16. Studied concepts below cover endpoint/deployment separation, direct testing, progressive traffic allocation, and rollback. GitHub Actions automation and its CLI/YAML implementation remain pending study. All examples below are conceptual tutor illustrations; no commands, workflows, or Azure deployments were executed.
+
+#### Stable endpoint, replaceable deployments
+
+The official source distinguishes a managed online endpoint's stable HTTPS address from its deployments, which host specific model versions and runtime resources. The endpoint can contain multiple deployments, letting the client keep the same URL while the serving model changes beneath it. A deployed candidate is not necessarily promoted to production traffic.
+
+Tutor illustration: `blue` hosts model version 7 at 100% of normal traffic, while `green` hosts version 8 at 0%. Traffic allocations target deployment names, not registered model version numbers directly.
+
+#### Direct tests before user-facing traffic
+
+Wait for green to finish provisioning, then send test requests directly to that deployment and compare responses with expected results. Direct invocation bypasses normal endpoint traffic routing, so green can be tested while blue continues to receive 100% of normal production traffic. Zero allocated traffic does not mean the deployment cannot receive deliberately targeted test requests.
+
+An 80% blue / 20% green split instead sends 20% of normally routed requests to green and returns its predictions to those clients. This is a limited live rollout, not an isolated test.
+
+#### Progressive promotion and acceptance criteria
+
+The source recommends introducing the candidate alongside the existing deployment, testing it first, then shifting traffic gradually and observing production behavior before further promotion. Its illustrative initial split is 90% blue / 10% green; a particular percentage is not a universal safety guarantee.
+
+Tutor-created practice and worked reasoning: start with representative inputs and important edge cases, directly target green, and validate expected responses before a limited live rollout. Live requests can supply a wider variety of inputs, but greater input diversity alone does not prove predictive improvement. Check service health, such as errors and latency, and prediction quality against defined acceptance criteria, with actual outcomes or labels when available. These conceptual distinctions support D2 deployment testing and progressive rollout.
+
+#### Roll back traffic, then investigate
+
+Retain the healthy blue deployment through green's observation period. If green produces frequent errors or unacceptable predictions, restore normal traffic to **blue=100%, green=0%**. Traffic reassignment preserves the endpoint URL and avoids deleting and recreating the endpoint for recovery. Investigate green without continuing to expose normal users to it; when blue is healthy, finishing root-cause diagnosis need not precede restoring service.
+
+Tutor-created conceptual task: green receives 20% of live traffic and begins failing while blue remains healthy. Worked solution: redirect traffic fully to blue, then inspect green's health and errors. Only retire the old deployment after the replacement meets acceptance criteria for the required observation period. The exact recovery allocation is a worked solution; implementation and execution remain pending.
+
+Overall sequence: **deploy green → wait for readiness → test directly → shift limited traffic → observe → promote further or roll back**. Production gates from M07-U04 remain relevant; GitHub Actions automation of these steps has not yet been studied here.
 
 ### M07-U06 — Monitor the deployed model
 Source: https://learn.microsoft.com/en-us/training/modules/deploy-model-github-actions/5-monitor-model

@@ -4,6 +4,16 @@ Curriculum verified: **2026-10-28**. Source: [AI-300T00 course](https://learn.mi
 
 There are **13 modules and 110 official source units: 72 tutor-study units and 38 website-only units** (12 exercises and 26 closing units). Each notes file below enumerates every unit with its stable ID and full source URL. Study tutor-study units in displayed order, not URL-number order. Personal progress lives in [TOLEARN.md](../memory/TOLEARN.md).
 
+The core counts above exclude supplemental documentation lessons. **S01 adds one planned tutor-study unit**, verified on **2026-11-16**; it is a documentation-based lesson, not an additional official training module.
+
+## Next lesson — learner-requested priority
+
+Added **2026-11-16**: study **[S01-U01 — Safe rollout for online endpoints](03-supplemental/01-safe-rollout-online-endpoints/notes.md#s01-u01--safe-rollout-for-online-endpoints)** next, then resume **[M07-U05 — Deploy, promote, and roll back a model with GitHub Actions](01-mlops/07-deploy-and-monitor-models/notes.md#m07-u05--deploy-promote-and-roll-back-a-model-with-github-actions)**.
+
+Source: https://learn.microsoft.com/en-us/azure/machine-learning/how-to-safely-rollout-online-endpoints
+
+This requested sequence takes priority over the default review/resume order. Adding the lesson records planned work, not completion evidence.
+
 <a id="website-only-closing-units"></a>
 ## Website-only units
 
@@ -65,3 +75,13 @@ Check Python basics, ML training/evaluation concepts, Azure resource/workspace b
 Use [EXAM-COVERAGE.md](EXAM-COVERAGE.md) throughout study, then resolve its supplemental backlog before treating the curriculum as complete exam preparation. The five domain labels describe related objectives, not a guarantee that each module covers every objective in a domain.
 
 Add supplemental lessons only after checking official source pages and updating the plan, notes, coverage mapping, and memory records together through the build agent. Use `S01`, `S02`, etc. for new modules, with `S01-U01` for units. Finish with cross-domain scenarios, due reviews, and official practice assessment resources linked from the certification page. Record actual assessment results rather than assumed readiness.
+
+## Supplemental lessons
+
+Supplemental lessons normally follow the core paths; the explicit next-lesson priority above places S01 before resuming M07-U05. IDs refer to tutor-study units mapped to documentation pages, not invented Microsoft Learn training units.
+
+| ID | Lesson and unit index | Tutor-study units | Source verified | Prerequisite / recommended preparation | Exam objectives |
+| --- | --- | --- | --- | --- | --- |
+| S01 | [Safe rollout for online endpoints](03-supplemental/01-safe-rollout-online-endpoints/notes.md) | S01-U01 (one documentation page) | 2026-11-16 | M07-U03–U04 concepts; for execution, AML workspace and RBAC access plus Azure CLI with ml extension v2 or Python 3.10+ with azure-ai-ml v2 and azure-identity | D2 progressive rollout, deployment testing, and rollback |
+
+Planned S01-U01 scope: endpoint/deployment definitions and versioned configuration; existing-deployment validation and scaling; a green candidate at zero routed traffic and direct tests; mirrored traffic and its limits; limited live traffic, full promotion, rollback, and retirement of blue. Use the managed online endpoint route, with relevant Kubernetes differences. Follow the learner's concept-first preference; illustrative CLI/Python/YAML examples and a conceptual application check can support study without requiring a dedicated Azure lab. Execution remains unverified until actually performed.

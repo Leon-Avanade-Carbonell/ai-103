@@ -1,6 +1,6 @@
 # Session history
 
-Thirty-nine actual learning sessions recorded through 2026-11-13, matching the persisted summaries and [TOLEARN.md session count and latest ID](../TOLEARN.md#session-index). This is the sole full session index. Earlier stale counts and missing session-04 were reconciled; the 2026-10-29 repair added the already-existing session-01 to this index without new study or setup activity.
+Forty-six learning/progress-correction sessions recorded through 2026-11-25, matching the persisted summaries and [TOLEARN.md session count and latest ID](../TOLEARN.md#session-index). This is the sole full session index. Earlier stale counts and missing session-04 were reconciled; the 2026-10-29 repair added the already-existing session-01 to this index without new study or setup activity.
 
 | Session ID | Date | Units / mode | Summary |
 | --- | --- | --- | --- |
@@ -43,6 +43,13 @@ Thirty-nine actual learning sessions recorded through 2026-11-13, matching the p
 | 2026-11-13-session-04 | 2026-11-13 | M06-U06 / lesson | [Summary](2026-11-13-session-04.md): U06 in-progress; tutor quiz 2/5; trigger/bridge and outcome review 2026-11-14 subject to agreement; M06 4/7 and in-progress |
 | 2026-11-13-session-05 | 2026-11-13 | M07-U01 / lesson | [Summary](2026-11-13-session-05.md): U01 completed for introductory recap; quiz declined; no review changed; M07 1/7 and in-progress |
 | 2026-11-13-session-06 | 2026-11-13 | M07-U02 / lesson | [Summary](2026-11-13-session-06.md): U02 in-progress; tutor quiz 3/4; repeatability/quality review 2026-11-14 subject to agreement; M07 1/7 and in-progress |
+| 2026-11-16-session-01 | 2026-11-16 | M07-U03 / lesson | [Summary](2026-11-16-session-01.md): U03 completed conceptually with scaffolded sequence; quiz declined; gate/transfer review 2026-11-19 subject to agreement; M07 2/6 and in-progress |
+| 2026-11-16-session-02 | 2026-11-16 | M07-U04 / lesson | [Summary](2026-11-16-session-02.md): U04 completed conceptually; quiz declined; identity isolation review 2026-11-19 subject to agreement; M07 3/6 and in-progress |
+| 2026-11-16-session-03 | 2026-11-16 | M07-U05 / lesson | [Summary](2026-11-16-session-03.md): U05 in-progress, automation pending; quiz declined; direct-test and recovery review 2026-11-17 subject to agreement; M07 3/6 and in-progress |
+| 2026-11-25-session-01 | 2026-11-25 | S01-U01 / lesson | [Summary](2026-11-25-session-01.md): S01-U01 and S01 in-progress, 0/1 completed; tutor quiz 9/10; mirroring-limits review 2026-11-26 subject to agreement. |
+| 2026-11-25-session-02 | 2026-11-25 | S01-U01 / lesson | [Summary](2026-11-25-session-02.md): resumed lesson, S01-U01 and S01 in-progress, 0/1; quiz declined; existing mirroring review retained and extended, subject to agreement. |
+| 2026-11-25-session-03 | 2026-11-25 | S01-U01 / lesson | [Summary](2026-11-25-session-03.md): continuation, S01-U01 and S01 in-progress, 0/1; quiz declined; existing mirroring review retained with related transfer actions, subject to agreement. |
+| 2026-11-25-session-04 | 2026-11-25 | S01-U01, M07-U05 / correction | [Summary](2026-11-25-session-04.md): learner-approved recommendation to M07-U05 automation; S01 substantially studied, statuses and reviews unchanged; no new technical check or quiz. |
 
 Memory-agent creates summaries using [the session template](../../templates/session-summary.md). Name files `YYYY-MM-DD-session-NN.md`, using the next unused number for the actual session date. Update the same file when retrying a handoff with the same session ID.
 

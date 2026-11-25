@@ -106,3 +106,48 @@ Follow-up: Tutor supplied the distinction; no learner response or recovery check
 Strengths: appropriate endpoint selection, supported MLflow no-code deployment requirements, and version-management rules (Q01–Q03).
 Remaining gap: release-process reliability versus predictive accuracy (Q04); explanation supplied, independent recovery not yet demonstrated.
 Review proposal: M07-U02, 2026-11-14, brief conceptual check with agreement on why a repeatable pipeline can deploy a poor model. Quiz percentage alone is not mastery or an official assessment pass.
+
+<a name="quiz-2026-11-16-session-01"></a>
+
+### Optional tutor quiz — 2026-11-16-session-01
+
+- Date: 2026-11-16
+- Units: [M07-U03 — Explore the deployment and monitoring architecture](notes.md#m07-u03--explore-the-deployment-and-monitoring-architecture)
+- Verified source: https://learn.microsoft.com/en-us/training/modules/deploy-model-github-actions/3-explore-solution-architecture (fetched 2026-11-16)
+- Participation: declined. Learner selected “Skip quiz” after the lesson.
+- Requested/planned: Not applicable; no quiz count selected.
+- Presented / valid answered: 0 / 0.
+- Count scope: this module and the whole session; no quiz items presented.
+- Evidence provenance: current-conversation question-tool offer and learner decline. Ordinary lesson-check prompts, responses, feedback, and scaffolded recovery are separate and handed off for the memory session.
+
+No item records or score: the decline does not undo lesson-check evidence and does not establish a blanket quiz preference.
+
+<a name="quiz-2026-11-16-session-02"></a>
+
+### Optional tutor quiz — 2026-11-16-session-02
+
+- Date: 2026-11-16
+- Units: [M07-U04 — Control deployments with GitHub environments](notes.md#m07-u04--control-deployments-with-github-environments)
+- Verified source: https://learn.microsoft.com/en-us/training/modules/deploy-model-github-actions/4-control-deployments-github-environments (fetched 2026-11-16)
+- Participation: declined. Learner selected “Skip quiz” after the lesson.
+- Requested/planned: Not applicable; no quiz count selected.
+- Presented / valid answered: 0 / 0.
+- Count scope: this module and the whole session; no quiz items presented.
+- Evidence provenance: current-conversation question-tool offer and learner decline. The three ordinary application checks and tutor feedback are separate and handed off for the memory session.
+
+No item records or score: declining the quiz does not undo lesson-check evidence or establish a blanket quiz preference.
+
+<a name="quiz-2026-11-16-session-03"></a>
+
+### Optional tutor quiz — 2026-11-16-session-03
+
+- Date: 2026-11-16
+- Units: [M07-U05 — Deploy, promote, and roll back a model with GitHub Actions](notes.md#m07-u05--deploy-promote-and-roll-back-a-model-with-github-actions)
+- Verified source: https://learn.microsoft.com/en-us/training/modules/deploy-model-github-actions/4-model-deployment (fetched 2026-11-16)
+- Participation: declined. Learner selected “Skip quiz” after requesting “Save and Pause”.
+- Requested/planned: Not applicable; no quiz count selected.
+- Presented / valid answered: 0 / 0.
+- Count scope: this module and the whole session; no quiz items presented.
+- Evidence provenance: current-conversation question-tool offer and learner decline. Ordinary lesson-check prompts, initial answers, tutor feedback, and follow-up results are separate and supplied to the memory session.
+
+No item records or score: the decline is not a failed check and does not establish a blanket quiz preference. The unit's remaining automation work is separate from optional quiz participation.

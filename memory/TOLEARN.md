@@ -4,7 +4,7 @@ Initialized 2026-10-28. [Curriculum](../lessons/PLAN.md).
 
 ## Current focus
 
-- M07-U02 is in progress; offer brief repeatability/quality clarification with agreement, or advance to U03 for preferred new concepts. M06-U06 and U05 remain in progress; offer trigger/outcome or security application with agreement. M04-U04 timing review also needs agreement. [M07 evidence](sessions/2026-11-13-session-06.md#evidence-and-proposed-progress); [U06 evidence][nov13-04-checks]; [U05 evidence][nov13-03-checks]; [reviews](#review-queue).
+- Follow the learner-requested [next lesson](#next-recommended-lesson) before default review/resume priority; offer [reviews](#review-queue) with agreement. [Priority history](maintenance.md#supplemental-lesson-priority--2026-11-16).
 - Self-reported Python/Git comfort, some Azure/CLI, limited ML training and partial evaluation familiarity; practical skills unverified. Provide refreshers. [Evidence](sessions/2026-10-28-session-01.md#prerequisite-and-application-evidence).
 
 ## Learner preferences
@@ -23,17 +23,18 @@ Skip dedicated labs; prioritize concepts despite due reviews. The original prefe
 | M04 | in-progress | 2026-11-12 | [Notes](../lessons/01-mlops/04-hyperparameter-tuning/notes.md); 4/5 completed. |
 | M05 | completed | 2026-11-12 | [Notes](../lessons/01-mlops/05-machine-learning-pipelines/notes.md); 4/4 completed. |
 | M06 | in-progress | 2026-11-13 | [Notes](../lessons/01-mlops/06-automate-training-with-github-actions/notes.md); 4/6 completed. |
-| M07 | in-progress | 2026-11-13 | [Notes](../lessons/01-mlops/07-deploy-and-monitor-models/notes.md); 1/6 completed. |
+| M07 | in-progress | 2026-11-16 | [Notes](../lessons/01-mlops/07-deploy-and-monitor-models/notes.md); 3/6 completed. |
 | G01 | not-started | — | [Notes](../lessons/02-genaiops/01-plan-and-prepare/notes.md) |
 | G02 | not-started | — | [Notes](../lessons/02-genaiops/02-prompt-management-and-versioning/notes.md) |
 | G03 | not-started | — | [Notes](../lessons/02-genaiops/03-evaluate-and-optimize-agents/notes.md) |
 | G04 | not-started | — | [Notes](../lessons/02-genaiops/04-automated-evaluations/notes.md) |
 | G05 | not-started | — | [Notes](../lessons/02-genaiops/05-monitor-generative-ai-applications/notes.md) |
 | G06 | not-started | — | [Notes](../lessons/02-genaiops/06-tracing-and-debugging/notes.md) |
+| S01 | in-progress | 2026-11-25 | [Supplemental notes](../lessons/03-supplemental/01-safe-rollout-online-endpoints/notes.md); 0/1 tutor-study units completed. |
 
 ## Unit progress
 
-Unlisted units are `not-started`. [Website-only Exercise and closing units](../lessons/PLAN.md#website-only-units) are excluded, not completed; no confirmation or substitute required. Completion is separate from reviews, practical mastery and official outcomes. M02, M03 and M05 have pending relevant examples/study, so automatic TLDR is deferred.
+Unlisted units are `not-started`. [Website-only units](../lessons/PLAN.md#website-only-units) are excluded, not completed; no confirmation or substitute required. Completion differs from review, practical mastery and official outcomes. M02, M03 and M05 have pending examples/study, so automatic TLDR is deferred.
 
 | Unit | Status | Last studied | Evidence and rationale | Notes |
 | --- | --- | --- | --- | --- |
@@ -73,6 +74,10 @@ Unlisted units are `not-started`. [Website-only Exercise and closing units](../l
 | M06-U06 | in-progress | 2026-11-13 | [Checks and quiz][nov13-04-checks]: pipeline/command and manual trigger recognized; bridge, post-merge and execution distinction unresolved. | [Trigger jobs][m06-u06-notes] |
 | M07-U01 | completed | 2026-11-13 | [Intro recap](sessions/2026-11-13-session-05.md#evidence-and-proposed-progress): evaluation and operational reliability independent; rationale/examples tutor-supplied. | [Introduction](../lessons/01-mlops/07-deploy-and-monitor-models/notes.md#m07-u01--introduction) |
 | M07-U02 | in-progress | 2026-11-13 | [Checks and quiz](sessions/2026-11-13-session-06.md#evidence-and-proposed-progress): endpoint/version applications and MLflow recognition; repeatability versus quality unresolved after feedback. | [Prepare a model](../lessons/01-mlops/07-deploy-and-monitor-models/notes.md#m07-u02--prepare-a-model-for-deployment) |
+| M07-U03 | completed | 2026-11-16 | [Checks](sessions/2026-11-16-session-01.md#evidence-and-proposed-progress): approval/automation compatibility independent, release order scaffolded, approval placement tutor-supplied; review retained. | [Architecture](../lessons/01-mlops/07-deploy-and-monitor-models/notes.md#m07-u03--explore-the-deployment-and-monitoring-architecture) |
+| M07-U04 | completed | 2026-11-16 | [Checks](sessions/2026-11-16-session-02.md#evidence-and-proposed-progress): approval placement and failed-test decision independent; RBAC isolation details tutor-supplied, review retained. | [GitHub environments](../lessons/01-mlops/07-deploy-and-monitor-models/notes.md#m07-u04--control-deployments-with-github-environments) |
+| M07-U05 | in-progress | 2026-11-16 | [Checks](sessions/2026-11-16-session-03.md#evidence-and-proposed-progress): targeted tests and rollback suggested; direct invocation and exact recovery tutor-supplied; automation unstudied. | [Deploy and promote](../lessons/01-mlops/07-deploy-and-monitor-models/notes.md#m07-u05--deploy-promote-and-roll-back-a-model-with-github-actions) |
+| S01-U01 | in-progress | 2026-11-25 | [Checks/quiz](sessions/2026-11-25-session-01.md#evidence-and-proposed-progress); [resumed checks](sessions/2026-11-25-session-02.md#evidence-and-proposed-progress); [creation and client checks](sessions/2026-11-25-session-03.md#evidence-and-proposed-progress): capacity/contract application, scaffolded targeting recovery; fuller Python construction and rollout unfinished. | [Safe rollout](../lessons/03-supplemental/01-safe-rollout-online-endpoints/notes.md#s01-u01--safe-rollout-for-online-endpoints) |
 
 ## Learned so far and reflections
 
@@ -88,13 +93,14 @@ See [reviews](#review-queue) and [history](maintenance.md#automatic-dashboard-co
 - **M04:** U01–U03 comparison/distribution/sampling reinforcement; random uniqueness tutor-supplied. U04 interval/epoch, delay/frequency unresolved. U05 metric/goal, execution, client/SDK and environment unverified; JavaScript/CLI/config pending.
 - **M05:** U01 component/model transfer unchecked; U02 registration and port/flag retention unverified after scaffolding. U04 reinforces U03 compute/printing, not full definition/submission/execution transfer. Disable-before-delete tutor-supplied; SDK, environment, permissions and execution unverified. Module-wide examples pending. [Evidence](sessions/2026-11-12-session-05.md#knowledge-gaps-and-deferred-work).
 - **M06:** Reproduction inputs and practical linkage unverified; U03 merge/pull and rulesets, U04 tests/workflow, U05 authorization/tracking, U06 triggers/bridge and execution outcomes need independent application. Configuration, examples and execution remain unverified. [Details](maintenance.md#automatic-dashboard-compaction--2026-11-13-session-05); [U05 evidence](sessions/2026-11-13-session-03.md#knowledge-gaps-and-deferred-work); [U06 evidence](sessions/2026-11-13-session-04.md#knowledge-gaps-and-deferred-work).
-- **M07:** U02 repeatability versus predictive quality unresolved; deployment unexecuted. U03–U06 unstudied; implementation unverified. U01 labels and reliability metrics tutor-supplied, unchecked. [U02 evidence](sessions/2026-11-13-session-06.md#knowledge-gaps-and-deferred-work); [U01 evidence](sessions/2026-11-13-session-05.md#knowledge-gaps-and-deferred-work).
+- **M07:** U02 repeatability versus predictive quality unresolved; U03 release transfer scaffolded, though U04 gate placement independently applied. U04 separate identities/scoped RBAC tutor-supplied; U05 direct test and recovery priority unchecked after clarification, automation/CLI/YAML pending; U06 unstudied. Deployment, identity, GitHub configuration and execution unverified; examples pending. U01 labels and reliability metrics tutor-supplied, unchecked. [U05 evidence](sessions/2026-11-16-session-03.md#knowledge-gaps-and-deferred-work); [U04](sessions/2026-11-16-session-02.md#knowledge-gaps-and-deferred-work); [U03](sessions/2026-11-16-session-01.md#knowledge-gaps-and-deferred-work); [U02](sessions/2026-11-13-session-06.md#knowledge-gaps-and-deferred-work); [U01](sessions/2026-11-13-session-05.md#knowledge-gaps-and-deferred-work).
+- **S01:** Fuller Python construction, verified SDK rollout and complete sample files pending. Article tail truncated; script verifies studied promotion/cleanup commands. No execution or mandatory lab. [Scope](sessions/2026-11-25-session-03.md#knowledge-gaps-and-deferred-work); [independent transfer review](#review-queue).
 - **Practical readiness:** M01-U04 lab unattempted/deferred; no U05 assigned lab deferred. Examples, compute and execution unverified. Previously deferred website-only exercises are no longer required; their history remains in the [scope reconciliation](maintenance.md#exercise-scope-reconciliation--2026-11-15). [Preference](sessions/2026-11-04-session-05.md#knowledge-gaps-and-deferred-work).
 - **Provenance:** The 2026-10-29 repair backfilled 2026-10-28 session-04 participation and session-05 quiz storage; session-05 items remain tutor-reported, not independently corroborated. [History](maintenance.md#historical-dashboard-repair-facts--2026-10-29).
 
 ## Review queue
 
-Twenty-seven unresolved: as of 2026-11-15, twenty-four due (nineteen by 2026-11-13, three on 2026-11-14, two on 2026-11-15); one due 2026-11-16, one 2026-11-19 and one 2026-11-20. Reviews do not change completion or establish mastery. [Resolved history](review-history.md), [M01-U04 resolution](sessions/2026-11-04-session-04.md#review-proposals).
+Thirty-one unresolved: as of 2026-11-25, thirty due; one due 2026-11-26. Reviews do not change completion or establish mastery. [Resolved history](review-history.md), [M01-U04 resolution](sessions/2026-11-04-session-04.md#review-proposals).
 
 | Unit / topic | Reason and evidence | Due | State | Resolution action / constraint |
 | --- | --- | --- | --- | --- |
@@ -123,20 +129,24 @@ Twenty-seven unresolved: as of 2026-11-15, twenty-four due (nineteen by 2026-11-
 | M05-U02 / registration optionality and port-to-flag mapping | [Two initial misconceptions, scaffolded recovery][nov12-03-checks]. | 2026-11-15 | scheduled | With agreement, independently explain local use versus workspace sharing and mapping in a fresh scenario; date tutor-proposed. |
 | M06-U02 / traceability and reproducibility | [Initial automatic-link misconception and tutor-supplied reproduction inputs](sessions/2026-11-12-session-07.md#evidence-and-proposed-progress); subsequent recognition after clarification. | 2026-11-15 | scheduled | With agreement, independently identify code/data/environment/settings identifiers for a past recipe in a fresh scenario; date tutor-proposed. |
 | M06-U03 / merge enforcement and frequent integration | [Correct gate application; merge-versus-pull clarification tutor-supplied][nov13-01-checks]; retention/clarification. | 2026-11-16 | scheduled | With agreement, apply required checks versus workflow validation and contrast pulling main with merging reviewed changes into main in a fresh scenario; date tutor-proposed. |
+| M07-U05 / direct invocation versus live split; rollback allocation and priority | [Initial split exposed users; exact test and recovery tutor-supplied](sessions/2026-11-16-session-03.md#evidence-and-proposed-progress); no independent restatement. | 2026-11-17 | scheduled | With agreement, independently target green with blue 100% / green 0%, and restore healthy blue 100% / green 0% before diagnosing green; date tutor-proposed. |
 | M04-U05 / independent sweep configuration transfer | [Direction omitted initially and correct on prompted follow-up][nov12-01-checks], after tutor example; reinforcement, not a wrong answer. | 2026-11-19 | scheduled | With agreement, independently give logged metric, matching primary metric/goal, limits and submission stage; prefer new concepts. |
+| M07-U03 / approval gate placement and registration-to-release transfer | [Initial omissions, scaffolded sequence and tutor-supplied gate](sessions/2026-11-16-session-01.md#evidence-and-proposed-progress). | 2026-11-19 | scheduled | With agreement, independently name remaining deployment, testing, promotion and monitoring steps and place approval after testing before full production promotion in a fresh scenario; date tutor-proposed. |
+| M07-U04 / identity isolation and scoped RBAC | [Separate identities and narrowed scope tutor-supplied](sessions/2026-11-16-session-02.md#evidence-and-proposed-progress); no independent recovery. | 2026-11-19 | scheduled | With agreement, explain overprivileged staging risk under OIDC and propose separate identities and scoped RBAC; date tutor-proposed. |
 | M06-U04 / workflow structure and behavioral test design | [Structure explained; assertion tutor-supplied][nov13-02-checks]; retention/untested transfer, not failure. | 2026-11-20 | scheduled | With agreement, map event/workflow/job/runner/steps, distinguish linting from behavioral assertions and independently construct an input/expected-output test. Enforcement is covered by the existing U03 review; date tutor-proposed. |
+| S01-U01 / mirroring limits | [Q06](sessions/2026-11-25-session-01.md#q06--mirroring-restrictions) contradiction and omitted cap; [later](sessions/2026-11-25-session-02.md#evidence-and-proposed-progress) zero, bandwidth and retirement errors; [creation/client checks](sessions/2026-11-25-session-03.md#evidence-and-proposed-progress) direct-test and header/policy correction or scaffolding; Kubernetes unsupported correctly stated. | 2026-11-26 | scheduled | With agreement, independently check one destination, 50% cap and Kubernetes unsupported; apply zero mirror, bandwidth versus capacity, retirement, direct-test versus shadow versus live exposure, and request header versus endpoint policy in fresh scenarios. Date tutor-proposed. |
 
 ## Next recommended lesson
 
-**M07-U02 — Prepare a model for deployment** (`in-progress`): https://learn.microsoft.com/en-us/training/modules/deploy-model-github-actions/2-understand-business-problem; [notes](../lessons/01-mlops/07-deploy-and-monitor-models/notes.md#m07-u02--prepare-a-model-for-deployment). Offer clarification with agreement; alternatively, new concepts: **M07-U03 — Explore the deployment and monitoring architecture**, https://learn.microsoft.com/en-us/training/modules/deploy-model-github-actions/3-explore-solution-architecture; [notes](../lessons/01-mlops/07-deploy-and-monitor-models/notes.md#m07-u03--explore-the-deployment-and-monitoring-architecture).
+**M07-U05 — Deploy, promote, and roll back a model with GitHub Actions**: https://learn.microsoft.com/en-us/training/modules/deploy-model-github-actions/4-model-deployment; [notes](../lessons/01-mlops/07-deploy-and-monitor-models/notes.md#m07-u05--deploy-promote-and-roll-back-a-model-with-github-actions). Study Actions automation concept-first, using S01's extensively studied rollout concepts without unnecessary repetition; offer reviews with agreement. [Learner-approved correction](sessions/2026-11-25-session-04.md#evidence-and-proposed-progress).
 
 ## Exam-coverage follow-up
 
-[Supplemental backlog](../lessons/EXAM-COVERAGE.md#supplemental-backlog): curriculum work, not learner gaps; verify sources/mapping before final preparation.
+[Supplemental backlog](../lessons/EXAM-COVERAGE.md#supplemental-backlog): curriculum work, not learner gaps; verify sources/mapping before final preparation. Shared plan's S01-next instruction and coverage's pending-study description are stale; refer to the build owner. [Correction](sessions/2026-11-25-session-04.md#knowledge-gaps-and-deferred-work).
 
 ## Session index
 
-39 actual learning sessions; latest `2026-11-13-session-06`. [Session history](sessions/README.md) is the sole full index. [Resolved reviews](review-history.md), [M01-U04 resolution](sessions/2026-11-04-session-04.md#review-proposals), [maintenance](maintenance.md).
+46 learning/progress-correction sessions; latest `2026-11-25-session-04`. [Session history](sessions/README.md) is the sole full index. [Resolved reviews](review-history.md), [M01-U04 resolution](sessions/2026-11-04-session-04.md#review-proposals), [maintenance](maintenance.md).
 
 [oct28-04-checks]: sessions/2026-10-28-session-04.md#evidence-and-proposed-progress
 [oct28-05-quiz]: sessions/2026-10-28-session-05.md#optional-lesson-quiz
