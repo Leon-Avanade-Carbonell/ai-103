@@ -267,7 +267,42 @@ Expected control flow after real implementations replace placeholders: failed te
 ### M07-U06 — Monitor the deployed model
 Source: https://learn.microsoft.com/en-us/training/modules/deploy-model-github-actions/5-monitor-model
 
-Pending study.
+Source fetched: 2026-11-26; page updated 2026-11-06. The explanations follow the official unit; clinic scenarios below are tutor-created conceptual examples. No monitoring configuration, code, or Azure operations were executed.
+
+#### Separate service health from prediction quality
+
+Online endpoints emit operational metrics to **Azure Monitor**: request latency, request count, error rate, and deployment compute CPU and memory utilization. View these in Azure ML studio or use Azure Monitor dashboards and alerts. A responsive endpoint can still make poor predictions; accurate predictions are not useful if the service is unavailable.
+
+For provisioning or scoring failures, separate configuration problems from runtime problems. Review deployment state, error details, and container logs; test locally when possible. Logs can reveal missing dependencies, scoring problems, image failures, or resource and quota constraints.
+
+Tutor example: sharply increased latency with out-of-memory errors calls for infrastructure/runtime investigation first. Check resource utilization, scoring-code memory use, and deployment sizing rather than assuming retraining will fix serving failures.
+
+#### Configure prediction monitoring explicitly
+
+Deployment does **not** automatically configure prediction-quality monitoring. Enable data collection on the online deployment to capture requests and responses, then create a model monitor with a schedule and reference dataset, typically training or validation data.
+
+| Signal | What changes |
+| --- | --- |
+| Data drift | Incoming feature distributions differ from reference data. |
+| Prediction drift | The distribution of model outputs shifts. |
+| Data quality | Missing values, unexpected categories, or out-of-range values appear. |
+| Feature attribution drift | Relative feature importance shifts compared with training. |
+
+These signals identify changes, not necessarily a loss of predictive accuracy. Actual outcomes or labels, when available, help establish whether predictions remain useful.
+
+#### Investigate, roll back, or consider retraining
+
+- **Investigate a threshold crossing:** confirm what changed and evaluate its impact before choosing a response.
+- **Roll back a faulty new release:** when problems begin with a new deployment and the retained previous deployment is healthy, restore traffic first, then investigate the candidate.
+- **Consider retraining for changed conditions:** if real-world behavior has changed and evidence shows inadequate predictions, an older model may have the same limitation. Evaluate a candidate trained on recent data and release it through the tested deployment pipeline.
+
+Tutor worked examples:
+
+1. A clinic changes scheduling policy, shifting appointment lead times. A data-drift alert alone does not justify automatic rollback or retraining. Confirm the policy change and compare predictions with actual appointment outcomes when available.
+2. Green produces scoring errors immediately after promotion while blue remains healthy. Restore **blue=100%, green=0%**, then inspect green; use the traffic controls in [M07-U05](#m07-u05--deploy-promote-and-roll-back-a-model-with-github-actions).
+3. Patient behavior changes over several months and both deployments now predict poorly. Investigate and consider retraining; switching versions alone does not address shared changed conditions.
+
+Practical data-collection, scheduled-monitor, threshold, and alert configuration examples remain pending. The unit establishes their purpose, not an executed implementation or automatic retraining workflow.
 
 ### M07-U07 — Exercise
 Source: https://learn.microsoft.com/en-us/training/modules/deploy-model-github-actions/5-exercise
@@ -290,7 +325,7 @@ Website-only. Use the Microsoft Learn source link above independently. The tutor
 
 ## Remaining study and examples
 
-- M07-U06 remains pending study. Further key concepts, worked practice, and pitfalls remain pending.
+- M07-U06 monitoring configuration examples remain pending: data collection, scheduled monitors, thresholds, and alerts. Practical execution is unverified.
 - JavaScript examples remain pending; relevance is not yet assessed. Other Python registration/deployment examples, endpoint/model/deployment construction files, readiness checks, and complete workflow and sample files remain pending as described above.
 
 Optional quiz participation and results: [Quiz history](quizzes.md).

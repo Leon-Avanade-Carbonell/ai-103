@@ -251,3 +251,103 @@ Follow-up: No retry.
 Strengths: OIDC purpose, isolated testing, approval versus authorization, response validation, and exact rollback allocation (Q01–Q05).
 Remaining gaps: no incorrect quiz responses. Full workflow implementation, files, readiness checks, and execution remain unverified; the score is conceptual evidence, not practical proficiency or an official pass.
 Review proposal: M07-U05 release-control transfer on 2026-12-03, with agreement; explain and apply testing, approval, and rollback in a changed scenario. Existing reviews should be validated and deduplicated by memory-agent rather than automatically multiplied.
+
+<a name="quiz-2026-11-26-session-02"></a>
+
+### Optional tutor quiz — 2026-11-26-session-02
+
+- Date: 2026-11-26
+- Units: [M07-U06 — Monitor the deployed model](notes.md#m07-u06--monitor-the-deployed-model).
+- Verified source: S1 = https://learn.microsoft.com/en-us/training/modules/deploy-model-github-actions/5-monitor-model (fetched 2026-11-26; page updated 2026-11-06).
+- Participation: completed.
+- Requested/planned: Short quiz / 5.
+- Presented / valid answered: 5 / 5.
+- Correct / incorrect / skipped / invalid / unasked or unanswered: 5 / 0 / 0 / 0 / 0.
+- Score: 5/5.
+- Difficulty mix: 2 easy, 2 medium, 1 hard; single-answer except Q02, scored by exact set.
+- Count scope: M07 module-local counts equal session-wide counts.
+- Evidence provenance: actual initial question-tool selections in the current conversation, after lesson feedback. No retries, practical execution, or official assessment outcome claimed.
+
+<a name="quiz-2026-11-26-session-02-q01"></a>
+
+#### Q01 — Operational health; easy; single-answer; M07-U06; S1
+
+Prompt: Question 1/5 — Easy. Select one answer. Which observation primarily indicates an endpoint operational-health problem?
+- A. Appointment lead times shift — The incoming feature distribution changes.
+- B. Request latency rises sharply — Requests take substantially longer to complete.
+- C. Predicted risk scores shift — The model's output distribution changes.
+- D. Feature importance changes — The relative influence of features shifts.
+
+Initial learner selections: B. Request latency rises sharply.
+Correct set: B.
+Outcome: correct.
+Explanation: Latency measures service responsiveness. A is data drift, C is prediction drift, and D is feature attribution drift (S1).
+Follow-up: No retry.
+
+<a name="quiz-2026-11-26-session-02-q02"></a>
+
+#### Q02 — Monitoring setup; medium; multiple-answer; M07-U06; S1
+
+Prompt: Question 2/5 — Medium. Select two answers. A team has deployed an online model but has not configured model monitoring. Which two setup actions does the unit describe for comparing production data with reference data?
+- A. Enable deployment data collection — Collect incoming requests and model responses.
+- B. Register another model version — Create an additional versioned model asset.
+- C. Create a scheduled model monitor — Configure comparison with a reference dataset.
+- D. Allocate traffic to every deployment — Give each deployed version live requests.
+
+Initial learner selections: A. Enable deployment data collection; C. Create a scheduled model monitor.
+Correct set: A, C.
+Outcome: correct (exact set).
+Explanation: Data collection supplies production inputs and outputs; the configured monitor compares data on a schedule. Registering another version or distributing traffic to every deployment does not configure monitoring (S1).
+Follow-up: No retry.
+
+<a name="quiz-2026-11-26-session-02-q03"></a>
+
+#### Q03 — Data quality; easy; single-answer; M07-U06; S1
+
+Prompt: Question 3/5 — Easy. Select one answer. Production requests begin containing missing values and previously unseen categories. Which monitoring signal directly addresses these issues?
+- A. Prediction drift — A change in the distribution of model outputs.
+- B. Feature attribution drift — A change in relative feature importance.
+- C. Request count — The number of requests handled by the service.
+- D. Data quality — Problems in the validity or completeness of input data.
+
+Initial learner selections: D. Data quality.
+Correct set: D.
+Outcome: correct.
+Explanation: Data quality covers missing values, unexpected categories, and out-of-range values. A concerns outputs, B concerns feature importance, and C measures request volume (S1).
+Follow-up: No retry.
+
+<a name="quiz-2026-11-26-session-02-q04"></a>
+
+#### Q04 — Release-related failure; medium; single-answer; M07-U06; S1
+
+Prompt: Question 4/5 — Medium. Select one answer. Immediately after a new deployment is promoted, scoring errors spike. The retained previous deployment remains healthy. What is the best immediate response?
+- A. Retrain before changing traffic — Complete new training while the faulty deployment keeps serving.
+- B. Restore traffic to the previous deployment — Recover service, then investigate the new deployment.
+- C. Delete the entire endpoint — Remove the service and create a replacement URL.
+- D. Wait for a drift alert — Keep the traffic allocation until a model monitor signals drift.
+
+Initial learner selections: B. Restore traffic to the previous deployment.
+Correct set: B.
+Outcome: correct.
+Explanation: A healthy fallback supports immediate rollback, followed by investigation. A delays recovery without evidence that training is the fix; C unnecessarily removes the endpoint; D waits for an unrelated signal despite known scoring failures (S1).
+Follow-up: No retry.
+
+<a name="quiz-2026-11-26-session-02-q05"></a>
+
+#### Q05 — Drift without established quality loss; hard; single-answer; M07-U06; S1
+
+Prompt: Question 5/5 — Hard. Select one answer. No model deployment has changed. A clinic changes scheduling policy, and appointment lead-time data crosses a drift threshold. There is not yet evidence that prediction quality has declined. What is the best next step?
+- A. Automatically retrain and promote — Treat the threshold crossing as sufficient release evidence.
+- B. Roll back to the previous model — Assume the older version avoids the changed input conditions.
+- C. Investigate the change and its impact — Check the policy change and evaluate predictions against actual outcomes when available.
+- D. Ignore drift while latency is normal — Treat service responsiveness as proof of prediction quality.
+
+Initial learner selections: C. Investigate the change and its impact.
+Correct set: C.
+Outcome: correct.
+Explanation: A drift threshold prompts investigation. A skips evaluation; B assumes an older model solves changed conditions; D confuses service health with prediction quality (S1).
+Follow-up: No retry.
+
+Strengths: service-health recognition, explicit monitoring setup, data-quality identification, release-failure rollback, and investigation before responding to drift (Q01–Q05).
+Remaining gaps: no incorrect quiz answers. Earlier lesson responses required clarification of rollback versus changed conditions; Q04–Q05 demonstrate post-feedback recognition, not delayed independent transfer. Monitoring implementation remains unverified.
+Review proposal: M07-U06, 2026-11-29, with agreement: apply investigate/rollback/retraining decisions to a changed scenario and distinguish operational from model-monitoring signals. This score is formative evidence, not an official pass or practical proficiency.

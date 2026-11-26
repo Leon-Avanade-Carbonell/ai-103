@@ -1,6 +1,6 @@
 # Session history
 
-Forty-seven learning/progress-correction sessions recorded through 2026-11-26, matching the persisted summaries and [TOLEARN.md session count and latest ID](../TOLEARN.md#session-index). This is the sole full session index. Earlier stale counts and missing session-04 were reconciled; the 2026-10-29 repair added the already-existing session-01 to this index without new study or setup activity.
+Fifty-eight learning/progress-correction sessions recorded through 2026-11-26, matching the persisted summaries and [TOLEARN.md session count and latest ID](../TOLEARN.md#session-index). This is the sole full session index. Earlier stale counts and missing session-04 were reconciled; the 2026-10-29 repair added the already-existing session-01 to this index without new study or setup activity.
 
 | Session ID | Date | Units / mode | Summary |
 | --- | --- | --- | --- |
@@ -51,6 +51,17 @@ Forty-seven learning/progress-correction sessions recorded through 2026-11-26, m
 | 2026-11-25-session-03 | 2026-11-25 | S01-U01 / lesson | [Summary](2026-11-25-session-03.md): continuation, S01-U01 and S01 in-progress, 0/1; quiz declined; existing mirroring review retained with related transfer actions, subject to agreement. |
 | 2026-11-25-session-04 | 2026-11-25 | S01-U01, M07-U05 / correction | [Summary](2026-11-25-session-04.md): learner-approved recommendation to M07-U05 automation; S01 substantially studied, statuses and reviews unchanged; no new technical check or quiz. |
 | 2026-11-26-session-01 | 2026-11-26 | M07-U05, M07-U04 / lesson | [Summary](2026-11-26-session-01.md): U05 conceptually completed; U04 retained; tutor quiz 5/5; direct-test/rollback review resolved, changed-scenario transfer review scheduled 2026-12-03 with agreement; M07 4/6 and in-progress. |
+| 2026-11-26-session-02 | 2026-11-26 | M07-U06 / lesson | [Summary](2026-11-26-session-02.md): U06 conceptually completed; scaffolded recovery and post-feedback quiz 5/5; changed-scenario monitoring review scheduled 2026-11-29 with agreement; M07 5/6 and in-progress. |
+| 2026-11-26-session-03 | 2026-11-26 | G01-U01 / lesson | [Summary](2026-11-26-session-03.md): introductory application completed; quiz declined; no reviews changed; G01 1/5 and in-progress. |
+| 2026-11-26-session-04 | 2026-11-26 | G01-U02 / lesson | [Summary](2026-11-26-session-04.md): U02 in-progress; quiz declined; test-request review 2026-11-29 with agreement; G01 1/5 and in-progress. |
+| 2026-11-26-session-05 | 2026-11-26 | G01-U03 / lesson | [Summary](2026-11-26-session-05.md): U03 conceptually completed; tutor quiz 4/5, groundedness transfer review 2026-11-29 with agreement; G01 2/5 and in-progress. |
+| 2026-11-26-session-06 | 2026-11-26 | G01-U04 / lesson | [Summary](2026-11-26-session-06.md): U04 conceptually completed with scaffolded recovery; quiz declined; lifecycle/freshness review 2026-11-29 subject to agreement; G01 3/5 and in-progress. |
+| 2026-11-26-session-07 | 2026-11-26 | G01-U05 / lesson | [Summary](2026-11-26-session-07.md): U05 conceptually completed; quiz declined; tool-role retention review 2026-12-03 subject to agreement; G01 4/5 and in-progress. |
+| 2026-11-26-session-08 | 2026-11-26 | G02-U01 / lesson | [Summary](2026-11-26-session-08.md): introductory application completed; testing scaffolded; quiz declined; no reviews changed; G02 1/5 and in-progress. |
+| 2026-11-26-session-09 | 2026-11-26 | G02-U02 / lesson | [Summary](2026-11-26-session-09.md): conceptual completion; deployment path scaffolded, quiz declined; no reviews changed; G02 2/5 and in-progress. |
+| 2026-11-26-session-10 | 2026-11-26 | G02-U03 / lesson | [Summary](2026-11-26-session-10.md): U03 in-progress, SDK example pending; quiz declined; comparison/storage review 2026-11-29 subject to agreement; G02 2/5 and in-progress. |
+| 2026-11-26-session-11 | 2026-11-26 | G02-U04 / lesson | [Summary](2026-11-26-session-11.md): conceptual completion, tutor quiz 4/4; no review changed; G02 3/5 and in-progress. |
+| 2026-11-26-session-12 | 2026-11-26 | G02-U05 / lesson | [Summary](2026-11-26-session-12.md): conceptual completion; quiz declined; deployment/rollback transfer review 2026-11-29 subject to agreement; G02 4/5 and in-progress. |
 
 Memory-agent creates summaries using [the session template](../../templates/session-summary.md). Name files `YYYY-MM-DD-session-NN.md`, using the next unused number for the actual session date. Update the same file when retrying a handoff with the same session ID.
 
