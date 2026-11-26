@@ -46,26 +46,18 @@ Source: https://learn.microsoft.com/en-us/training/modules/evaluate-optimize-age
 
 Website-only. Use the Microsoft Learn source link above independently. The tutor skips this closing unit; it is excluded from tutor completion, review scheduling, and TLDR readiness. No website confirmation is required.
 
-## Key concepts and decision points
-Pending study.
+<a id="key-concepts-and-decision-points"></a>
+<a id="python-examples"></a>
+<a id="javascript-examples"></a>
+<a id="azure-cli-commands"></a>
+<a id="related-configuration-yaml-bicep-or-github-actions"></a>
+<a id="worked-examples-and-practice"></a>
+<a id="common-pitfalls-and-clarifications"></a>
 
-## Python examples
-Pending study. Record prerequisites/versions, expected outcomes, and execution status.
+## Remaining study and examples
 
-## JavaScript examples
-Pending study. Use relevant supported examples only.
-
-## Azure CLI commands
-Pending study. Record CLI/extension prerequisites and expected outcomes.
-
-## Related configuration: YAML, Bicep, or GitHub Actions
-Pending study.
-
-## Worked examples and practice
-Pending study. Include unit IDs, useful tasks, worked solutions, prerequisites, and execution status. Keep learner-response histories and assessment outcomes in memory.
-
-## Common pitfalls and clarifications
-Pending study. Add reusable conceptual explanations as topics are studied.
+- Study the tutor units above; key concepts, decisions, pitfalls, and worked practice remain pending.
+- Python, JavaScript, Azure CLI, and YAML/Bicep/GitHub Actions examples remain pending; relevance is not yet assessed. Record prerequisites, versions, expected outcomes, and execution status where applicable.
 
 ## Microsoft Learn search terms
 - AI agent evaluation experiments quality cost performance

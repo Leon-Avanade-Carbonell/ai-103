@@ -18,18 +18,16 @@ Source fetched: 2026-10-29. The introduction frames experimentation as necessary
 
 #### Experimentation tools and workflow
 
-Official source explanation:
+Microsoft Learn describes three complementary tools:
 - **AutoML** automatically searches algorithms and preprocessing configurations, running multiple training jobs in parallel.
 - **Jupyter notebooks** provide an interactive environment for writing and iterating on custom training code.
 - **MLflow** tracks experiment runs so results can be compared; tracking is different from automatically searching algorithms.
 
-The module introduces three phases: explore algorithms and featurization with AutoML, continue custom experimentation in notebooks with MLflow tracking, then compare trained models using performance metrics and the Responsible AI dashboard. These are planned module activities, not evidence of practical execution.
+The planned workflow explores algorithms and featurization with AutoML, continues custom notebook experiments with MLflow, and compares models using performance metrics and the Responsible AI dashboard. This introduction is conceptual; no practical execution was performed.
 
-Decision rule: use AutoML for automated exploration, notebooks for custom control, and MLflow for tracking and comparison. This supports AI-300 D2 training and experiment-comparison objectives.
+Tutor clarification: notebook capacity depends on its compute. Custom notebook code need not move into AutoML, and arbitrary custom preprocessing should not be assumed to be a supported AutoML configuration.
 
-Tutor clarification: notebooks are not inherently limited to small experiments; the execution compute determines capacity. Moving custom notebook code into AutoML is not a mandatory next step. Do not assume arbitrary custom preprocessing is an accepted AutoML configuration; supported featurization options need separate verification in the relevant unit.
-
-Tutor illustration, not executed: for equipment-maintenance prediction, explore candidate approaches with AutoML, use a notebook when direct control over training or preprocessing code is needed, and track custom runs with MLflow. Compare model evidence rather than choosing solely by run order or authoring tool. No SDK, CLI, or configuration code was introduced or run in this conceptual introduction.
+Tutor illustration: for equipment-maintenance prediction, explore candidates with AutoML, use a notebook for direct control, and track custom runs with MLflow. Compare model evidence rather than choosing by run order or authoring tool.
 
 [Optional quiz history](quizzes.md)
 
@@ -40,11 +38,11 @@ Source fetched: 2026-10-29. Conceptual study only; no code or Azure jobs were ru
 
 #### Data preparation and MLTable
 
-Official source: this AutoML workflow uses an **MLTable data asset**, with data stored alongside an MLTable file that describes how to read it. A registered asset provides a reusable, versioned input reference. Registration alone does not guarantee that missing values, categories, or other data-quality issues have been handled. MLTable is about the table's loading definition and transformations, not merely naming conventions.
+This AutoML workflow uses an **MLTable data asset**: an MLTable file describes how to read and transform the accompanying data. Registration provides a reusable, versioned reference, but does not guarantee data-quality issues have been handled.
 
 #### Automatic numeric scaling versus optional featurization
 
-Official source: AutoML automatically applies scaling and normalization to numeric data to help prevent large-scale features from dominating training. Optional featurization is enabled by default and can be disabled or customized, including a specific feature's imputation method. Do not interpret disabling optional featurization as disabling all automatic numeric scaling.
+AutoML automatically scales and normalizes numeric data to help prevent large-scale features from dominating training. Optional featurization is enabled by default and can be disabled or customized, including a feature's imputation method. Disabling it does not disable all automatic numeric scaling.
 
 | Transformation | Purpose | Illustrative use |
 | --- | --- | --- |
@@ -66,7 +64,7 @@ Tutor-created illustrations, not executed; no SDK/CLI version dependency for the
 - **High cardinality:** cardinality is the number of distinct values. A unique customer ID often identifies a row rather than providing a pattern that generalizes to unseen customers. Uniqueness does not guarantee predictive value, and scaling cannot manufacture that meaning. Many distinct values are not by themselves a universal reason to remove a feature; consider its semantics.
 - **Date features:** a signup date can yield month, year, and day-of-week features that expose seasonal patterns.
 
-Practice task: for a table containing missing ages, city names, annual income, unique customer IDs, and signup dates, map each issue to a relevant transformation. Worked solution: impute missing ages; consider scaling numeric age/income; encode cities; evaluate dropping IDs; derive date parts. This supports D2 AutoML training decisions. Practical SDK configuration and execution remain future study.
+Tutor practice: for missing ages, city names, income, unique customer IDs, and signup dates, respectively consider imputation, encoding, scaling, dropping IDs, and deriving date parts. Practical SDK configuration and execution remain pending.
 
 ### M02-U03 — Run an automated machine learning experiment
 Source: https://learn.microsoft.com/en-us/training/modules/experiment-azure-machine-learning/3-run-job
@@ -137,7 +135,7 @@ print("Monitor your job at", returned_job.studio_url)
 
 Prerequisites: an authenticated SDK v2 `MLClient` connected to the workspace, a valid configured job and MLTable input, compute availability, and sufficient access. Expected result: a submitted job and a studio monitoring link, not necessarily a completed model. Constructing the job or calling `set_limits()` alone does not start training; printing the URL does not submit it.
 
-Workflow: configure task/data/target/metric → set limits and training options → submit → monitor in Azure Machine Learning studio. Supports AI-300 D2 AutoML training and job comparison. Practical execution and language/CLI/configuration examples remain future module work; no JavaScript equivalent was assumed.
+Configure task, data, target and metric → set limits and training options → submit → monitor in studio. Practical execution and additional language/CLI/configuration examples remain pending; no JavaScript equivalent was assumed.
 
 ### M02-U04 — Evaluate and compare models
 Source: https://learn.microsoft.com/en-us/training/modules/experiment-azure-machine-learning/4-evaluate-compare-models
@@ -160,7 +158,7 @@ Tutor clarification: Done is not a reason to ignore preprocessing, and Passed do
 
 Official source: candidates are sorted by the configured **primary metric**, with the best-performing candidate at the top. Edit the Models tab columns to show additional metrics for a broader comparison.
 
-Tutor-created worked example, illustrative and not executed: an accuracy-ranked experiment produces A (94% accuracy, 180 ms prediction latency) and B (93%, 40 ms). A ranks first. Only B meets an application latency requirement of under 100 ms or under 50 ms; neither meets under 30 ms. Making a latency limit stricter does not change the accuracy ranking or speed up the models. Minimum acceptable accuracy was not specified, so latency eligibility alone does not establish full deployment suitability. These distinctions support AI-300 D2 job comparison and model evaluation.
+Tutor example, not executed: A has 94% accuracy and 180 ms latency; B has 93% and 40 ms. A ranks first by accuracy, but only B meets a latency limit under 100 ms or under 50 ms; neither meets under 30 ms. The latency limit does not change the ranking. Minimum acceptable accuracy is unspecified, so latency eligibility alone does not establish deployment suitability.
 
 #### Preprocessing labels and model explanations
 
@@ -203,7 +201,7 @@ mlflow.set_tracking_uri("YOUR-WORKSPACE-TRACKING-URI")
 
 Prerequisites: installed `mlflow` and `azureml-mlflow`, the actual workspace tracking URI replacing the placeholder, and authorized workspace access for subsequent remote tracking. Exact installed versions were not verified; the unit specifies the packages but no version pins. Expected outcome: MLflow is configured to use the specified tracking destination. Not executed; authentication and remote logging were not tested.
 
-Tutor clarification: copying the URI and applying it with `set_tracking_uri()` are separate steps. Configuring the destination does not train a model or log records by itself. These distinctions support AI-300 D2 experiment-tracking objectives. Training and logging are introduced in M02-U06; no JavaScript counterpart was assumed.
+Tutor clarification: obtaining the URI and applying it with `set_tracking_uri()` are separate steps. Configuration alone does not train or log. M02-U06 covers logging; no JavaScript counterpart was assumed.
 
 #### Worked conceptual practice
 
@@ -218,7 +216,7 @@ Source fetched: 2026-11-04. Conceptual study and illustrative Python only; no tr
 
 Official source: an MLflow experiment groups related runs. Select an experiment with `mlflow.set_experiment()` and start a tracked attempt with `mlflow.start_run()`. Selecting an experiment or starting a run does not train a model; training code must execute separately.
 
-Tutor illustration: compare models with 50, 100, and 200 trees in one `maintenance-classifier` experiment with three runs. Each run retains its own parameter settings and results. The tracking destination determines where records go; the experiment organizes related attempts within that destination. This supports AI-300 D2 training and experiment comparison.
+Tutor illustration: compare 50, 100, and 200 trees in one `maintenance-classifier` experiment with three runs, each retaining its settings and results. The tracking destination determines where records go; the experiment groups attempts there.
 
 ```python
 import mlflow
@@ -257,10 +255,7 @@ Expected outcome: record a parameter, a numeric metric, and an existing file. Th
 
 #### Worked practice and logging pitfalls
 
-Tutor-created conceptual tasks, not executed:
-- Compare three tree-count settings: use one experiment and three runs, preserving each run's settings and results.
-- Add latency when standard training information is autologged: retain autologging and add `mlflow.log_metric()` for the independently measured latency.
-- Attach an existing validation report: use `mlflow.log_artifact()`; recording its path with `log_param()` stores text, not the file itself.
+Tutor practice, not executed: use `mlflow.log_artifact()` to attach an existing validation report; recording its path with `log_param()` stores text, not the file.
 
 Distinguish **measurement** from **logging**: `mlflow.log_metric("prediction_latency_ms", 42.0)` records the supplied number. It does not prove that MLflow timed predictions or that the number was measured correctly. Parameters are settings, metrics are numeric results, and artifacts are files—not interchangeable categories of “training information.”
 
@@ -294,7 +289,7 @@ Official pipeline structure:
 
 Available tools are `Add Explanation to RAI Insights dashboard`, `Add Error Analysis to RAI Insights dashboard`, `Add Counterfactuals to RAI Insights dashboard`, and `Add Causal to RAI Insights dashboard`. Select relevant tools; including every tool is not required. Build with Python SDK, CLI, or studio's no-code experience. After successful pipeline completion, open the dashboard from the pipeline overview or the registered model's **Responsible AI** tab.
 
-This is a source-described conceptual structure, not an executable configuration. No unsupported JavaScript equivalent is assumed. It supports AI-300 D2 responsible AI evaluation.
+This structure is conceptual, not an executable configuration; no JavaScript equivalent is assumed.
 
 #### Worked hospital analysis example
 
@@ -320,26 +315,18 @@ Source: https://learn.microsoft.com/en-us/training/modules/experiment-azure-mach
 
 Website-only. Use the Microsoft Learn source link above independently. The tutor skips this closing unit; it is excluded from tutor completion, review scheduling, and TLDR readiness. No website confirmation is required.
 
-## Key concepts and decision points
-Pending study.
+<a id="key-concepts-and-decision-points"></a>
+<a id="python-examples"></a>
+<a id="javascript-examples"></a>
+<a id="azure-cli-commands"></a>
+<a id="related-configuration-yaml-bicep-or-github-actions"></a>
+<a id="worked-examples-and-practice"></a>
+<a id="common-pitfalls-and-clarifications"></a>
 
-## Python examples
-Pending study. Record prerequisites/versions, expected outcomes, and execution status.
+## Remaining study and examples
 
-## JavaScript examples
-Pending study. Use relevant supported examples only.
-
-## Azure CLI commands
-Pending study. Record CLI/extension prerequisites and expected outcomes.
-
-## Related configuration: YAML, Bicep, or GitHub Actions
-Pending study.
-
-## Worked examples and practice
-Pending study. Include unit IDs, useful tasks, worked solutions, prerequisites, and execution status. Keep learner-response histories and assessment outcomes in memory.
-
-## Common pitfalls and clarifications
-Pending study. Add reusable conceptual explanations as topics are studied.
+- Further key concepts, worked practice, and pitfalls remain pending; examples already studied appear with their units.
+- Python, JavaScript, Azure CLI, and YAML/Bicep/GitHub Actions examples remain pending; relevance of additional examples is not yet assessed. Record prerequisites, versions, expected outcomes, and execution status where applicable. Practical SDK configuration and execution remain future work.
 
 ## Microsoft Learn search terms
 - Azure Machine Learning AutoML classification featurization

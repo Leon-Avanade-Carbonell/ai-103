@@ -18,13 +18,11 @@ Source verified: 2026-11-12.
 
 #### Why automate model training?
 
-Microsoft Learn explains that manual training does not scale well when teams iterate frequently, retrain on fresh data, or need to trace model versions to reviewed and approved changes. Automation supports repeatable execution, validation of proposed changes, and an auditable connection between code changes and model versions.
-
-The module introduces source control for ML assets, trunk-based development, automatic validation with GitHub Actions, secure Azure authentication, and submission of Azure Machine Learning jobs from GitHub events or Azure-side signals. These are planned module topics, not implementation work performed in this introduction.
+Microsoft Learn describes automation as a way to repeat training, validate changes, and trace model versions to reviewed code as teams iterate or use fresh data. The module introduces source control, trunk-based development, GitHub Actions validation, Azure authentication, and job submission from GitHub or Azure-side events; this introduction did not implement them.
 
 #### Orchestration versus training and validation
 
-Conceptual tutor illustration: **GitHub change → Actions workflow → Azure ML training job → results checked**. GitHub Actions coordinates automation; Azure ML executes the submitted training job. This connects D1 source control/secure automation with D2 automated model training.
+Conceptual tutor illustration: **GitHub change → Actions workflow → Azure ML training job → results checked**. GitHub Actions coordinates automation; Azure ML executes the submitted training job.
 
 Successful execution alone does not demonstrate acceptable model quality. A workflow should also apply relevant quality checks and retain traceability to the reviewed change.
 
@@ -32,7 +30,7 @@ Successful execution alone does not demonstrate acceptable model quality. A work
 
 Tutor-created practice scenario, conceptual only; no code was run: a teammate changes data preparation, training completes successfully, but model performance worsens. Why is job success insufficient, and what additional check is useful?
 
-Worked solution: job success establishes that execution finished, not that the resulting model meets quality requirements. Check the primary metric against a defined acceptance threshold and compare it with a previous accepted model. The metric-comparison idea arose in the learner's application reasoning; thresholds and an accepted baseline are tutor elaborations. Use comparable evaluation conditions: changing the evaluation dataset can confound interpretation of a metric difference.
+Worked solution: compare the primary metric with an acceptance threshold and a previously accepted model under comparable evaluation conditions. The learner proposed metric comparison; the threshold and accepted baseline are tutor elaborations. A different evaluation dataset can confound the comparison.
 
 No SDK, CLI, or workflow implementation was studied or executed here; relevant implementation examples remain pending for later units.
 
@@ -56,7 +54,7 @@ A workspace name is nonsecret configuration; a credential granting access is sen
 
 #### Why source control matters for machine learning
 
-The official source connects Git to collaboration, code review, reproducibility, and an audit trail linking model versions to producing changes. This supports D1 source control/workspace assets and D2 model lifecycle traceability.
+Git supports collaboration, review, reproducibility, and an audit trail linking model versions to their producing changes.
 
 Tutor clarification: a commit identifies code/configuration, but does not automatically contain a model link or its dataset. Record the producing commit in job/model metadata as part of traceability. A job's retained model output is distinct from a registered, named/versioned model asset.
 
@@ -84,7 +82,7 @@ Source verified: 2026-11-13.
 
 Microsoft Learn describes trunk-based development as frequent integration into one shared branch, typically `main`. Contributors use short-lived feature branches, open pull requests, and integrate reviewed changes while keeping `main` a reliable starting point. Trunk-based development does not require unrestricted direct pushes to `main`.
 
-Short-lived branches reduce divergence from `main`, keeping merge conflicts smaller and exposing integration problems sooner. Small commits and regularly updating a feature branch from `main` help, but do not replace frequently merging small, reviewed increments back into the shared branch. The stale-code and conflict risks are useful practical reasons for limiting branch lifetime.
+Short-lived branches reduce divergence, merge conflicts, and delayed integration problems. Small commits and updating from `main` help, but do not replace frequently merging reviewed increments into the shared branch.
 
 #### Workflow checks versus merge enforcement
 
@@ -93,7 +91,7 @@ The official source distinguishes GitHub Actions from repository branch protecti
 - A workflow defines and runs automated validation, producing status checks.
 - A rule on `main` can restrict direct pushes, require pull requests and reviewer approvals, and require specific checks to pass before merging.
 
-A validation workflow alone does not guarantee that a failed check blocks a merge. Configure the repository rule to require the relevant checks. These concepts connect to D1 Git source control and automation; implementing training validation is the next unit's topic.
+A failed workflow check blocks merging only when the repository rule requires that check.
 
 #### Worked applications
 
@@ -119,7 +117,7 @@ For training code, the source suggests linting with Flake8 and behavioral unit t
 
 The workflow reports status checks on the pull request. Configure branch protection on `main` to require the relevant validation checks to pass before merging. Running a check and enforcing its outcome are separate responsibilities. Microsoft Learn identifies the check by the job name; use clear, stable names so protection rules target the intended checks.
 
-Illustrative sequence: **pull request event → workflow starts → runner checks out code → steps install dependencies, lint, and test → job reports status → branch protection requires success before merge**. This connects D1 source-control automation with D2 reliable training workflows. Passing code validation alone does not establish acceptable model quality.
+Illustrative sequence: **pull request → runner checks out code, installs dependencies, lints and tests → job reports status → branch protection requires success**. Code validation alone does not establish model quality.
 
 #### Worked behavioral-test and enforcement examples
 
@@ -135,7 +133,7 @@ Source verified: 2026-11-13.
 
 #### Secrets, variables, and least privilege
 
-Microsoft Learn distinguishes encrypted GitHub secrets for sensitive credentials from GitHub variables for non-sensitive configuration, such as workspace and resource-group names. Recognized secret values are masked in logs, but workflows must still avoid exposing them. A workspace name identifies a destination; it does not grant access. Storing it as a secret is not inherently unsafe, but secret protection is unnecessary for ordinary non-sensitive configuration.
+Use encrypted GitHub secrets for credentials and variables for non-sensitive settings such as workspace and resource-group names. GitHub masks recognized secrets in logs, but workflows must still avoid exposing them. A workspace name identifies a destination; it does not grant access or need secret protection.
 
 A service principal is a non-human identity in Microsoft Entra ID. Assign an appropriate Azure role at the narrowest scope needed for the workflow, such as its target Azure ML workspace. Workspace scope is appropriate only when it covers the required operations; do not assume that every workflow can operate solely at that scope.
 
@@ -176,7 +174,7 @@ Microsoft Learn distinguishes these GitHub Actions triggers:
 | `schedule` | Retrain periodically against updated data |
 | `repository_dispatch` | Accept an external API-generated repository event |
 
-A trigger starts a GitHub Actions workflow; a workflow step then submits an Azure ML job. GitHub orchestrates the automation, while Azure ML executes the training workload. This connects D1 automation with D2 automated training.
+A trigger starts the GitHub workflow; a step submits the job, and Azure ML executes it.
 
 #### Bridge Azure-side events to GitHub
 
@@ -285,7 +283,7 @@ An evaluation script can execute successfully while reporting a poor model. Succ
 
 Tutor-created exercise, not executed: separate reusable preparation, training, and evaluation components must run together. Which job type fits, and why is successful submission insufficient?
 
-Worked solution: submit a pipeline job to connect the components. Wait for job completion and check execution status, then check the evaluation against quality requirements. Submission, execution, and quality acceptance answer different questions. No lab-equivalent deployment or training execution is established by this conceptual exercise.
+Worked solution: submit a pipeline job, wait for completion, then check execution and evaluation against quality requirements. This conceptual exercise does not establish lab-equivalent deployment or training execution.
 
 ### M06-U07 — Exercise
 Source: https://learn.microsoft.com/en-us/training/modules/trigger-azure-machine-learn-jobs-github-actions/5-exercise
@@ -302,28 +300,20 @@ Source: https://learn.microsoft.com/en-us/training/modules/trigger-azure-machine
 
 Website-only. Use the Microsoft Learn source link above independently. The tutor skips this closing unit; it is excluded from tutor completion, review scheduling, and TLDR readiness. No website confirmation is required.
 
-## Key concepts and decision points
-Pending study.
+<a id="key-concepts-and-decision-points"></a>
+<a id="python-examples"></a>
+<a id="javascript-examples"></a>
+<a id="azure-cli-commands"></a>
+<a id="related-configuration-yaml-bicep-or-github-actions"></a>
+<a id="worked-examples-and-practice"></a>
+<a id="common-pitfalls-and-clarifications"></a>
 
-## Python examples
-Pending study. Record prerequisites/versions, expected outcomes, and execution status.
+## Remaining study and examples
 
-## JavaScript examples
-Pending study. Use relevant supported examples only.
-
-## Azure CLI commands
-Pending study. Record CLI/extension prerequisites and expected outcomes.
-
-## Related configuration: YAML, Bicep, or GitHub Actions
-Pending study.
-
-## Worked examples and practice
-Pending study. Include unit IDs, useful tasks, worked solutions, prerequisites, and execution status. Keep learner-response histories and assessment outcomes in memory.
+- Further key concepts, worked practice, and pitfalls remain pending; examples already studied appear with their units.
+- Additional Python, JavaScript, Azure CLI, and YAML/Bicep/GitHub Actions examples remain pending; relevance is not yet assessed. Record prerequisites, versions, expected outcomes, and execution status where applicable. Azure authentication, job YAML, CLI submission, and waiting implementation remain practical work.
 
 [Quiz history](quizzes.md)
-
-## Common pitfalls and clarifications
-Pending study. Add reusable conceptual explanations as topics are studied.
 
 ## Microsoft Learn search terms
 - GitHub Actions Azure Machine Learning OIDC federation

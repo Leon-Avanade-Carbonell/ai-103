@@ -151,3 +151,103 @@ No item records or score: declining the quiz does not undo lesson-check evidence
 - Evidence provenance: current-conversation question-tool offer and learner decline. Ordinary lesson-check prompts, initial answers, tutor feedback, and follow-up results are separate and supplied to the memory session.
 
 No item records or score: the decline is not a failed check and does not establish a blanket quiz preference. The unit's remaining automation work is separate from optional quiz participation.
+
+<a name="quiz-2026-11-26-session-01"></a>
+
+### Optional tutor quiz — 2026-11-26-session-01
+
+- Date: 2026-11-26
+- Units: [M07-U05](notes.md#m07-u05--deploy-promote-and-roll-back-a-model-with-github-actions); supporting reinforcement of [M07-U04](notes.md#m07-u04--control-deployments-with-github-environments).
+- Verified sources: S1 = https://learn.microsoft.com/en-us/training/modules/deploy-model-github-actions/4-model-deployment; S2 = https://learn.microsoft.com/en-us/training/modules/deploy-model-github-actions/4-control-deployments-github-environments. Both fetched 2026-11-26.
+- Participation: completed.
+- Requested/planned: Short quiz (up to 5) / 5.
+- Presented / valid answered: 5 / 5.
+- Correct / incorrect / skipped / invalid / unasked or unanswered: 5 / 0 / 0 / 0 / 0.
+- Score: 5/5.
+- Difficulty mix: 1 easy, 3 medium, 1 hard; single-answer except Q03, scored by exact set.
+- Count scope: M07 module-local counts equal session-wide counts.
+- Evidence provenance: initial selections returned by the question tool in this conversation. No retries, deployment execution, or official Microsoft assessment claimed. Q04's numeric response is from a labeled tutor illustration.
+
+<a name="quiz-2026-11-26-session-01-q01"></a>
+
+#### Q01 — OIDC authentication; easy; single-answer; M07-U05; S1
+
+Prompt: What is the main authentication benefit of OIDC in this deployment workflow? Select one answer.
+- A. Automatic production approval — Approve releases when Azure login succeeds.
+- B. Short-lived federated access — Authenticate without storing a long-lived Azure client secret.
+- C. Guaranteed model accuracy — Validate predictions during authentication.
+- D. Unrestricted Azure permissions — Give the workflow access to all Azure resources.
+
+Initial learner selections: B. Short-lived federated access.
+Correct set: B.
+Outcome: correct.
+Explanation: OIDC provides short-lived federated authentication without a stored client secret. It does not approve releases (A), validate predictions (C), or grant unrestricted permissions (D); S1, with control separation in S2.
+Follow-up: No retry.
+
+<a name="quiz-2026-11-26-session-01-q02"></a>
+
+#### Q02 — Isolated direct testing; medium; single-answer; M07-U05; S1
+
+Prompt: Green is ready at 0% routed traffic. You want to test it without returning green's predictions to normally routed users. Which action fits? Select one answer.
+- A. Route 10% to green — Use a limited live traffic split.
+- B. Route 100% to green — Test after full promotion.
+- C. Invoke the registered model asset — Use registration alone as the prediction service.
+- D. Invoke green directly — Specify --deployment-name green in the endpoint invocation.
+
+Initial learner selections: D. Invoke green directly.
+Correct set: D.
+Outcome: correct.
+Explanation: Direct invocation targets green while normal routing remains unchanged. A and B expose normally routed users to green; C confuses a registered asset with a serving deployment (S1).
+Follow-up: No retry.
+
+<a name="quiz-2026-11-26-session-01-q03"></a>
+
+#### Q03 — Approval and authorization; medium; multiple-answer; M07-U04, M07-U05; S1, S2
+
+Prompt: A team separates deployment/testing from production traffic promotion. Which two statements correctly describe the controls? Select two answers.
+- A. Promotion references production — The traffic-change job targets an environment configured with required-reviewer protection.
+- B. OIDC replaces reviewer approval — Successful authentication alone authorizes the release decision.
+- C. RBAC limits Azure operations — Each federated identity receives only the resource permissions its job requires.
+- D. Naming production provisions Azure — The GitHub environment name creates the production endpoint.
+
+Initial learner selections: C. RBAC limits Azure operations; A. Promotion references production (returned in this order).
+Correct set: A, C.
+Outcome: correct (exact set).
+Explanation: The protected environment gates promotion, and RBAC limits resource operations. OIDC does not replace approval (B), and an environment name does not provision Azure resources (D); S1, S2.
+Follow-up: No retry.
+
+<a name="quiz-2026-11-26-session-01-q04"></a>
+
+#### Q04 — Validate rather than merely invoke; hard; single-answer; M07-U05; S1
+
+Prompt: A workflow invokes green and prints its prediction successfully. The fixed test input should produce approximately 0.82, but green returns 0.20. What is the best interpretation? Select one answer.
+- A. Successful invocation proves quality — The workflow can safely shift traffic because a response arrived.
+- B. Validation must block promotion — Compare the response with the test criterion and fail the test step when it is violated.
+- C. More traffic repairs the result — Increase green's allocation before checking expected outputs.
+- D. Approval replaces response testing — Let a reviewer approve without automated validation.
+
+Initial learner selections: B. Validation must block promotion.
+Correct set: B.
+Outcome: correct.
+Explanation: S1 requires comparing direct responses with expectations before traffic changes. Invocation success is not validation (A), more traffic does not repair a violated criterion (C), and approval complements testing (D; S2). Numeric values and the validation script are tutor-created illustrations, not the source's model or supplied code.
+Follow-up: No retry.
+
+<a name="quiz-2026-11-26-session-01-q05"></a>
+
+#### Q05 — Restore healthy routing; medium; single-answer; M07-U05; S1
+
+Prompt: Green receives 10% of live traffic and starts failing; blue is healthy and still available. Which immediate recovery best follows the safe-rollout approach? Select one answer.
+- A. Delete the endpoint — Recreate its serving URL before investigating.
+- B. Diagnose before changing traffic — Keep the failing split until root cause is known.
+- C. Restore blue=100 green=0 — Recover normal routing first, then investigate green.
+- D. Delete blue and promote green — Remove the working deployment and route all requests to green.
+
+Initial learner selections: C. Restore blue=100 green=0.
+Correct set: C.
+Outcome: correct.
+Explanation: Restore normally routed traffic to healthy blue, preserving the endpoint URL, then investigate green. A disrupts recovery, B prolongs exposure, and D removes the working fallback (S1).
+Follow-up: No retry.
+
+Strengths: OIDC purpose, isolated testing, approval versus authorization, response validation, and exact rollback allocation (Q01–Q05).
+Remaining gaps: no incorrect quiz responses. Full workflow implementation, files, readiness checks, and execution remain unverified; the score is conceptual evidence, not practical proficiency or an official pass.
+Review proposal: M07-U05 release-control transfer on 2026-12-03, with agreement; explain and apply testing, approval, and rollback in a changed scenario. Existing reviews should be validated and deduplicated by memory-agent rather than automatically multiplied.

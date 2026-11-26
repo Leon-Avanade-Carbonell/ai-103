@@ -22,11 +22,9 @@ Planned goals, derived from the verified official article, with a tutor-created 
 
 Source: https://learn.microsoft.com/en-us/azure/machine-learning/how-to-safely-rollout-online-endpoints
 
-Source verified: 2026-11-16 for curriculum planning. This single tutor-study unit maps to the whole documentation article; its sections are not separate official training units.
+Source verified for planning: 2026-11-16; fetched for study: 2026-11-25, Azure Machine Learning API v2. This single tutor-study unit maps to the whole article. Both article retrievals were truncated after the initial CLI mirroring example; the [official rollout script](https://github.com/Azure/azureml-examples/blob/main/cli/deploy-safe-rollout-online-endpoints.sh), fetched separately on 2026-11-25, verified mirror reset, staged/full promotion, and deployment/endpoint deletion commands. Later article content is not claimed as retrieved. No Azure commands or SDK code were executed.
 
-Scope attribution: the article explicitly covers direct testing, mirroring, live traffic promotion, and old-deployment removal. Rollback to a retained blue deployment is a planned tutor application of the documented traffic-allocation mechanism, not a separate rollback section in this article.
-
-Source fetched for study: 2026-11-25, Azure Machine Learning API v2. Both article retrievals included content through the initial CLI mirroring example; later output was truncated. The [official rollout script](https://github.com/Azure/azureml-examples/blob/main/cli/deploy-safe-rollout-online-endpoints.sh) was separately fetched on the same date and verified the mirror reset, staged/full promotion, and deployment/endpoint deletion commands. The remaining article content is not claimed as retrieved. No Azure commands or SDK code were executed.
+The article covers direct testing, mirroring, live promotion, and old-deployment removal. Rollback to retained blue is a tutor application of its traffic controls, not a separate article section.
 
 #### Define the endpoint and deployment
 
@@ -36,7 +34,7 @@ Creating a candidate deployment and promoting it are separate operations. Blue c
 
 For production, the article recommends registered model and environment names with explicit versions. These asset references are separate from compute configuration and traffic allocation.
 
-Creation YAML and Python sections, scoring-script requirements, and the REST direct-invocation header were retrieved from the article on 2026-11-25. That retrieval still truncated after the initial CLI mirroring command; later article sections are not claimed as fetched. Supplemental references fetched on the same date: [online endpoint YAML](https://learn.microsoft.com/en-us/azure/machine-learning/reference-yaml-endpoint-online), [Kubernetes deployment YAML](https://learn.microsoft.com/en-us/azure/machine-learning/reference-yaml-deployment-kubernetes-online), and [Node.js fetch](https://nodejs.org/api/globals.html#fetch). The Node response was truncated later, after the relevant fetch documentation. All examples remain unexecuted.
+The 2026-11-25 retrieval included creation YAML and Python, scoring-script requirements, and the REST direct-invocation header. Supplemental references fetched that day: [online endpoint YAML](https://learn.microsoft.com/en-us/azure/machine-learning/reference-yaml-endpoint-online), [Kubernetes deployment YAML](https://learn.microsoft.com/en-us/azure/machine-learning/reference-yaml-deployment-kubernetes-online), and [Node.js fetch](https://nodejs.org/api/globals.html#fetch). The Node response was truncated after the relevant fetch documentation. All examples are unexecuted.
 
 #### Scoring contract and creation versus promotion
 
@@ -78,15 +76,13 @@ The verified article overview specifies limited live traffic, full promotion to 
 
 Tutor application of the documented traffic controls: if green returns unacceptable errors, restore blue 100% and green 0% first. Retaining a healthy, provisioned blue deployment with sufficient capacity gives a ready rollback target. Rebuilding blue delays recovery; deleting green is not necessary to restore routing and can remove diagnostic context. Deleting blue after promotion removes the ready rollback target; retaining it temporarily trades compute cost for recovery readiness.
 
-Retaining blue preserves both a running deployment and a potential rollback route, but it must have enough capacity for returning load. Fewer instances reduce concurrency/throughput capacity; overload can cause queueing, increased latency, timeouts, or rejected requests. This does not necessarily make each individual inference computation slower. Routing readiness and capacity readiness are separate requirements.
+Blue must have capacity for returning load. Fewer instances reduce concurrency and throughput; overload can cause queueing, latency, timeouts, or rejected requests without necessarily slowing each inference computation. Routing and capacity readiness are separate.
 
-Retirement removes the old deployment, not the shared client-facing endpoint. Blue and green are deployments under one endpoint. After green has passed validation at 100% live traffic, deleting blue removes its compute and ready rollback target while retaining green and the endpoint. Endpoint deletion is broader cleanup that removes the service and its deployments. A suitable validation window is an operational decision, not a fixed five-minute rule from the source.
+After green passes validation at 100% live traffic, deleting blue removes its compute and ready rollback target but retains green and the shared endpoint. Endpoint deletion removes the service and its deployments. The validation window is an operational decision, not a fixed five-minute source rule.
 
 Pending study: fuller Python endpoint/deployment object construction and rollout examples, including complete sample files and additional SDK rollout calls verified from available sources. Creation YAML, REST/JavaScript invocation applicability, and the relevant Kubernetes configuration differences are explained below. Detailed CLI promotion/cleanup commands were verified separately in the official script; later article retrieval remains limited as described above.
 
-## Key concepts and decision points
-
-Keep deployment creation, compute capacity, direct testing, mirroring, and live routing distinct. A typical conceptual sequence is direct testing at zero routed traffic, shadow observation, a limited live share, full promotion, and retirement only after validation. Keeping the old deployment available enables a traffic-based rollback.
+<a id="key-concepts-and-decision-points"></a>
 
 ## Python examples
 
@@ -224,29 +220,15 @@ Expected meaning: the endpoint defines the shared service and key authentication
 
 S01-U01 tutor-created conceptual practice; no Azure execution:
 
-- With blue 100% and green 0% routed traffic, compare a request explicitly targeting green with an ordinary request. Worked solution: the first goes to green; the second follows routing to blue.
-- To observe a candidate's latency and errors on realistic request copies without serving its predictions to users, choose mirroring rather than a live traffic share.
-- If green starts returning errors at 10% live traffic while blue remains healthy and sufficiently provisioned, first restore blue 100%, green 0%. Investigate the candidate afterward.
-- Increasing green's instance count changes capacity, not `traffic` or `mirror_traffic`.
-- To test configured shadowing, send requests without an explicit deployment target. Requests naming blue bypass mirroring, even when blue already receives 100% ordinary traffic.
-- A retained blue deployment with greatly reduced instance count may be unable to handle an immediate return to full traffic. Preserve capacity appropriate to the recovery requirement, balancing compute cost against readiness.
-- Increasing mirroring near the endpoint bandwidth limit is not risk-free. Check bandwidth and throttling separately from compute; adding green instances alone cannot resolve bandwidth quota exhaustion.
-- Read `green=0` literally: with `--mirror-traffic` it disables shadow copies; with `--traffic` it removes green's ordinary live share. `--traffic "blue=90 green=10"` is the first client-facing promotion step in the sequence above.
-- To stop paying for old blue compute while keeping the service available, retire the blue deployment after validation, not the shared endpoint.
-- For an unvalidated green candidate, first use an explicit sample invocation without changing ordinary live routing. Mirroring observes copies without returning candidate predictions; a limited live allocation exposes some clients to the candidate.
-- To make a REST client follow blue 90% / green 10% already configured on the endpoint, remove its deployment-targeting header; do not change the endpoint policy to green 100%.
-- If scoring code and clients disagree on an input field, inspect the scoring script and request contract, not the instance count.
-- Kubernetes forbids mirroring; direct testing remains available before limited client-facing rollout.
+- With blue at 100% and green at 0%, a request explicitly targeting green reaches green; an ordinary request follows routing to blue. Remove a REST client's targeting header to follow an existing 90/10 split; do not change the endpoint policy to green 100%.
+- Directly invoke an unvalidated green first. Mirroring observes request copies without returning green's predictions; a live share exposes clients. Requests explicitly naming blue bypass mirroring, so omit the deployment target to test shadowing. Kubernetes supports direct testing but not mirroring.
+- If green fails at 10% live traffic and blue is healthy and sufficiently provisioned, restore blue 100%, green 0%, then investigate. Retaining adequate blue capacity trades cost for recovery readiness; retire blue after validation to stop its compute cost while keeping the endpoint.
+- Instance count changes capacity, not routing. Check bandwidth and throttling separately before increasing mirroring; extra instances do not resolve bandwidth quota exhaustion. If payload fields disagree, inspect the scoring contract rather than instance count.
+- `green=0` disables copies with `--mirror-traffic` but removes green's live share with `--traffic`. The 90/10 live update is client-facing promotion.
 
 [Quiz history](quizzes.md)
 
-## Common pitfalls and clarifications
-
-Zero routed traffic does not mean a deployment is inaccessible, unprovisioned, or free of compute cost. Mirrored predictions are not client-facing responses to the ordinary copied requests. Mirroring has a one-destination limit and a 50% cap; it is not a multi-destination fan-out mechanism. Full promotion changes routing; retirement deletes the old deployment and removes a ready rollback target.
-
-Blue at zero live traffic is deployed and available, not serving ordinary live requests. Compute capacity, bandwidth quota, and traffic allocation are distinct controls. Direct deployment targeting bypasses mirroring. `online-deployment delete` retires one deployment; `online-endpoint delete` removes the shared service, not just the old model.
-
-A named deployment is a target beneath the endpoint, not a separate endpoint. Request-level deployment targeting and endpoint-wide traffic policy are independent controls. Successful provisioning does not establish scoring-contract compatibility or acceptable predictions; adding instances does not repair payload parsing.
+<a id="common-pitfalls-and-clarifications"></a>
 
 ## Microsoft Learn search terms
 

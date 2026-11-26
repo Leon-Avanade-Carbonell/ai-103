@@ -7,7 +7,7 @@
 
 ## Overview and learning goals
 
-<Planned goals; do not describe these as already learned.>
+<One short paragraph of planned goals; these are not evidence of learning.>
 
 ## Notes by Microsoft Learn unit
 
@@ -15,44 +15,69 @@
 
 Source: <full unit URL>
 
-Pending study. After studying this page, organize explanations, decision rules, examples, and useful insights by concept. Distinguish official material, tutor illustrations, and learner conclusions. Merge later additions into the relevant topic. Repeat for every unit in source order; do not seed unstudied content.
-
-For units titled Exercise or beginning Exercise - …, and closing Module assessment, Knowledge check, and Summary units identified in `lessons/PLAN.md`, retain the normal stable heading and full source URL, but replace the pending placeholder with:
-
-> Website-only. Use the Microsoft Learn source link above independently. The tutor skips this unit in lesson selection, teaching, checks, and review scheduling; it is excluded from tutor completion and TLDR readiness. No website confirmation is required.
-
-Preserve any existing historical evidence through its file owner. Do not seed tutor explanations, substitute exercises, or assessments in these units. Match unit titles rather than incidental exercise references; worked examples and tutor-created practice within tutor-study units remain available.
-
-## Key concepts and decision points
-
 Pending study.
 
-## Python examples
+<!-- Repeat stable unit headings and source links in displayed source order.
+After study, replace the placeholder with a reader-focused explanation:
 
-Pending study. Include prerequisites/versions and expected output; state whether executed.
+Source fetched: <YYYY-MM-DD>; <page update date if known>.
+<One compact attribution/execution-context line, as needed.>
 
-## JavaScript examples
+#### <Useful concept or decision>
 
-Pending study. Use only supported, relevant examples.
+<Lead with the idea. Explain what it means, when to use it, and the important
+distinction. Use short paragraphs or bullets; a table only if it aids comparison.
+Keep source-based content distinct from tutor examples and learner conclusions
+without labeling every sentence.>
 
-## Azure CLI commands
+<Place a relevant example here. Label its origin and illustrative/executed status.
+Keep prerequisites/versions and expected outcomes nearby in compact text.
+Preserve existing code, commands, and configuration blocks verbatim during prose
+cleanup, including comments, whitespace, placeholders, and ordering.>
 
-Pending study. Include required extensions, placeholders, and expected outcomes.
+<Add a worked solution or pitfall only when it adds useful understanding.
+Merge later explanations into this concept rather than appending session history.
+Do not seed content in unstudied units.>
+-->
 
-## Related configuration: YAML, Bicep, or GitHub Actions
+<!-- For units titled Exercise or beginning Exercise - …, and closing Module
+assessment, Knowledge check, and Summary units listed in lessons/PLAN.md, keep
+the stable heading and source link and use this notice instead of Pending study:
 
-Pending study.
+> Website-only. Study this unit independently using the source link. Excluded from tutor lessons, checks, reviews, completion, and TLDR readiness; no website confirmation is required.
 
-## Worked examples and practice
+Match unit titles, not incidental exercise references. Do not seed tutor
+explanations, substitute exercises, or assessments in website-only units.
+Preserve existing historical evidence through its file owner.
+-->
 
-Pending study. Include unit IDs, useful tasks, worked solutions, and reasoning for rereading. Label tutor-created examples and official exercises; keep prerequisites and illustrative/executed status. Assessment or lab outcomes and exact learner responses belong in memory sessions.
+<!-- Add optional sections below only when useful; omit empty scaffolding.
 
-For an optional quiz, save participation and detailed records in sibling `quizzes.md` using `templates/lesson-quizzes.md`. A single sibling quiz-history link is sufficient for navigation. Keep session IDs, exact learner answers, grading, status proposals, preferences, review dates, and next-session plans out of notes; hand ordinary lesson-check evidence to memory-agent for the session record.
+## Remaining study and examples
 
-## Common pitfalls and clarifications
+- <Specific unresolved tutor-study topic/lab/example, with its unit ID/link.>
+- <Relevant example still pending, or relevance not yet assessed.>
 
-Pending study. Explain conceptual distinctions and corrected misconceptions as reusable reference material, without a dated learner-response history.
+Consolidate existing pending work without dropping it. Assess Python, JavaScript,
+Azure CLI, and YAML/Bicep/GitHub Actions relevance; do not invent examples or a
+JavaScript equivalent for Python-only functionality. Use Not applicable only
+after determining that no relevant example exists, with a short reason. Removing
+empty headings does not resolve readiness blockers. Preserve linked anchors.
+
+## Quick reference
+
+<Only useful cross-unit decisions or navigation; avoid repeating unit content.>
+
+[Optional quiz history](quizzes.md)
+
+Include this single navigation link only when sibling quizzes.md exists. Save
+quiz participation and detailed evidence there using templates/lesson-quizzes.md.
+Keep session IDs, exact learner answers, grading, status proposals, preferences,
+review dates, and next-session plans in quizzes/memory, not notes. Hand full
+ordinary lesson-check evidence to memory-agent. Preserve historical evidence in
+memory before removing its only copy from notes.
 
 ## Microsoft Learn search terms
 
-<Search terms relevant to the module.>
+<A few useful search terms, if needed.>
+-->

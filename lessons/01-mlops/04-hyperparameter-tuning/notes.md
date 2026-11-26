@@ -24,13 +24,13 @@ Source fetched: 2026-11-05. The following concepts reflect the official introduc
 
 #### Tuning, sweep jobs, and trials
 
-The official introduction describes training multiple models with the same algorithm and training data but different hyperparameter values, evaluating each against a target performance metric, and selecting the best-performing model. In Azure Machine Learning, a **sweep job** coordinates the search; each **trial** runs a parameterized training script for a hyperparameter combination and logs the target metric.
+A **sweep job** coordinates training with different hyperparameter values. Each **trial** runs a parameterized script and logs the target metric, allowing the models to be compared and the best selected.
 
-For a fair comparison, keep the algorithm, training data, and evaluation setup consistent and use the same metric and optimization direction. Hyperparameters deliberately vary, and each trial learns its own model parameters: fair comparison does not require identical learned weights.
+For a fair comparison, keep the algorithm, training data, evaluation setup, metric, and optimization direction consistent. Hyperparameters vary deliberately, and each trial learns its own weights.
 
-**Tutor illustration — metric direction:** If trial A has validation loss 0.30 and trial B has validation loss 0.45, a goal of minimizing validation loss favors A. This is a conceptual worked example, not an executed experiment. Testing learning rates 0.01 and 0.1 requires separate training trials, rather than merely changing weights in one already-trained model.
+**Tutor illustration, not executed:** minimizing validation loss favors trial A at 0.30 over B at 0.45. Testing learning rates 0.01 and 0.1 requires separate training trials, not merely changing weights in an already-trained model.
 
-The module's upcoming goals are search-space definition, sampling, early termination, and running a sweep job; their detailed treatment belongs to subsequent units.
+The following units cover search spaces, sampling, early termination, and sweep jobs.
 
 ### M04-U02 — Define a search space
 Source: https://learn.microsoft.com/en-us/training/modules/perform-hyperparameter-tuning-azure-machine-learning-pipelines/2-define-search-space
@@ -63,6 +63,30 @@ Azure ML's LogUniform bounds are in **natural-log space**: use `ln(0.0001)` and 
 
 **Source-example caveat:** The page illustrates `learning_rate=Normal(mu=10, sigma=3)` to show API syntax. This is not a general learning-rate recommendation and does not enforce positivity. Check parameter semantics and algorithm constraints rather than copying illustrative numbers as defaults.
 
+<a id="python-examples"></a>
+#### M04-U02 — Search-space expressions
+
+Tutor illustration using the distribution APIs shown in the verified source. Prerequisites: Python with the Azure Machine Learning SDK v2 package `azure-ai-ml`; a specific installed package version was not inspected. No Azure authentication is needed merely to construct these expressions. This snippet was **not run** and does not submit a sweep job.
+
+```python
+from math import log
+from azure.ai.ml.sweep import Choice, Uniform, LogUniform
+
+linear_space = {
+    "batch_size": Choice(values=[16, 32, 64]),
+    "learning_rate": Uniform(min_value=0.001, max_value=0.1),
+}
+
+log_space = {
+    "batch_size": Choice(values=[16, 32, 64]),
+    "learning_rate": LogUniform(
+        min_value=log(0.0001), max_value=log(0.1)
+    ),
+}
+```
+
+Expected outcome: dictionaries of search-space expressions, not sampled values or trained models. M04-U05 below illustrates integration into a parameterized command job; actual submission and execution remain unverified.
+
 ### M04-U03 — Configure a sampling method
 Source: https://learn.microsoft.com/en-us/training/modules/perform-hyperparameter-tuning-azure-machine-learning-pipelines/3-configure-sampling-method
 
@@ -89,6 +113,22 @@ The sampling sequence covers all tunable hyperparameters: a changed seed can aff
 
 Reproducible sampling under the same seed and configuration is not a guarantee of identical trained models: training can have other randomness and execution dependencies. A sampling seed does not control all those factors.
 
+#### M04-U03 — Seeded Sobol configuration objects
+
+Tutor illustration using the verified unit and SDK reference above. Prerequisites: Python and Azure ML SDK v2 (`azure-ai-ml`); no installed version was inspected. This snippet was **not run**. Constructing these objects requires no Azure authentication and does not submit a job.
+
+```python
+from azure.ai.ml.sweep import Choice, Uniform, RandomSamplingAlgorithm
+
+search_space = {
+    "batch_size": Choice(values=[3, 10, 15]),
+    "learning_rate": Uniform(min_value=0.001, max_value=0.1),
+}
+sampling = RandomSamplingAlgorithm(rule="sobol", seed=4)
+```
+
+Expected outcome: a dictionary of search-space expressions and a Sobol sampling configuration. Each eventual trial must choose batch size 3, 10, or 15 and a learning rate within the specified interval; the code does not print or generate an actual trial sequence. M04-U05 illustrates the integration workflow using a different, grid-based search space. Values are illustrative, not recommended defaults.
+
 ### M04-U04 — Configure early termination
 Source: https://learn.microsoft.com/en-us/training/modules/perform-hyperparameter-tuning-azure-machine-learning-pipelines/4-configure-early-termination
 
@@ -106,7 +146,7 @@ Early performance need not predict final performance: a slow-starting configurat
 - `delay_evaluation` gives **each trial** an initial number of metric-reporting intervals before its first policy evaluation. It does not wait for that many other trials to finish.
 - An **epoch** is a pass through the training dataset. A script may evaluate and log its primary metric once per epoch, twice per epoch, or at another frequency. Model evaluation that computes a metric and stopping-policy evaluation that decides whether to cancel a trial are distinct operations.
 
-**Tutor illustration:** With `delay_evaluation=4`, logging once per epoch takes four epochs to supply four reports; logging twice per epoch takes two epochs. Two reports per epoch over two epochs means **four reporting intervals**, not two. Three reports have not yet supplied four intervals, irrespective of epoch count. The source's `evaluation_interval=1` examples place the first stopping evaluation after the initial delay: the fifth report for delay 4 and sixth for delay 5.
+**Tutor illustration:** With `delay_evaluation=4`, four reports take four epochs if logged once per epoch, or two epochs if logged twice. With `evaluation_interval=1`, the source's examples place the first stopping evaluation after the delay: report five for delay 4, or report six for delay 5.
 
 **Source wording caveat:** The truncation example's prose says “a delay of four trials.” This conflicts with the page's parameter definition and fifth-reporting-interval explanation. Interpret the setting as a per-trial delay measured in primary-metric reporting intervals, not completed trials.
 
@@ -125,6 +165,22 @@ Respect the primary metric's optimization direction: low loss may be good, where
 - Bandit: best accuracy 0.90 and `slack_amount=0.20` gives a threshold of 0.70. At an eligible evaluation, a trial with best reported accuracy 0.68 stops; 0.75 remains within slack. If the best trial improves, the threshold can change. With best 0.88 and slack 0.10, accuracy 0.80 remains above the 0.78 threshold.
 - Median: if the median running-average accuracy is 0.82, a trial with running-average accuracy 0.79 is stopped at an eligible evaluation. The comparison uses running averages, not just a single last report.
 - Truncation: with ten active trials and `truncation_percentage=20`, cancel the lowest-performing two at an eligible evaluation. A ranked percentage differs from a Bandit margin or a median comparison.
+
+#### M04-U04 — Truncation policy configuration
+
+Verified unit API example, with explanatory context. Prerequisites: Python and Azure ML SDK v2 (`azure-ai-ml`) with an existing `sweep_job` object; no installed package version was inspected. This snippet was **not run** and does not submit a job.
+
+```python
+from azure.ai.ml.sweep import TruncationSelectionPolicy
+
+sweep_job.early_termination = TruncationSelectionPolicy(
+    truncation_percentage=20,
+    delay_evaluation=4,
+    evaluation_interval=1,
+)
+```
+
+Expected outcome: attach a policy that cancels the lowest-performing 20% at eligible checks, allowing each trial four initial primary-metric reporting intervals and evaluating every interval afterward. Use the exact parameter name `truncation_percentage`, not `truncation_percent`. M04-U05 illustrates sweep construction and submission syntax; neither snippet is execution evidence.
 
 ### M04-U05 — Use a sweep job for hyperparameter tuning
 Source: https://learn.microsoft.com/en-us/training/modules/perform-hyperparameter-tuning-azure-machine-learning-pipelines/5-use-sweep-job-hyperparameter-tuning
@@ -152,85 +208,7 @@ Azure Machine Learning studio exposes child trials, their logged metrics, and ch
 
 **Tutor illustration:** Learning rates 0.001, 0.01, and 0.1 produce validation losses 0.42, 0.31, and 0.38, taking 60, 90, and 45 seconds respectively. Minimizing validation loss selects 0.01, even though it is slowest. To rank by speed instead, log `training_time`, set that as the primary metric, and use `Minimize`. Optimizing speed alone does not impose a model-quality constraint. Identifying a best trial is separate from registering or deploying its model.
 
-### M04-U06 — Exercise - Run a sweep job
-Source: https://learn.microsoft.com/en-us/training/modules/perform-hyperparameter-tuning-azure-machine-learning-pipelines/6-exercise-run-sweep-job
-
-Website-only. Use the Microsoft Learn source link above independently. The tutor skips this unit in lesson selection, teaching, checks, and review scheduling; it is excluded from tutor completion and TLDR readiness. No website confirmation is required.
-
-### M04-U07 — Module assessment
-Source: https://learn.microsoft.com/en-us/training/modules/perform-hyperparameter-tuning-azure-machine-learning-pipelines/7-knowledge-check
-
-Website-only. Use the Microsoft Learn source link above independently. The tutor skips this closing unit; it is excluded from tutor completion, review scheduling, and TLDR readiness. No website confirmation is required.
-
-### M04-U08 — Summary
-Source: https://learn.microsoft.com/en-us/training/modules/perform-hyperparameter-tuning-azure-machine-learning-pipelines/8-summary
-
-Website-only. Use the Microsoft Learn source link above independently. The tutor skips this closing unit; it is excluded from tutor completion, review scheduling, and TLDR readiness. No website confirmation is required.
-
-## Key concepts and decision points
-- M04-U01: a sweep coordinates trials; each trial trains with a hyperparameter combination and logs the shared target metric.
-- M04-U02: use Choice for an exact list, Uniform for linear-range coverage, and LogUniform for balanced coverage across orders of magnitude. Match generated values to script constraints; Normal does not enforce positivity.
-- M04-U03: grid suits small finite spaces; random supports mixed distributions; Sobol supports more even seeded exploration; Bayesian uses performance feedback but restricts distribution expressions. Seeds control sampling, not allowed values or trial budgets.
-- M04-U04: early termination stops weak individual trials; Bandit compares with the best, median stopping compares running averages, and truncation removes a ranked percentage. Delay and frequency count primary-metric reports, not epochs or finished trials.
-- M04-U05: connect script arguments to tunable inputs, match the MLflow metric name to the primary metric, select the optimization direction, and distinguish sweep configuration from submission. Examples are illustrative, not executed; M04-U06 provides website-only practice.
-
-## Python examples
-### M04-U02 — Search-space expressions
-
-Tutor illustration using the distribution APIs shown in the verified source. Prerequisites: Python with the Azure Machine Learning SDK v2 package `azure-ai-ml`; a specific installed package version was not inspected. No Azure authentication is needed merely to construct these expressions. This snippet was **not run** and does not submit a sweep job.
-
-```python
-from math import log
-from azure.ai.ml.sweep import Choice, Uniform, LogUniform
-
-linear_space = {
-    "batch_size": Choice(values=[16, 32, 64]),
-    "learning_rate": Uniform(min_value=0.001, max_value=0.1),
-}
-
-log_space = {
-    "batch_size": Choice(values=[16, 32, 64]),
-    "learning_rate": LogUniform(
-        min_value=log(0.0001), max_value=log(0.1)
-    ),
-}
-```
-
-Expected outcome: dictionaries of search-space expressions, not sampled values or trained models. M04-U05 below illustrates integration into a parameterized command job; actual submission and execution remain unverified.
-
-### M04-U03 — Seeded Sobol configuration objects
-
-Tutor illustration using the verified unit and SDK reference above. Prerequisites: Python and Azure ML SDK v2 (`azure-ai-ml`); no installed version was inspected. This snippet was **not run**. Constructing these objects requires no Azure authentication and does not submit a job.
-
-```python
-from azure.ai.ml.sweep import Choice, Uniform, RandomSamplingAlgorithm
-
-search_space = {
-    "batch_size": Choice(values=[3, 10, 15]),
-    "learning_rate": Uniform(min_value=0.001, max_value=0.1),
-}
-sampling = RandomSamplingAlgorithm(rule="sobol", seed=4)
-```
-
-Expected outcome: a dictionary of search-space expressions and a Sobol sampling configuration. Each eventual trial must choose batch size 3, 10, or 15 and a learning rate within the specified interval; the code does not print or generate an actual trial sequence. M04-U05 illustrates the integration workflow using a different, grid-based search space. Values are illustrative, not recommended defaults.
-
-### M04-U04 — Truncation policy configuration
-
-Verified unit API example, with explanatory context. Prerequisites: Python and Azure ML SDK v2 (`azure-ai-ml`) with an existing `sweep_job` object; no installed package version was inspected. This snippet was **not run** and does not submit a job.
-
-```python
-from azure.ai.ml.sweep import TruncationSelectionPolicy
-
-sweep_job.early_termination = TruncationSelectionPolicy(
-    truncation_percentage=20,
-    delay_evaluation=4,
-    evaluation_interval=1,
-)
-```
-
-Expected outcome: attach a policy that cancels the lowest-performing 20% at eligible checks, allowing each trial four initial primary-metric reporting intervals and evaluating every interval afterward. Use the exact parameter name `truncation_percentage`, not `truncation_percent`. M04-U05 illustrates sweep construction and submission syntax; neither snippet is execution evidence.
-
-### M04-U05 — Command-to-sweep workflow
+#### M04-U05 — Command-to-sweep workflow
 
 Tutor adaptation of the verified unit's SDK v2 workflow, using learning rate and validation loss. Prerequisites: Python with `azure-ai-ml`; `./src/train.py` accepting `--learning-rate`; a training environment with the model's dependencies, `mlflow`, and Azure ML tracking integration; an existing compute target; and an authenticated `ml_client` for submission. No installed SDK version or workspace environment availability was checked. `AzureML-sklearn-1.5@latest` follows the official unit's environment identifier, but `@latest` is a moving reference, not a pinned environment version. All code is illustrative and **not run**.
 
@@ -274,14 +252,30 @@ returned_sweep_job = ml_client.create_or_update(sweep_job)
 
 Expected outcome on successful submission: a returned Azure ML job object, not proof that all trials finished or a model was deployed. Client setup, environment verification, and execution remain practical work.
 
-## JavaScript examples
-Pending study. Use relevant supported examples only.
+### M04-U06 — Exercise - Run a sweep job
+Source: https://learn.microsoft.com/en-us/training/modules/perform-hyperparameter-tuning-azure-machine-learning-pipelines/6-exercise-run-sweep-job
 
-## Azure CLI commands
-Pending study. Record CLI/extension prerequisites and expected outcomes.
+Website-only. Use the Microsoft Learn source link above independently. The tutor skips this unit in lesson selection, teaching, checks, and review scheduling; it is excluded from tutor completion and TLDR readiness. No website confirmation is required.
 
-## Related configuration: YAML, Bicep, or GitHub Actions
-Pending study.
+### M04-U07 — Module assessment
+Source: https://learn.microsoft.com/en-us/training/modules/perform-hyperparameter-tuning-azure-machine-learning-pipelines/7-knowledge-check
+
+Website-only. Use the Microsoft Learn source link above independently. The tutor skips this closing unit; it is excluded from tutor completion, review scheduling, and TLDR readiness. No website confirmation is required.
+
+### M04-U08 — Summary
+Source: https://learn.microsoft.com/en-us/training/modules/perform-hyperparameter-tuning-azure-machine-learning-pipelines/8-summary
+
+Website-only. Use the Microsoft Learn source link above independently. The tutor skips this closing unit; it is excluded from tutor completion, review scheduling, and TLDR readiness. No website confirmation is required.
+
+<a id="key-concepts-and-decision-points"></a>
+
+<a id="javascript-examples"></a>
+<a id="azure-cli-commands"></a>
+<a id="related-configuration-yaml-bicep-or-github-actions"></a>
+
+## Remaining study and examples
+
+JavaScript, Azure CLI, and YAML/Bicep/GitHub Actions examples remain pending; relevance is not yet assessed. Record prerequisites, versions, and expected outcomes where applicable.
 
 ## Worked examples and practice
 ### M04-U03 — Budget and method selection
@@ -304,16 +298,7 @@ Tutor-created conceptual tasks; no code executed. The M04-U06 lab is separate we
 
 [Optional quiz history](quizzes.md)
 
-## Common pitfalls and clarifications
-- A positive Normal mean does not prevent negative samples. LogNormal and LogUniform produce positive outputs through exponentiation.
-- Equal probability per linear interval differs from equal probability per multiplicative band.
-- LogUniform accepts log-space bounds, not raw output bounds.
-- Quantized values are discrete, but may still include choices the script rejects; use Choice for an exact permitted list.
-- A finite grid's combination count is the product of candidate counts, not their sum; a smaller budget cannot provide exhaustive coverage.
-- A sampling seed neither becomes a hyperparameter value nor guarantees identical model-training results.
-- Bayesian's expression restrictions apply to every tuned hyperparameter, not just batch size.
-- Stopping-policy intervals count primary-metric reports. An epoch and an interval coincide only when the script logs that metric exactly once per epoch; neither counts completed trials.
-- Early termination evaluates existing metric evidence to stop individual trials. It neither chooses the metric nor stops the entire sweep merely because one trial underperforms.
+<a id="common-pitfalls-and-clarifications"></a>
 
 ## Microsoft Learn search terms
 - Azure Machine Learning sweep job search space

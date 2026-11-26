@@ -18,14 +18,12 @@ Source: https://learn.microsoft.com/en-us/training/modules/run-pipelines-azure-m
 
 #### Components, pipelines, and executions
 
-Official source explanation (verified 2026-11-12): notebooks and script jobs support experimentation and training. For an enterprise ML process, separate the work into individual tasks. Package tasks as reusable, shareable **components**, combine them into a **pipeline**, and execute the workflow as a **pipeline job**.
+Microsoft Learn (verified 2026-11-12) describes separating an ML process into reusable **components**, connecting them in a **pipeline**, and executing it as a **pipeline job**. Notebooks and script jobs also support experimentation and training.
 
 - **Component:** A reusable task implemented by code, such as data preparation.
 - **Pipeline:** The workflow connecting individual tasks.
 - **Pipeline job:** A particular execution of that workflow.
 - **Model:** The artifact produced by model training, not the data-preparation task itself.
-
-These concepts connect to D1 reusable components and D2 training pipelines. This introduction establishes the roles; implementation remains for the following units.
 
 #### Distinguishing pipelines across services
 
@@ -40,14 +38,14 @@ GitHub Actions trigger → Azure ML pipeline job
                         Prepare data → Train model → Evaluate model
 ```
 
-If several training workflows need the same data-cleaning code, package that task as a reusable **component**. Each Azure ML pipeline organizes the tasks for its workflow. Reusing a trained model is a different decision: it reuses a training output rather than the preparation code. GitHub Actions can trigger execution when code changes; the diagram is an illustration, not a configured automation or evidence of a successful run.
+Package shared data-cleaning code as a component; reusing a trained model instead reuses an output. GitHub Actions can trigger execution when code changes. The diagram is not a configured or successfully run automation.
 
 ### M05-U02 — Create components
 Source: https://learn.microsoft.com/en-us/training/modules/run-pipelines-azure-machine-learning/2-create-components
 
 #### Component structure and purpose
 
-Official source explanation (verified 2026-11-12): components package specific tasks as reusable code, supporting pipeline construction and sharing ready-to-go code among workspace users. A component has three parts:
+Microsoft Learn (verified 2026-11-12) describes three parts of a reusable component:
 
 | Part | Contents |
 | --- | --- |
@@ -55,13 +53,11 @@ Official source explanation (verified 2026-11-12): components package specific t
 | Interface | Expected inputs, such as data or hyperparameters, and outputs, such as artifacts |
 | Command, code, and environment | The script, how to invoke it, and its runtime/dependencies |
 
-Sharing a script alone does not supply its complete component contract. A data-preparation component defines the reusable task; the cleaned dataset is its output, not the component itself. These distinctions support D1 component assets and D2 training pipelines.
+Sharing a script alone does not supply the full contract. A data-preparation component defines the task; the cleaned dataset is its output.
 
 #### Loading, executing, and registering
 
-Loading a local YAML definition creates a component object that can be used to build a pipeline. **Registration is not required to use a local component in a pipeline.** Loading itself does not execute the task; submitting the pipeline job executes its steps. Running the script directly is a separate operation that does not use the component definition.
-
-Registering the component creates or updates a workspace asset for other workspace users to reuse. Keep the script and local YAML definition together when using an unregistered local component.
+Load a local YAML definition to build a pipeline without registering the component. Registration creates or updates a reusable workspace asset; keep the script and YAML together when using an unregistered component. Loading does not execute the task: submit the pipeline job for that. Running the script directly does not use the component definition.
 
 Source-derived Python SDK v2 example, illustrative and not executed. Prerequisites: `azure-ai-ml`; registration also requires an authenticated `MLClient` named `ml_client`, access to the target workspace, and suitable permissions. No installed package version or successful execution was verified.
 
@@ -110,7 +106,7 @@ Source: https://learn.microsoft.com/en-us/training/modules/run-pipelines-azure-m
 
 #### Workflow dependencies and compute
 
-Official source explanation (verified 2026-11-12): a pipeline connects reusable components sequentially or in parallel. Executing it creates an overall pipeline job with component executions as child jobs. Components can use different compute targets. These decisions connect to D1 reusable components and D2 training pipelines.
+Microsoft Learn (verified 2026-11-12): a pipeline connects components sequentially or in parallel. Execution creates a parent job and component child jobs, which can use different compute targets.
 
 Tutor-created dependency example, illustrative and not executed:
 
@@ -119,7 +115,7 @@ Prepare → Train → Evaluate
     └────────────→ Evaluate (evaluation data)
 ```
 
-Train waits for Prepare's cleaned data. Evaluate waits for both its data and Train's model, so Train and Evaluate cannot run in parallel in this graph. Two training steps that depend only on Prepare could run in parallel if resources permit. Input/output connections establish dependencies; simply listing Python calls in order is not the dependency mechanism. For real model evaluation, use held-out evaluation data rather than evaluating on the training data; the graph illustrates wiring only.
+Train waits for Prepare; Evaluate waits for both data and Train's model. Two training steps depending only on Prepare could run in parallel if resources permit. Input/output connections establish dependencies, not the order of Python calls. The graph illustrates wiring only: use held-out data for real evaluation.
 
 #### Build the graph and expose outputs
 
@@ -160,7 +156,7 @@ print(pipeline_job)
 
 Expected outcome: build the job object and display its YAML representation, without running Prepare, Train, or Evaluate. `azureml:data:1` identifies a specific registered data-asset version. Printing does not itself save a YAML file. The unit describes YAML-based definitions; the API reference clarifies that the decorated function returns a job object.
 
-**Definition location is not execution location.** Creating the object in a local Python process does not assign the laptop as a compute target or configure local component execution. Submission is separate; after submission, steps execute on the configured compute targets. A pipeline can use a default compute target and step-specific targets. Building a work order on a laptop is distinct from deciding where the work runs.
+**Definition location is not execution location.** Building the object locally neither selects the laptop as compute nor runs components. Submit separately; steps use the configured default or step-specific targets.
 
 ### M05-U04 — Run a pipeline job
 Source: https://learn.microsoft.com/en-us/training/modules/run-pipelines-azure-machine-learning/4-run-pipeline-job
@@ -211,7 +207,7 @@ Expected outcome: create a schedule that triggers the pipeline every two weeks, 
 
 The source requires disabling a schedule before deleting it. Stopping future scheduled triggers is distinct from diagnosing a failed run.
 
-Tutor clarification for D2 lifecycle automation: a time-based schedule is not a data-drift detector. Scheduling retraining does not automatically deploy or replace a production model; that requires explicit workflow steps and appropriate model validation/deployment gates. No Azure execution or production deployment was performed here.
+Tutor clarification: a schedule is not a drift detector. Retraining does not automatically replace a production model; deployment needs explicit steps and validation gates. No Azure execution or production deployment was performed.
 
 ### M05-U05 — Exercise - Run a pipeline job
 Source: https://learn.microsoft.com/en-us/training/modules/run-pipelines-azure-machine-learning/5-exercise-run-pipeline-job
@@ -228,26 +224,18 @@ Source: https://learn.microsoft.com/en-us/training/modules/run-pipelines-azure-m
 
 Website-only. Use the Microsoft Learn source link above independently. The tutor skips this closing unit; it is excluded from tutor completion, review scheduling, and TLDR readiness. No website confirmation is required.
 
-## Key concepts and decision points
-Pending study.
+<a id="key-concepts-and-decision-points"></a>
+<a id="python-examples"></a>
+<a id="javascript-examples"></a>
+<a id="azure-cli-commands"></a>
+<a id="related-configuration-yaml-bicep-or-github-actions"></a>
+<a id="worked-examples-and-practice"></a>
+<a id="common-pitfalls-and-clarifications"></a>
 
-## Python examples
-Pending study. Record prerequisites/versions, expected outcomes, and execution status.
+## Remaining study and examples
 
-## JavaScript examples
-Pending study. Use relevant supported examples only.
-
-## Azure CLI commands
-Pending study. Record CLI/extension prerequisites and expected outcomes.
-
-## Related configuration: YAML, Bicep, or GitHub Actions
-Pending study.
-
-## Worked examples and practice
-Pending study. Include unit IDs, useful tasks, worked solutions, prerequisites, and execution status. Keep learner-response histories and assessment outcomes in memory.
-
-## Common pitfalls and clarifications
-Pending study. Add reusable conceptual explanations as topics are studied.
+- Further key concepts, worked practice, and pitfalls remain pending; examples already studied appear with their units.
+- Additional Python, JavaScript, Azure CLI, and YAML/Bicep/GitHub Actions examples remain pending; relevance is not yet assessed. Record prerequisites, versions, expected outcomes, and execution status where applicable.
 
 ## Microsoft Learn search terms
 - Azure Machine Learning reusable components

@@ -1,6 +1,6 @@
 # Session history
 
-Forty-six learning/progress-correction sessions recorded through 2026-11-25, matching the persisted summaries and [TOLEARN.md session count and latest ID](../TOLEARN.md#session-index). This is the sole full session index. Earlier stale counts and missing session-04 were reconciled; the 2026-10-29 repair added the already-existing session-01 to this index without new study or setup activity.
+Forty-seven learning/progress-correction sessions recorded through 2026-11-26, matching the persisted summaries and [TOLEARN.md session count and latest ID](../TOLEARN.md#session-index). This is the sole full session index. Earlier stale counts and missing session-04 were reconciled; the 2026-10-29 repair added the already-existing session-01 to this index without new study or setup activity.
 
 | Session ID | Date | Units / mode | Summary |
 | --- | --- | --- | --- |
@@ -50,6 +50,7 @@ Forty-six learning/progress-correction sessions recorded through 2026-11-25, mat
 | 2026-11-25-session-02 | 2026-11-25 | S01-U01 / lesson | [Summary](2026-11-25-session-02.md): resumed lesson, S01-U01 and S01 in-progress, 0/1; quiz declined; existing mirroring review retained and extended, subject to agreement. |
 | 2026-11-25-session-03 | 2026-11-25 | S01-U01 / lesson | [Summary](2026-11-25-session-03.md): continuation, S01-U01 and S01 in-progress, 0/1; quiz declined; existing mirroring review retained with related transfer actions, subject to agreement. |
 | 2026-11-25-session-04 | 2026-11-25 | S01-U01, M07-U05 / correction | [Summary](2026-11-25-session-04.md): learner-approved recommendation to M07-U05 automation; S01 substantially studied, statuses and reviews unchanged; no new technical check or quiz. |
+| 2026-11-26-session-01 | 2026-11-26 | M07-U05, M07-U04 / lesson | [Summary](2026-11-26-session-01.md): U05 conceptually completed; U04 retained; tutor quiz 5/5; direct-test/rollback review resolved, changed-scenario transfer review scheduled 2026-12-03 with agreement; M07 4/6 and in-progress. |
 
 Memory-agent creates summaries using [the session template](../../templates/session-summary.md). Name files `YYYY-MM-DD-session-NN.md`, using the next unused number for the actual session date. Update the same file when retrying a handoff with the same session ID.
 

@@ -8,7 +8,7 @@
 
 ## Overview and learning goals
 
-Planned source goals: design a solution to get and prepare data, choose a service and compute for training, and prepare for deployment options. These are learning goals, not completed learning.
+Planned goals: prepare data, select a training service and compute, and consider deployment options.
 
 ## Notes by Microsoft Learn unit
 
@@ -28,13 +28,13 @@ Microsoft Learn describes six steps:
 5. **Integrate the model:** make predictions available to applications.
 6. **Monitor the model:** assess whether it continues to meet its intended goals.
 
-The lifecycle is iterative and continuous. Deployment is not the end: monitoring can lead back to earlier steps, including retraining. Design choices affect cost, speed, quality, and longevity.
+The lifecycle is iterative: monitoring can lead back to earlier steps, including retraining. Design choices affect cost, speed, quality, and longevity.
 
 #### Monitoring and evidence-based retraining
 
 **Tutor illustration:** a retailer's demand forecasts may deteriorate when buying habits change. Compare predictions with actual outcomes and agreed success criteria. Changed behavior alone does not prove that predictions have degraded, and strong sales are not the same as accurate forecasts.
 
-A useful reasoning principle is to gather enough evidence before retraining to avoid acting for the wrong reason. Seasonality, malicious activity, and modeling problems are possible hypotheses to investigate, not established causes. If forecasts still meet the accuracy target, continued monitoring is a reasonable response; if they no longer meet it, investigate and revisit the relevant lifecycle steps.
+Gather evidence before retraining. Seasonality, malicious activity, and modeling problems are hypotheses, not established causes. If forecasts meet the accuracy target, continue monitoring; otherwise investigate and revisit the relevant lifecycle steps.
 
 ### M01-U02 — Define the problem
 Source: https://learn.microsoft.com/en-us/training/modules/design-machine-learning-model-training-solution/2-identify-tasks
@@ -55,7 +55,7 @@ Problem definition establishes the desired output, the ML task, and success crit
 
 **Tutor illustrations:** estimating a house's dollar selling price from its features is regression; predicting whether it sells above $300,000 requests a categorical output and fits classification. A regression prediction can also be thresholded into a final category, but the required output must still be explicit. Predicting a future sale does not by itself establish time-series forecasting: the time-series setup matters.
 
-Historical data is useful for multiple tasks. Choose regression because the requested output is numerical, not merely because past data exists or computation is involved. ML regression also differs from software regression testing.
+Choose regression for a numerical output, not merely because historical data exists. ML regression differs from software regression testing.
 
 #### Training, scoring, and evaluation
 
@@ -67,13 +67,13 @@ The official unit's workflow is:
 - **Scoring** applies a trained model to examples to generate predictions.
 - **Evaluation** compares predictions with actual outcomes and calculates performance metrics.
 
-Producing a prediction for every example establishes that scoring produced outputs; it does not establish predictive quality. Evaluation must compare the appropriate metric with the acceptance threshold.
+Predictions alone do not establish quality. Compare the appropriate evaluation metric with the acceptance threshold.
 
 #### Held-out data versus representative data
 
 **Tutor extension of the split step:** testing on the same examples used for training can overstate generalization because a model may fit their particular quirks—overfitting. Held-out data checks performance on examples not used to train the model.
 
-Representativeness is a separate concern. Holding out city apartments does not establish performance on rural farmhouses absent from both training and test data. Evaluate relevant farmhouse examples for the intended use; this may reveal a need for better training coverage. The numerical price task can still use mean absolute error (MAE). Population mismatch does not automatically require a different metric. The farmhouse scenario is a tutor illustration, not the official unit's example.
+**Tutor illustration:** holding out city apartments does not establish performance on rural farmhouses absent from training and test data. Evaluate relevant farmhouse examples; better training coverage may be needed. The price task can still use mean absolute error (MAE): population mismatch does not automatically require a different metric.
 
 #### Match metrics to success criteria
 
@@ -122,7 +122,7 @@ An ingestion pipeline is a sequence of data movement and transformation tasks. I
 
 **Tutor application:** recurring daily training can use scheduled ingestion to prepare the previous day's readings. The prepared table should be ready before training begins.
 
-**Tutor extension on failure handling:** if preparation fails, wait and investigate rather than train on arbitrary available files. A failure might concern copying, access, or transformation; it does not prove the data itself is broken. A deliberately designed fallback using an older validated dataset differs from arbitrary-file training. These readiness/failure examples are conceptual illustrations, not an executed orchestration exercise or an explicit source mandate.
+**Tutor extension, conceptual only:** if preparation fails, investigate copying, access, or transformation rather than train on arbitrary files. The failure does not prove the data is broken; a designed fallback to an older validated dataset is different from arbitrary-file training.
 
 ### M01-U04 — Train the model
 Source: https://learn.microsoft.com/en-us/training/modules/design-machine-learning-model-training-solution/3-choose-service-train
@@ -181,7 +181,7 @@ Monitor **training duration and compute utilization** to guide resource adjustme
 
 The unit describes an AutoML wizard in studio for configuring and running training experiments without writing training code. AutoML automates iterative model-development work; the earlier training unit describes its exploration of algorithms and parameters.
 
-**Tutor synthesis:** suitable data and a defined problem are still needed. A trained artifact does not prove suitability for production: evaluate the results before approving deployment. Automation of training choices does not remove the need to judge model quality against application needs.
+**Tutor synthesis:** AutoML still needs suitable data and a defined problem. Evaluate results against application needs before approving deployment.
 
 ### M01-U06 — Integrate a model
 Source: https://learn.microsoft.com/en-us/training/modules/design-machine-learning-model-training-solution/4-decide-between-compute-options
@@ -201,9 +201,9 @@ Training learns patterns to produce a model; scoring runs an already-trained mod
 
 The source asks how often predictions should be generated, how soon results are needed, whether inputs are scored individually or in batches, and how much compute prediction execution needs.
 
-**Identify the necessary frequency of scoring:** data arrival frequency does not determine prediction timing. Ask when the consumer needs the output and how much delay is acceptable. Scheduled consumption can allow batch scoring even when readings arrive every second.
+**Scoring frequency:** choose from the consumer's deadline and acceptable delay, not data arrival frequency. A scheduled report can use batch scoring even when readings arrive every second.
 
-**Decide on the number of predictions:** individual scoring can use one customer row or image; batch scoring can process a customer table or collection of images and collate predictions. Input quantity is a consideration alongside timing, not a substitute for the response-time requirement.
+**Number of predictions:** individual scoring can use one customer row or image; batch scoring can process a table or collection and collate predictions. Consider quantity alongside response time.
 
 #### Consider the cost of compute
 
@@ -224,29 +224,16 @@ Source: https://learn.microsoft.com/en-us/training/modules/design-machine-learni
 
 Website-only. Use the Microsoft Learn source link above independently. The tutor skips this closing unit; it is excluded from tutor completion, review scheduling, and TLDR readiness. No website confirmation is required.
 
-## Key concepts and decision points
+<a id="key-concepts-and-decision-points"></a>
 
-- **M01-U01:** use monitoring evidence against success criteria to decide whether to revisit the lifecycle.
-- **M01-U02:** define the output, select the task, and specify the appropriate metric and acceptance threshold before judging results.
-- **M01-U02:** distinguish learning patterns (training), generating predictions (scoring), and measuring quality (evaluation).
-- **M01-U03:** design ingestion around the required training representation and granularity, not simply around moving raw files.
-- **M01-U04:** use model needs, control, time, existing platforms, and language preferences to select services; AutoML explores training choices while pipelines coordinate steps.
-- **M01-U05:** distinguish studio (interface), workspace (Azure resource), and compute (execution resources); use observed training time and utilization to revisit compute choices.
-- **M01-U06:** choose prediction timing from consumer needs, not data arrival frequency; budget compute for prediction execution as well as training.
+<a id="python-examples"></a>
+<a id="javascript-examples"></a>
+<a id="azure-cli-commands"></a>
+<a id="related-configuration-yaml-bicep-or-github-actions"></a>
 
-These concepts connect to D1 data infrastructure and D2 training, evaluation, and lifecycle foundations.
+## Remaining study and examples
 
-## Python examples
-Pending study. Record prerequisites/versions, expected outcomes, and execution status.
-
-## JavaScript examples
-Pending study. Use relevant supported examples only.
-
-## Azure CLI commands
-Pending study. Record CLI/extension prerequisites and expected outcomes.
-
-## Related configuration: YAML, Bicep, or GitHub Actions
-Pending study.
+Python, JavaScript, Azure CLI, and YAML/Bicep/GitHub Actions examples remain pending; relevance is not yet assessed. Record prerequisites, versions, expected outcomes, and execution status where applicable.
 
 ## Worked examples and practice
 
@@ -326,23 +313,7 @@ Tutor-created worked example; conceptual only, with no code or compute executed:
 
 The reporting purpose explains when predictions are consumed; applying a saved model explains why the operation is scoring. A batch-scoring job and a training job may both use clusters, but their purpose—not the word “cluster”—distinguishes them.
 
-## Common pitfalls and clarifications
-
-- **Business results versus model performance:** good sales do not demonstrate accurate forecasts.
-- **Required output versus implementation:** a numerical prediction can be thresholded into a category, but that does not make the output requirement ambiguous.
-- **Future prediction versus forecasting setup:** a future date alone does not establish time-series forecasting.
-- **Held-out versus representative:** unseen examples still need to represent the intended use.
-- **Precision versus recall:** predicted-positive and actual-positive denominators answer different questions.
-- **Cleaning versus aggregation:** making individual readings cleaner does not necessarily produce one row per required group.
-- **Preparation failure versus invalid data:** access, copying, and transformation failures require investigation; do not assume a single cause.
-- **Fabric versus Azure Machine Learning:** both support training, but Fabric is the source's integrated analytics-to-Power BI platform; Azure Machine Learning focuses on the ML lifecycle.
-- **AutoML versus pipelines:** training-choice exploration and workflow orchestration address different needs and can be combined.
-- **Prebuilt versus suitable:** a prebuilt model still needs evaluation against application requirements.
-- **Studio versus workspace versus compute:** a management interface is not the resource it manages or the hardware executing the job.
-- **Training completion versus deployment readiness:** producing a model artifact does not establish its suitability for production.
-- **Training versus batch scoring:** a week's training data does not make training a batch-prediction operation; batch scoring uses a trained model to generate outputs for collected inputs.
-- **Collection timing versus consumption timing:** rapid sensor arrivals can support a weekly batch report; immediate action requires a different prediction timing decision.
-- **Training compute versus serving compute:** deployment execution and availability need explicit planning; they are not automatically supplied by the existence of a training job.
+<a id="common-pitfalls-and-clarifications"></a>
 
 ## Microsoft Learn search terms
 - Azure Machine Learning training compute selection
