@@ -1,6 +1,6 @@
 # Session history
 
-Fifty-eight learning/progress-correction sessions recorded through 2026-11-26, matching the persisted summaries and [TOLEARN.md session count and latest ID](../TOLEARN.md#session-index). This is the sole full session index. Earlier stale counts and missing session-04 were reconciled; the 2026-10-29 repair added the already-existing session-01 to this index without new study or setup activity.
+Seventy learning/progress-correction sessions recorded through 2026-11-27, matching the persisted summaries and [TOLEARN.md session count and latest ID](../TOLEARN.md#session-index). This is the sole full session index. Earlier stale counts and missing session-04 were reconciled; the 2026-10-29 repair added the already-existing session-01 to this index without new study or setup activity.
 
 | Session ID | Date | Units / mode | Summary |
 | --- | --- | --- | --- |
@@ -62,6 +62,18 @@ Fifty-eight learning/progress-correction sessions recorded through 2026-11-26, m
 | 2026-11-26-session-10 | 2026-11-26 | G02-U03 / lesson | [Summary](2026-11-26-session-10.md): U03 in-progress, SDK example pending; quiz declined; comparison/storage review 2026-11-29 subject to agreement; G02 2/5 and in-progress. |
 | 2026-11-26-session-11 | 2026-11-26 | G02-U04 / lesson | [Summary](2026-11-26-session-11.md): conceptual completion, tutor quiz 4/4; no review changed; G02 3/5 and in-progress. |
 | 2026-11-26-session-12 | 2026-11-26 | G02-U05 / lesson | [Summary](2026-11-26-session-12.md): conceptual completion; quiz declined; deployment/rollback transfer review 2026-11-29 subject to agreement; G02 4/5 and in-progress. |
+| 2026-11-27-session-01 | 2026-11-27 | G03-U01 / lesson | [Summary](2026-11-27-session-01.md): introductory application completed; quiz declined; no reviews changed; G03 1/4 and in-progress. |
+| 2026-11-27-session-02 | 2026-11-27 | G03-U02 / lesson | [Summary](2026-11-27-session-02.md): conceptual completion; quiz declined; experiment-design transfer review 2026-11-30 subject to agreement; G03 2/4 and in-progress. |
+| 2026-11-27-session-03 | 2026-11-27 | G03-U03 / lesson | [Summary](2026-11-27-session-03.md): conceptual completion; quiz declined; traceability and variant-selection review 2026-11-30 subject to agreement; G03 3/4 and in-progress. |
+| 2026-11-27-session-04 | 2026-11-27 | G03-U04 / lesson | [Summary](2026-11-27-session-04.md): conceptual completion; quiz declined; calibration and reliability review 2026-11-30 subject to agreement; G03 4/4 completed, TLDR pending notes work. |
+| 2026-11-27-session-05 | 2026-11-27 | G04-U01 / lesson | [Summary](2026-11-27-session-05.md): introductory application completed; quiz declined; automation/human complement review 2026-11-30 subject to agreement; G04 1/6 and in-progress. |
+| 2026-11-27-session-06 | 2026-11-27 | G04-U02 / lesson | [Summary](2026-11-27-session-06.md): conceptual completion; quiz declined; no review changed; G04 2/6 and in-progress. |
+| 2026-11-27-session-07 | 2026-11-27 | G04-U03 / lesson | [Summary](2026-11-27-session-07.md): conceptual completion with scaffolded validation; quiz declined; custom-evaluator and gate-agreement review 2026-11-30 subject to agreement; G04 3/6 and in-progress. |
+| 2026-11-27-session-08 | 2026-11-27 | G04-U04 / lesson | [Summary](2026-11-27-session-08.md): U04 in-progress, versioning and upload pending; quiz declined; privacy and field-transfer review 2026-11-30 subject to agreement; G04 3/6 and in-progress. |
+| 2026-11-27-session-09 | 2026-11-27 | G04-U04 / lesson | [Summary](2026-11-27-session-09.md): U04 conceptually completed after comparison/upload checks; quiz declined; prior review retained; G04 4/6 and in-progress. |
+| 2026-11-27-session-10 | 2026-11-27 | G04-U05 / lesson | [Summary](2026-11-27-session-10.md): U05 in-progress, Python implementation and independent mapping pending; quiz declined; mapping review 2026-11-30 subject to agreement; G04 4/6 and in-progress. |
+| 2026-11-27-session-11 | 2026-11-27 | G04-U05 / lesson | [Summary](2026-11-27-session-11.md): U05 in-progress, mapping and workflow application unverified; quiz declined; existing mapping review retained 2026-11-30 subject to agreement; G04 4/6 and in-progress. |
+| 2026-11-27-session-12 | 2026-11-27 | G04-U06 / lesson | [Summary](2026-11-27-session-12.md): U06 conceptually completed; integration unverified; quiz declined; reviews unchanged; G04 5/6 and in-progress. |
 
 Memory-agent creates summaries using [the session template](../../templates/session-summary.md). Name files `YYYY-MM-DD-session-NN.md`, using the next unused number for the actual session date. Update the same file when retrying a handoff with the same session ID.
 
